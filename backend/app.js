@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const http = require("http");
 const cors = require("cors");
+const { config } = require("./config/secret.js");
 // const {routesInit} = require("./routes/config_routes")
 require("./db/mongoConnect");
 
@@ -15,6 +16,5 @@ app.use(express.static(path.join(__dirname,"public")))
 
 const server = http.createServer(app);
 
-
-let port = process.env.PORT || 3001
+let port = process.env.PORT || 3000;
 server.listen(port);
