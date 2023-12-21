@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const joi = require("joi");
-const jwt = require("jsonwebtoken");
-const { config } = require("../config/secret.js");
+
 
 let paragraphsSchema = new mongoose.Schema({
     storyId:String,
@@ -13,10 +12,7 @@ let paragraphsSchema = new mongoose.Schema({
 
 exports.ParagraphsModel = mongoose.model("paragraphs", paragraphsSchema);
 
-exports.createToken = (_id) => {
-    let token = jwt.sign({_id}, config.tokenSecret, {expiresIn: "60mins"});
-    return token;
-}
+
 
 exports.validParagraph = (_reqBody) => {
     let joiSchema = joi.object({
