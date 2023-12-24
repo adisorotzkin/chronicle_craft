@@ -25,8 +25,24 @@ router.get("/usersList" ,authAdmin, async(req,res)=>
       res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
+
+//Get a user by id.
+router.get("/single/:idUser" , async(req,res)=> 
+{
+ try
+ {
+   let idUser = req.params.idUser
+   let data = await UserModel.findOne({_id:idUser})
+   res.json(data);
+ }
+ catch(err)
+ {
+   console.log(err)
+   res.status(500).json({msg:"err",err})
+ }
+})
 //user's information based on the token they send
-router.get("/myInfo",auth,async (req, res) => 
+router.get("/myProfile",auth,async (req, res) => 
 {
   try 
   {
@@ -51,7 +67,7 @@ router.post("/signUp", async(req,res) => {
       let user = new UserModel(req.body);
       user.password = await bcrypt.hash(user.password, 10);
       await user.save();
-      user.password = "***";
+      user.password = "******";
       res.status(201).json(user);
     }
     catch(err)
@@ -135,10 +151,8 @@ router.delete("/:idDel" ,auth,async (req, res) =>
     let idDel = req.params.idDel;
     let data;
     // delete user
-    if (req.tokenData.role == "admin") {
-      data = await UserModel.deleteOne({ _id: idDel });
-    }
-    else if (idDel == req.tokenData._id) {
+    //אפשרות הפיכת יוזר ללא פעיל על ידיד הסופר אדמין
+    if (idDel == req.tokenData._id) {
       data = await UserModel.deleteOne({ _id: idDel });
     }
     // await ToyModel.deleteMany({ user_id: idDel });

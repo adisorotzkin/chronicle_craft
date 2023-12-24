@@ -5,27 +5,50 @@ const router = express.Router();
 
 
 //Get a comment by id.
-router.get("/single/:idComment", async (req, res) => {
+// router.get("/single/:idComment", async (req, res) => {
+//   try {
+//     let idComment = req.params.idComment
+//     let data = await CommentsModel.findOne({ _id: idComment })
+//     res.json(data);
+//   }
+//   catch (err) {
+//     console.log(err)
+//     res.status(500).json({ msg: "An error occoured. Try again", err })
+//   }
+// })
+
+//search for all paragrafhs's comments, presenting 6 results per page.
+router.get("/:paragraphId", async (req, res) => {
+  let perPage = req.query.perPage || 6;
+  let page = req.query.page || 1;
+  let paragraphId = req.params.paragraphId;
+  let data;
+
   try {
-    let idComment = req.params.idComment
-    let data = await CommentsModel.findOne({ _id: idComment })
+    dete = await CommentsModel.find({ paragraphId: paragraphId })
+      .limit(perPage)
+      .skip((page - 1) * perPage)
+      .sort({ _id: -1 })
     res.json(data);
   }
   catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json({ msg: "An error occoured. Try again", err })
   }
 })
-//search a comment follwing paragraphId or storyId ,presenting 10 results per page.
-router.get("/search", async (req, res) => {
-  let perPage = req.query.perPage || 10;
+
+//search for user's comments, presenting 6 results per page.
+router.get("/:userId", async (req, res) => {
+  let perPage = req.query.perPage || 6;
   let page = req.query.page || 1;
+  let userId = req.params.userId;
+  let data;
+
   try {
-    let queryS = req.query.s;
-    let searchReg = new RegExp(queryS, "i")
-    let data = await CommentsModel.find({ $or: [{ storyId: searchReg }, { paragraphId: searchReg }] })
+    dete = await CommentsModel.find({ userId: userId })
       .limit(perPage)
       .skip((page - 1) * perPage)
+      .sort({ _id: -1 })
     res.json(data);
   }
   catch (err) {
