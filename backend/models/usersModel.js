@@ -10,7 +10,10 @@ let usersSchema = new mongoose.Schema({
     registrationDate:{ type: Date, default: Date.now()},
     profilePicture:String,
     bio:String,
-    role:{ type: String, default: "user"}
+    dateOfBirth: Date,
+    role:{ type: String, default: "user"},
+    active: boolean,
+    rating:Number
 })
 
 exports.UsersModel = mongoose.model("users", usersSchema);
@@ -24,7 +27,8 @@ exports.validUser = (_reqBody) => {
     let joiSchema = joi.object({
         name: joi.string().min(2).max(99).required(),
         email: joi.string().min(2).max(99).email().required(),
-        password: joi.string().min(6).max(99).required()
+        password: joi.string().min(6).max(99).required(),
+        dateOfBirth: joi.date().required(),
     })
     return joiSchema.validate(_reqBody);
 }
