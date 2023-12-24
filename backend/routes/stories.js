@@ -19,7 +19,7 @@ router.get("/",async(req,res) =>
       catch(err)
       {
         console.log(err);
-        res.status(500).json({msg:"there error try again later",err})
+        res.status(500).json({msg:"An error occoured. Try again",err})
       }
  })
  //Get a story by id.
@@ -54,7 +54,7 @@ router.get("/search" ,async(req,res) =>
     catch(err)
     {
         console.log(err);
-        res.status(500).json({msg:"there error try again later",err})
+        res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 
@@ -77,7 +77,7 @@ router.post("/", auth, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 
@@ -96,11 +96,8 @@ router.delete("/:idDel", authAdmin, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
-
-
-
 
  module.exports = router;

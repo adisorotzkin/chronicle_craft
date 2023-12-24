@@ -16,7 +16,7 @@ const router = express.Router();
   catch(err)
   {
     console.log(err)
-    res.status(500).json({msg:"err",err})
+    res.status(500).json({msg:"An error occoured. Try again",err})
   }
 })
 //search a recipe follwing storyId or author ,presenting 10 results per page.
@@ -36,7 +36,7 @@ router.get("/search" ,async(req,res) =>
     catch(err)
     {
         console.log(err);
-        res.status(500).json({msg:"there error try again later",err})
+        res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 
@@ -59,7 +59,7 @@ router.post("/", auth, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 //edit  paragraph by his user or admin
@@ -87,7 +87,7 @@ router.put("/:idEdit", auth, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 //delete  paragraph by his user or admin
@@ -110,11 +110,8 @@ router.delete("/:idDel", auth, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
-
-
-
 
  module.exports = router;

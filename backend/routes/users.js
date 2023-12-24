@@ -22,7 +22,7 @@ router.get("/usersList" ,authAdmin, async(req,res)=>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 //user's information based on the token they send
@@ -58,10 +58,10 @@ router.post("/signUp", async(req,res) => {
     {
       if(err.code == 11000)
       {
-        return res.status(500).json({msg:"Email already in system, try log in",code:11000})
+        return res.status(500).json({msg:"Email already in system, try logging in",code:11000})
       }
       console.log(err);
-      res.status(500).json({msg:"err",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 //user login
@@ -77,12 +77,12 @@ router.post("/login", async(req,res) =>
       let user = await UserModel.findOne({email:req.body.email})
       if(!user)
       {
-        return res.status(401).json({msg:"email is worng"})
+        return res.status(401).json({msg:"Password or email are wrong"})
       }
       let authPassword = await bcrypt.compare(req.body.password,user.password);
       if(!authPassword)
       {
-        return res.status(401).json({msg:"Password or email is worng"});
+        return res.status(401).json({msg:"Password or email are wrong"});
       }
       let token = createToken(user._id, user.role);
       res.json({token});
@@ -90,7 +90,7 @@ router.post("/login", async(req,res) =>
     catch(err)
     {
       console.log(err)
-      res.status(500).json({msg:"err",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 //edit user by this user or admin
@@ -115,7 +115,7 @@ router.put("/:idEdit",auth, async (req, res) =>
     }
     if (!data) 
     {
-      return res.status(400).json({ err: "This operation is not enabled or this token is not match to idEdit!" })
+      return res.status(400).json({ err: "This operation is not enabled or the token is not valid" })
     }
     let user = await UserModel.findOne({ _id: idEdit });
     user.password = await bcrypt.hash(user.password, 10);

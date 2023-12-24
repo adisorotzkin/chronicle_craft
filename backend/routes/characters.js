@@ -19,7 +19,7 @@ router.get("/",async(req,res) =>
       catch(err)
       {
         console.log(err);
-        res.status(500).json({msg:"there error try again later",err})
+        res.status(500).json({msg:"An error occoured. Try again",err})
       }
  })
  //Get a character by id.
@@ -34,7 +34,7 @@ router.get("/",async(req,res) =>
   catch(err)
   {
     console.log(err)
-    res.status(500).json({msg:"err",err})
+    res.status(500).json({msg:"An error occoured. Try again",err})
   }
 })
 //search a character follwing characterName or storyId ,presenting 10 results per page.
@@ -54,7 +54,7 @@ router.get("/search" ,async(req,res) =>
     catch(err)
     {
         console.log(err);
-        res.status(500).json({msg:"there error try again later",err})
+        res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 
@@ -76,7 +76,7 @@ router.post("/", auth, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 //edit character by his user or admin
@@ -104,7 +104,7 @@ router.put("/:idEdit", auth, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
 //delete character by his user or admin
@@ -127,11 +127,8 @@ router.delete("/:idDel", auth, async(req,res) =>
     catch(err)
     {
       console.log(err);
-      res.status(500).json({msg:"there error try again later",err})
+      res.status(500).json({msg:"An error occoured. Try again",err})
     }
 })
-
-
-
 
  module.exports = router;
