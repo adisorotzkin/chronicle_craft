@@ -19,27 +19,26 @@ const router = express.Router();
     res.status(500).json({msg:"An error occoured. Try again",err})
   }
 })
-//search a recipe follwing storyId or author ,presenting 10 results per page.
-router.get("/search" ,async(req,res) => 
-{
-    let perPage = req.query.perPage || 10;
-    let page = req.query.page || 1;
-    try
-    {
-        let queryS = req.query.s;
-        let searchReg = new RegExp(queryS,"i")
-        let data = await ParagraphsModel.find({$or:[{storyId:searchReg},{author:searchReg}]})
-        .limit(perPage)
-        .skip((page - 1) * perPage)
-        res.json(data);
-    }
-    catch(err)
-    {
-        console.log(err);
-        res.status(500).json({msg:"An error occoured. Try again",err})
-    }
-})
 
+//search for all author paragrafhs, presenting 6 results per page.
+router.get("/:author", async (req, res) => {
+  let perPage = req.query.perPage || 6;
+  let page = req.query.page || 1;
+  let author = req.params.author;
+  let data;
+
+  try {
+    dete = await ParagraphsModel.find({ author: author })
+      .limit(perPage)
+      .skip((page - 1) * perPage)
+      .sort({ _id: -1 })
+    res.json(data);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "An error occoured. Try again", err })
+  }
+})
 
 //adding new paragraph with token
 router.post("/", auth, async(req,res) => 
