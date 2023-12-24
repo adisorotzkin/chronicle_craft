@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { config } = require("../config/secret.js");
 
 let usersSchema = new mongoose.Schema({
-    name:String,
+    username:String,
     email:String,
     password:String,
     registrationDate:{ type: Date, default: Date.now()},
@@ -12,8 +12,8 @@ let usersSchema = new mongoose.Schema({
     bio:String,
     dateOfBirth: Date,
     role:{ type: String, default: "user"},
-    active: boolean,
-    rating:Number
+    active: { type: Boolean, default: true },
+    rating: Number
 })
 
 exports.UsersModel = mongoose.model("users", usersSchema);
@@ -25,10 +25,10 @@ exports.createToken = (_id) => {
 
 exports.validUser = (_reqBody) => {
     let joiSchema = joi.object({
-        name: joi.string().min(2).max(99).required(),
+        username: joi.string().min(2).max(99).required(),
         email: joi.string().min(2).max(99).email().required(),
-        password: joi.string().min(6).max(99).required(),
-        dateOfBirth: joi.date().required(),
+        password: joi.string().min(6).max(30).required(),
+        dateOfBirth: joi.date().required().min(new Date().getFullYear() - 120).max(new Date().getFullYear() - 8)
     })
     return joiSchema.validate(_reqBody);
 }
