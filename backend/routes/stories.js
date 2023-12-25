@@ -52,11 +52,11 @@ router.get("/search", async (req, res) => {
 router.get("/:genre", async (req, res) => {
   let perPage = req.query.perPage || 6;
   let page = req.query.page || 1;
-  let genre = req.params.genre;
-  let data;
+  
 
   try {
-    dete = await StoriesModel.find({ genre: genre })
+    let genre = req.params.genre;
+    let data = await StoriesModel.find({ genre: genre })
       .limit(perPage)
       .skip((page - 1) * perPage)
       .sort({ _id: -1 })
@@ -72,11 +72,9 @@ router.get("/:genre", async (req, res) => {
 router.get("/:author", async (req, res) => {
   let perPage = req.query.perPage || 6;
   let page = req.query.page || 1;
-  let author = req.params.author;
-  let data;
-
   try {
-    dete = await StoriesModel.find({ author: author })
+    let author = req.params.author;
+    let data = await StoriesModel.find({ author: author })
       .limit(perPage)
       .skip((page - 1) * perPage)
       .sort({ _id: -1 })
