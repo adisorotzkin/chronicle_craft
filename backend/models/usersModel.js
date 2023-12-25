@@ -13,13 +13,14 @@ let usersSchema = new mongoose.Schema({
     dateOfBirth: Date,
     role:{ type: String, default: "user"},
     active: { type: Boolean, default: true },
-    rating: Number
+    rating:  { type: Number, default: 0 }
 })
 
 exports.UsersModel = mongoose.model("users", usersSchema);
 
-exports.createToken = (_id) => {
-    let token = jwt.sign({_id}, config.tokenSecret, {expiresIn: "60mins"});
+exports.createToken = (_id, role) => 
+{
+    let token = jwt.sign({ _id, role }, config.tokenSecret, { expiresIn: "60mins" });
     return token;
 }
 
@@ -27,8 +28,10 @@ exports.validUser = (_reqBody) => {
     let joiSchema = joi.object({
         username: joi.string().min(2).max(99).required(),
         email: joi.string().min(2).max(99).email().required(),
+        profilePicture:joi.string().min(2),
+        bio: joi.string().min(2).max(999),
         password: joi.string().min(6).max(30).required(),
-        dateOfBirth: joi.date().required().min(new Date().getFullYear() - 120).max(new Date().getFullYear() - 8)
+        dateOfBirth: joi.date().required()
     })
     return joiSchema.validate(_reqBody);
 }

@@ -4,6 +4,7 @@ const storiesR = require("./stories");
 const paragraphsR = require("./paragraphs");
 const commentsR = require("./comments");
 const charactersR = require("./characters");
+const ratingsR = require("./rating");
 
 
 exports.routesInit = (app) => 
@@ -14,5 +15,6 @@ exports.routesInit = (app) =>
     app.use("/paragraphs",paragraphsR);
     app.use("/comments",commentsR);
     app.use("/characters",charactersR);
+    app.use("/ratings",ratingsR);
 
 }
