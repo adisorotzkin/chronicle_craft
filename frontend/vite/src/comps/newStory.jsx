@@ -4,7 +4,11 @@ import Navbar from '../static_comps/navbar'
 
 const NewStory = () => {
   return (
-    <div><Navbar/></div>
+    <div className=''><Navbar/>
+      <div className='form-control'>
+        <label>insert your story title</label>
+      </div>
+    </div>
   )
 }
 

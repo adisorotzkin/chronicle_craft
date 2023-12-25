@@ -1,0 +1,62 @@
+
+/* Style the accordion container */
+.accordion {
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  /* Style the accordion header and body */
+  .accordion-button {
+    background-color: #3ecca4;
+    color: black;
+    border: black solid 5px;
+    border-radius: 10px;
+  }
+  
+  /* Style the active accordion header */
+  .accordion-button:not(.collapsed) {
+    background-color: #3ecca4;
+    color: black;
+  }
+  
+  /* Style the accordion body */
+  .accordion-body {
+    background-color: #3ecca4;
+    color: black;
+    
+  }
+
+  .accordion-header:focus {
+    border: red solid 2px;
+  }
+  
+  /* Style the active accordion body */
+  .accordion-collapse.show {
+    background-color: #3ecca4;
+    color: black;
+    border: black solid 5px;
+    border-radius: 10px;
+  }
+
+  /* Remove the default hover and focus styles for accordion items */
+.accordion-button:hover{
+  background-color: white;
+  border: black solid 5px;
+
+}
+
+.accordion-item:hover,
+.accordion-item:focus {
+  background-color: white;
+}
+
+
+/* Style the active accordion header */
+.accordion-button:not(.collapsed) {
+  background-color: white;
+  color: black;
+}
+
+.accordion-button:focus{
+    border: black solid 5px;
+
+}

@@ -38,6 +38,10 @@ const Navbar = () => {
                     </i>
                     <Link to="/profile" className='link'> Profile</Link>
                 </div>
+                <div className="pt-4">
+                <i className="fa fa-question-circle text-white" aria-hidden="true"></i>                   
+                    <Link to="/FAQs" className='link'> FAQs</Link>
+                </div>
 
 
             </nav>
