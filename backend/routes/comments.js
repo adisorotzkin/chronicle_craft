@@ -18,14 +18,14 @@ const router = express.Router();
 // })
 
 //search for all paragrafhs's comments, presenting 6 results per page.
-router.get("/:paragraphId", async (req, res) => {
+router.get("/paragraphId/:paragraphId", async (req, res) => {
   let perPage = req.query.perPage || 6;
   let page = req.query.page || 1;
-  let paragraphId = req.params.paragraphId;
-  let data;
+  
 
   try {
-    dete = await CommentsModel.find({ paragraphId: paragraphId })
+    let paragraphId = req.params.paragraphId;
+    let data = await CommentsModel.find({ paragraphId: paragraphId })
       .limit(perPage)
       .skip((page - 1) * perPage)
       .sort({ _id: -1 })
@@ -38,14 +38,14 @@ router.get("/:paragraphId", async (req, res) => {
 })
 
 //search for user's comments, presenting 6 results per page.
-router.get("/:userId", async (req, res) => {
+router.get("/userId/:userId", async (req, res) => {
   let perPage = req.query.perPage || 6;
   let page = req.query.page || 1;
-  let userId = req.params.userId;
-  let data;
+  
 
   try {
-    dete = await CommentsModel.find({ userId: userId })
+    let userId = req.params.userId;
+    let data= await CommentsModel.find({ userId: userId })
       .limit(perPage)
       .skip((page - 1) * perPage)
       .sort({ _id: -1 })

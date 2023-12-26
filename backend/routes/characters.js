@@ -59,14 +59,14 @@ router.get("/search" ,async(req,res) =>
 })
 
 //search for story's characters, presenting 5 results per page.
-router.get("/:storyId", async (req, res) => {
+router.get("/storyId/:storyId", async (req, res) => {
   let perPage = req.query.perPage || 5;
   let page = req.query.page || 1;
-  let storyId = req.params.storyId;
-  let data;
+
 
   try {
-    dete = await CharactersModel.find({ storyId: storyId })
+    let storyId = req.params.storyId;
+    let data = await CharactersModel.find({ storyId: storyId })
       .limit(perPage)
       .skip((page - 1) * perPage)
       .sort({ _id: -1 })

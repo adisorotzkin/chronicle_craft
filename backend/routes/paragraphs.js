@@ -24,11 +24,11 @@ const router = express.Router();
 router.get("/:author", async (req, res) => {
   let perPage = req.query.perPage || 6;
   let page = req.query.page || 1;
-  let author = req.params.author;
-  let data;
+ 
 
   try {
-    dete = await ParagraphsModel.find({ author: author })
+    let author = req.params.author;
+    let data = await ParagraphsModel.find({ author: author })
       .limit(perPage)
       .skip((page - 1) * perPage)
       .sort({ _id: -1 })
