@@ -8,6 +8,7 @@ import Search from './comps/search'
 import NewStory from './comps/newStory'
 import Notifications from './comps/notifications'
 import Profile from './comps/profile'
+import BookItem from './comps/bookItem';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route index element={<SignUp />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path='/bookItem' element={<BookItem />} />
                     <Route path="/explore" element={<Explore />} />
                     <Route path='/search' element={<Search />} />
                     <Route path='/newStory' element={<NewStory />} />
