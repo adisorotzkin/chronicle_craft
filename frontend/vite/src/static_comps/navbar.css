@@ -1,4 +1,4 @@
-.container-fluid {
+.main {
     background-color: black;
     padding: 8px;
     display: flex;
@@ -31,14 +31,14 @@
 {
     color: #3ecca4;
 }
-.btn{
+.exit{
     bottom: 0;
     border: white 2px solid;
     position: absolute;
     margin-bottom: 32px;
     font-family: 'Cuprum', sans-serif;
 }
-.btn:hover
+.exit:hover
 {
     color: #3ecca4;
     border-color: #3ecca4;

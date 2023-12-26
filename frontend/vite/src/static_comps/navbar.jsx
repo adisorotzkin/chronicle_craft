@@ -7,7 +7,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <div className='container-fluid fixed-left vh-100'>
+        <div className='container-fluid main fixed-left vh-100'>
             {/* Logo */}
             <div className="logo">
                 <img src='../public/images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate(<Welcome />)}}/>
@@ -38,17 +38,13 @@ const Navbar = () => {
                     </i>
                     <Link to="/profile" className='link'> Profile</Link>
                 </div>
-                <div className="pt-4">
-                <i className="fa fa-question-circle text-white" aria-hidden="true"></i>                   
-                    <Link to="/FAQs" className='link'> FAQs</Link>
-                </div>
 
 
             </nav>
 
             {/* User Actions */}
             <div className="flex-end">
-                <button className="btn btn-dark">Exit</button>
+                <button className="btn btn-dark exit">Exit</button>
             </div>
         </div>
     )
