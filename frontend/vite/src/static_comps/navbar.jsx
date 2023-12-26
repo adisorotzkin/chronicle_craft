@@ -6,6 +6,10 @@ import Welcome from '../comps/welcome'
 const Navbar = () => {
     const navigate = useNavigate();
 
+    const handleExit = () => {
+        navigate('/');
+    }
+
     return (
         <div className='main-navbar fixed-left vh-100'>
             {/* Logo */}
@@ -44,7 +48,7 @@ const Navbar = () => {
 
             {/* User Actions */}
             <div className="flex-end">
-                <button className="btn btn-dark exit">Exit</button>
+                <button className="btn btn-dark exit" onClick={handleExit}>Exit</button>
             </div>
         </div>
     )
