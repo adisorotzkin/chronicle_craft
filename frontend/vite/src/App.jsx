@@ -8,13 +8,12 @@ import Search from './comps/search'
 import NewStory from './comps/newStory'
 import Notifications from './comps/notifications'
 import Profile from './comps/profile'
-import Faqs from './comps/faqs';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route index element={<Welcome />} />
+                <Route index element={<SignUp />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/explore" element={<Explore />} />
@@ -22,7 +21,6 @@ function App() {
                 <Route path='/newStory' element={<NewStory />} />
                 <Route path='/notifications' element={<Notifications />} />
                 <Route path='/profile' element={<Profile />} />
-                <Route path='/FAQs' element={<Faqs/>} />
             </Routes>
         </BrowserRouter>
     )

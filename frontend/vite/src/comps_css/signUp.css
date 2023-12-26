@@ -1,4 +1,33 @@
 .main{
     height: 100vh;
-    background-image: url();
+    width:100%;
+    /* background-image: url("../book_library_2.jpg"); */
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 50px;
+}
+.form{
+    margin:auto;
+}
+.form-group{
+    color: white;
+}
+.form-control{
+    border: white solid 2px;
+    color: white;
+    background-color: black;
+}
+.btn-file{
+    opacity: 0.8;
+}
+.required-fields{
+    color: #3ecca4;
+}
+.next-btn{
+    color: #3ecca4;
+}
+.next-btn:hover{
+    color:white;
 }
