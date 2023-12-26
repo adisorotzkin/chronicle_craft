@@ -13,7 +13,7 @@ exports.ParagraphsModel = mongoose.model("paragraphs", paragraphsSchema);
 
 exports.validParagraph = (_reqBody) => {
     let joiSchema = joi.object({
-        content: joi.string().min(2).max(999).email().required(),
+        content: joi.string().min(2).max(999).required(),
         end: joi.boolean()
     })
     return joiSchema.validate(_reqBody);
