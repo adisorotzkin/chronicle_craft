@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import '../comps_css/signUp.css'
+import '../comps_css/signupLogin.css'
 import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
@@ -53,11 +53,11 @@ const SignUp = () => {
         setShowLoading(true);
         // await handleImageUpload();
         // await addNewDoc();
-        navigate('/explore');
+        navigate('/login');
     }
 
     return (
-        <main className='main'>
+        <main className='main-signup'>
             <div className="logo-signup d-flex">
                 <img src='../public/images/logo.jpg' alt='logo' className="logo" />
             </div>

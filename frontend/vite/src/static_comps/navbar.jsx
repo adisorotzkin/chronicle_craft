@@ -7,7 +7,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <div className='container-fluid main fixed-left vh-100'>
+        <div className='main-navbar fixed-left vh-100'>
             {/* Logo */}
             <div className="logo">
                 <img src='../public/images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate(<Welcome />)}}/>

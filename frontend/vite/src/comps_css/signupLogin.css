@@ -1,0 +1,45 @@
+.main-signup {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 35px;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    background-color: black;
+    background-image: url("../login-gif.gif");
+    background-size: cover;
+    background-position: center;
+}
+
+.form {
+    margin: auto;
+}
+
+.form-group {
+    color: white;
+}
+
+.form-control {
+    border: white solid 2px;
+    color: white;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.btn-file {
+    opacity: 0.8;
+}
+
+.required-fields {
+    color: #3ecca4;
+}
+
+.next-btn {
+    color: #3ecca4;
+}
+
+.next-btn:hover {
+    color: white;
+}

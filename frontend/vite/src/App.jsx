@@ -11,18 +11,20 @@ import Profile from './comps/profile'
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route index element={<SignUp />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/explore" element={<Explore />} />
-                <Route path='/search' element={<Search />} />
-                <Route path='/newStory' element={<NewStory />} />
-                <Route path='/notifications' element={<Notifications />} />
-                <Route path='/profile' element={<Profile />} />
-            </Routes>
-        </BrowserRouter>
+        <div className="App">
+            <BrowserRouter>
+                <Routes>
+                    <Route index element={<SignUp />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/explore" element={<Explore />} />
+                    <Route path='/search' element={<Search />} />
+                    <Route path='/newStory' element={<NewStory />} />
+                    <Route path='/notifications' element={<Notifications />} />
+                    <Route path='/profile' element={<Profile />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
     )
 }
 

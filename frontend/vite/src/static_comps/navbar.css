@@ -1,4 +1,4 @@
-.main {
+.main-navbar {
     background-color: black;
     padding: 8px;
     display: flex;
@@ -9,10 +9,11 @@
     padding-top: 50px;
     padding-bottom: 20px;
     position: relative;
+    border-right: white solid 2px;
+    width:18%;
 }
 .logo{
     height: 50px;
-    width: 100%;
     margin-bottom: 20px;
 }
 .logo:hover{
@@ -36,7 +37,7 @@
     border: white 2px solid;
     position: absolute;
     margin-bottom: 32px;
-    font-family: 'Cuprum', sans-serif;
+    /* font-family: 'Cuprum', sans-serif; */
 }
 .exit:hover
 {
