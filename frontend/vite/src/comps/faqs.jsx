@@ -1,11 +1,9 @@
 import React from 'react'
-import Navbar from '../static_comps/navbar'
 import '../comps_css/faqs.css'
 
 const Faqs = () => {
     return (
-        <div className='d-flex float'>
-            <Navbar />
+        <div className='d-flex float outer-div'>
             <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
                     <h2 className="accordion-header" id="headingOne">
