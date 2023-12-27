@@ -7,6 +7,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const handleExit = () => {
+        localStorage.clear();
         navigate('/');
     }
 

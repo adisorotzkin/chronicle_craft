@@ -102,7 +102,7 @@ router.post("/login", async(req,res) =>
         return res.status(401).json({msg:"Password or email are wrong"});
       }
       let token = createToken(user._id, user.role);
-      res.json({token});
+      res.json({token, user});
     }
     catch(err)
     {
