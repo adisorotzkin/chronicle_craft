@@ -1,13 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+// BookItem.jsx
+import React, { useEffect, useContext } from 'react';
 import { apiService } from '../service/apisService';
 import Book from './book';
-import Navbar from '../static_comps/navbar';
 import { AppContext } from '../context/context';
 
 const BookItem = () => {
   const { getData } = apiService();
-  const { extParagraphsContentArr, setextParagraphsContentArr } = useContext(AppContext);
-
+  const { setextParagraphsContentArr,setparagraphsIdArr } = useContext(AppContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,13 +20,15 @@ const BookItem = () => {
           console.log(paragraphsContentArr[i]);
         }
         setextParagraphsContentArr(paragraphsContentArr);
+        setparagraphsIdArr(paragraphsIdArr)
 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
+
     fetchData();
-  }, [setextParagraphsContentArr]);
+  }, [setextParagraphsContentArr,setparagraphsIdArr]);
 
   return (
     <div>
@@ -37,4 +38,5 @@ const BookItem = () => {
 };
 
 export default BookItem;
+
 
