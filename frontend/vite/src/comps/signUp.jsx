@@ -2,12 +2,15 @@ import React, { useState, useRef, useContext } from 'react'
 import '../comps_css/signupLogin.css'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/context'
+import { apiService } from '../service/apisService';
+
 
 const SignUp = () => {
+    const {postData} = apiService();
     const [selectedImage, setSelectedImage] = useState(null);
     const [showLoading, setShowLoading] = useState(false);
     const [showNext, setShowNext] = useState(true);
-    const [imageURL, setImageURL] = useState(null);
+    const [imageURL, setImageURL] = useState("");
 
     const {getStartedEmail} = useContext(AppContext);
 
@@ -44,6 +47,15 @@ const SignUp = () => {
 
     const addNewDoc = async () => {
         try {
+            const body = {
+                  email: getStartedEmail,
+                  password: passwordRef.current.value,
+                  profilePicture: selectedImage ? imageURL: "",
+                  bio: bioRef.current.value,
+                  dateOfBirth : dobRef.current.value,
+                  username: usernameRef.current.value
+            }
+            await postData('/users/signUp',body );
 
         } catch (error) {
           console.error('Error adding document:', error);
@@ -54,7 +66,11 @@ const SignUp = () => {
         setShowNext(false);
         setShowLoading(true);
         // await handleImageUpload();
-        // await addNewDoc();
+        try {
+            await addNewDoc();
+        } catch (error) {
+            console.log('Error: ',error); 
+        }
         navigate('/login');
     }
 

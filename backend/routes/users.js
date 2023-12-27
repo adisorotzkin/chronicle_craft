@@ -57,6 +57,7 @@ router.get("/myProfile",auth,async (req, res) =>
 })
 //adding new user
 router.post("/signUp", async(req,res) => {
+     console.log("hhhh");
     let validBody = validUser(req.body);
     if(validBody.error)
     {

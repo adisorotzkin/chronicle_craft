@@ -28,10 +28,10 @@ exports.validUser = (_reqBody) => {
     let joiSchema = joi.object({
         username: joi.string().min(2).max(99).required(),
         email: joi.string().min(2).max(99).email().required(),
-        profilePicture:joi.string().min(2),
-        bio: joi.string().min(2).max(999),
+        bio: joi.string().min(2).max(999).allow(""),
+        profilePicture:joi.string().allow(""),
         password: joi.string().min(6).max(30).required(),
-        dateOfBirth: joi.date().required()
+        dateOfBirth: joi.date().allow("")
     })
     return joiSchema.validate(_reqBody);
 }
