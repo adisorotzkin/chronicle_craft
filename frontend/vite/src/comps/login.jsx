@@ -39,7 +39,7 @@ const Login = () => {
           <p>* Required fields</p>
         </div>
         <div className="next-div col-1">
-          {showNext && <button className='btn next-btn' onClick={onSub}>Next</button>}
+          {showNext && <button className='btn next-btn' onClick={onSub}><i className="fa fa-arrow-right" aria-hidden="true"></i></button>}
           {showLoading && <div className='spinner-border' role='status'></div>}
         </div>
       </div>

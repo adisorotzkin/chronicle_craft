@@ -12,6 +12,7 @@ import ContactUs from './footer_comps/contactUs'
 import Terms from './footer_comps/terms'
 import PrivacyPolicy from './footer_comps/privacyPolicy'
 import LegalNotices from './footer_comps/legalNotices';
+import BookItem from './comps/bookItem';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route index element={<Welcome />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path='/bookItem' element={<BookItem />} />
                     <Route path="/explore" element={<Explore />} />
                     <Route path='/search' element={<Search />} />
                     <Route path='/newStory' element={<NewStory />} />
