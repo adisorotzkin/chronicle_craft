@@ -9,8 +9,8 @@
     padding-top: 50px;
     padding-bottom: 20px;
     position: relative;
-    border-right: white solid 2px;
-    width:18%;
+    border-right: white solid 1px;
+    width:100%;
 }
 .logo{
     height: 50px;

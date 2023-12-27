@@ -14,23 +14,27 @@ const Navbar = () => {
         <div className='main-navbar fixed-left vh-100'>
             {/* Logo */}
             <div className="logo">
-                <img src='../public/images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate(<Welcome />)}}/>
+                <img src='../public/images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate(<Welcome />) }} />
             </div>
 
             {/* Navigation Links */}
             <nav className='nav d-flex flex-column'>
                 <div className="pt-4">
                     <i className="text-white fa fa-home" aria-hidden="true"></i>
-                    <Link to="/" className='link'> Home</Link>
+                    <Link to="/home" className='link'> Home</Link>
                 </div>
                 <div className="pt-4">
                     <i className="text-white fa fa-compass" aria-hidden="true"></i>
                     <Link to="/explore" className='link'> Explore</Link>
                 </div>
                 <div className="pt-4">
+                    <i className="text-white fa fa-search" aria-hidden="true"></i>
+                    <Link to="/search" className='link'> Search</Link>
+                </div>
+                <div className="pt-4">
                     <i className="text-white fa fa-book" aria-hidden="true">
                     </i>
-                    <Link to="/newStory" className='link'> New Story</Link>
+                    <Link to="/newStory" className='link'> Create</Link>
                 </div>
                 <div className="pt-4">
                     <i className="text-white fa fa-comment" aria-hidden="true">
