@@ -18,7 +18,7 @@
 .btn-login{
     background-color: white;
     color:#23715b;
-    font-weight: bold;
+    font-weight: 500;
 }
 .btn-login:hover{
     color: white;

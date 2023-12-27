@@ -2,6 +2,7 @@ import React from 'react'
 import '../comps_css/welcome.css'
 import { useNavigate } from 'react-router-dom'
 import FAQs from '../comps/FAQs'
+import Footer from '../footer_comps/footer'
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -43,12 +44,12 @@ const Welcome = () => {
               <h1>Your passions, Our platform</h1>
         </div>
       </div>
-      <div className="faqs container-fluid">
+      {/* <div className="faqs container-fluid">
         <FAQs />
-      </div>
-      {/* <div className="footer">
-        <Footer />
       </div> */}
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   )
 }

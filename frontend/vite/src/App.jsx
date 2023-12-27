@@ -8,6 +8,10 @@ import Search from './comps/search'
 import NewStory from './comps/newStory'
 import Notifications from './comps/notifications'
 import Profile from './comps/profile'
+import ContactUs from './footer_comps/contactUs'
+import Terms from './footer_comps/terms'
+import PrivacyPolicy from './footer_comps/privacyPolicy'
+import LegalNotices from './footer_comps/legalNotices';
 
 function App() {
     return (
@@ -22,6 +26,10 @@ function App() {
                     <Route path='/newStory' element={<NewStory />} />
                     <Route path='/notifications' element={<Notifications />} />
                     <Route path='/profile' element={<Profile />} />
+                    <Route path='/contact' element={<ContactUs />} />
+                    <Route path='/terms' element={<Terms />} />
+                    <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
+                    <Route path='/legalNotices' element={<LegalNotices />} />
                 </Routes>
             </BrowserRouter>
         </div>
