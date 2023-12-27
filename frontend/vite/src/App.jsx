@@ -13,11 +13,16 @@ import Terms from './footer_comps/terms'
 import PrivacyPolicy from './footer_comps/privacyPolicy'
 import LegalNotices from './footer_comps/legalNotices';
 import BookItem from './comps/bookItem';
+import React, { useEffect, useState,useContext } from 'react';
+import { AppContext } from './context/context';
 
 function App() {
+    
+  const [extParagraphsContentArr,setextParagraphsContentArr] = useState([]);
     return (
         <div className="App">
             <BrowserRouter>
+            <AppContext.Provider value = {{extParagraphsContentArr,setextParagraphsContentArr}}>
                 <Routes>
                     <Route index element={<Welcome />} />
                     <Route path="/signup" element={<SignUp />} />
@@ -33,6 +38,7 @@ function App() {
                     <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
                     <Route path='/legalNotices' element={<LegalNotices />} />
                 </Routes>
+                </AppContext.Provider>
             </BrowserRouter>
         </div>
     )
