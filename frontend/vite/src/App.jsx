@@ -36,6 +36,11 @@ function App() {
                     <Route path='/newStory' element={<NewStory />} />
                     <Route path='/notifications' element={<Notifications />} />
                     <Route path='/profile' element={<Profile />} />
+                    <Route path='/contactUs' element={<ContactUs />} />
+                    <Route path='/terms' element={<Terms />} />
+                    <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
+                    <Route path='/legalNotices' element={<LegalNotices />} />
+                    <Route path='/home' element={<Home />} />
                 </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

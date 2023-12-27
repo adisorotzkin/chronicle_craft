@@ -1,20 +1,38 @@
 import React, { useState, useRef } from 'react'
 import '../comps_css/signupLogin.css'
 import { useNavigate } from 'react-router-dom'
+import { apiService } from '../service/apisService'
 
 const Login = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [showNext, setShowNext] = useState(true);
 
+  const {postData} = apiService();
+
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const handleLogin = async() => {
+    try {
+      const body = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }
+      const res = await postData('/login', body);
+      console.log(res);
+      if (res.status === 200) {
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  }
 
   const onSub = async () => {
     setShowNext(false);
     setShowLoading(true);
-    navigate('/explore');
+    handleLogin();
   }
 
   return (
@@ -40,7 +58,7 @@ const Login = () => {
         </div>
         <div className="next-div col-1">
           {showNext && <button className='btn next-btn' onClick={onSub}><i className="fa fa-arrow-right" aria-hidden="true"></i></button>}
-          {showLoading && <div className='spinner-border' role='status'></div>}
+          {showLoading && <div className='spinner-border loading' role='status'></div>}
         </div>
       </div>
     </main>

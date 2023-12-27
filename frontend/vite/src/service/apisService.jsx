@@ -11,7 +11,7 @@ export const apiService  = () => {
             
         }
         catch (err) {
-            console.error(`error ${err}`);
+            console.error(`error in postData ${err}`);
         }
 
     }
