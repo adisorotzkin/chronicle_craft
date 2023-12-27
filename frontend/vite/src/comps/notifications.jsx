@@ -1,9 +1,13 @@
 import React from 'react'
 import Navbar from '../static_comps/navbar'
+import OpenAICooper from './openAICooper'
 
 const Notifications = () => {
   return (
-    <div><Navbar/></div>
+    <div>
+      {/* <Navbar /> */}
+      <OpenAICooper/>
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import '../comps_css/signupLogin.css'
 import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../context/context'
 
 const SignUp = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -8,8 +9,9 @@ const SignUp = () => {
     const [showNext, setShowNext] = useState(true);
     const [imageURL, setImageURL] = useState(null);
 
+    const {getStartedEmail} = useContext(AppContext);
+
     const navigate = useNavigate();
-    const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const usernameRef = useRef(null);
     const dobRef = useRef(null);
@@ -64,7 +66,7 @@ const SignUp = () => {
             <form className='form'>
                 <div className="form-group">
                     <label>Email *</label>
-                    <input type="email" placeholder='Enter email' className='form-control' ref={emailRef}/>
+                    <input type="email" className='form-control' value={getStartedEmail} readOnly/>
                 </div>
                 <div className="form-group">
                     <label>Username *</label>

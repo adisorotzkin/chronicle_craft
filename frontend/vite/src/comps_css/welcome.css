@@ -18,7 +18,7 @@
 .btn-login{
     background-color: white;
     color:#23715b;
-    font-weight: bold;
+    font-weight: 500;
 }
 .btn-login:hover{
     color: white;
@@ -59,7 +59,6 @@
     flex-direction: column;
     justify-content:space-between;
     align-items: center;
-    text-align: center;
     height: 450px;
     border-bottom: white 3px solid;
     padding-top: 200px;
