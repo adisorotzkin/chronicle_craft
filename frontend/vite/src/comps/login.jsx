@@ -8,9 +8,6 @@ const Login = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [showNext, setShowNext] = useState(true);
   const { postData } = apiService();
-
-  const {postData} = apiService();
-
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -23,8 +20,10 @@ const Login = () => {
       }
       const res = await postData('/users/login', body);
       console.log(res);
+      localStorage.setItem('token', res.data.token);
       navigate('/home');
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error logging in:', error);
     }
   }
