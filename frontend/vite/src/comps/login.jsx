@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react'
 import '../comps_css/signupLogin.css'
 import { useNavigate } from 'react-router-dom'
-import { apiService } from '../service/apisService'
+import { apiService } from '../service/apisService';
+
 
 const Login = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [showNext, setShowNext] = useState(true);
+  const { postData } = apiService();
 
   const {postData} = apiService();
 
@@ -19,11 +21,9 @@ const Login = () => {
         email: emailRef.current.value,
         password: passwordRef.current.value
       }
-      const res = await postData('/login', body);
+      const res = await postData('/users/login', body);
       console.log(res);
-      if (res.status === 200) {
-        navigate('/home');
-      }
+      navigate('/home');
     } catch (error) {
       console.error('Error logging in:', error);
     }

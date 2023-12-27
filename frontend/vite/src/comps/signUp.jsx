@@ -5,10 +5,11 @@ import { AppContext } from '../context/context'
 import { apiService } from '../service/apisService'
 
 const SignUp = () => {
+    const {postData} = apiService();
     const [selectedImage, setSelectedImage] = useState(null);
     const [showLoading, setShowLoading] = useState(false);
     const [showNext, setShowNext] = useState(true);
-    const [imageURL, setImageURL] = useState(null);
+    const [imageURL, setImageURL] = useState("");
 
     const {getStartedEmail} = useContext(AppContext);
 
