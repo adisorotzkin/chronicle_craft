@@ -15,10 +15,11 @@ import { AppContext } from './context/context';
 function App() {
     
   const [extParagraphsContentArr,setextParagraphsContentArr] = useState([]);
+  const [paragraphsIdArr, setparagraphsIdArr] = useState([]);
     return (
         <div className="App">
             <BrowserRouter>
-            <AppContext.Provider value = {{extParagraphsContentArr,setextParagraphsContentArr}}>
+            <AppContext.Provider value = {{extParagraphsContentArr,setextParagraphsContentArr,paragraphsIdArr,setparagraphsIdArr}}>
                 <Routes>
                     <Route index element={<Welcome />} />
                     <Route path="/signup" element={<SignUp />} />
