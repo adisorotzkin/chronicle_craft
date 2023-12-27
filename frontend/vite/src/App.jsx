@@ -9,11 +9,16 @@ import NewStory from './comps/newStory'
 import Notifications from './comps/notifications'
 import Profile from './comps/profile'
 import BookItem from './comps/bookItem';
+import React, { useEffect, useState,useContext } from 'react';
+import { AppContext } from './context/context';
 
 function App() {
+    
+  const [extParagraphsContentArr,setextParagraphsContentArr] = useState([]);
     return (
         <div className="App">
             <BrowserRouter>
+            <AppContext.Provider value = {{extParagraphsContentArr,setextParagraphsContentArr}}>
                 <Routes>
                     <Route index element={<Welcome />} />
                     <Route path="/signup" element={<SignUp />} />
@@ -25,6 +30,7 @@ function App() {
                     <Route path='/notifications' element={<Notifications />} />
                     <Route path='/profile' element={<Profile />} />
                 </Routes>
+                </AppContext.Provider>
             </BrowserRouter>
         </div>
     )
