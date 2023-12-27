@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useRef, useContext } from 'react'
 import '../comps_css/welcome.css'
 import { useNavigate } from 'react-router-dom'
 import FAQs from '../comps/FAQs'
 import Footer from '../footer_comps/footer'
+import { AppContext } from '../context/context'
 
 const Welcome = () => {
   const navigate = useNavigate();
+  const emailRef = useRef();
+  const { setgetStartedEmail, getStartedEmail } = useContext(AppContext);
 
   return (
     <div className="welcome">
@@ -25,8 +28,12 @@ const Welcome = () => {
             <h4>Ready to read and write? Enter your email to begin</h4>
           </div>
           <div className="get-started mt-4">
-            <input className='form-control me-2' type="email" placeholder='Enter your email' />
-            <button className='btn get-started-btn' onClick={() => {navigate('/signup')}}>Get started</button>
+            <input className='form-control me-2' type="email" placeholder='Enter your email' ref={emailRef} />
+            <button className='btn get-started-btn' onClick={() => {
+              setgetStartedEmail(emailRef.current.value);
+              console.log(emailRef.current.value);
+              navigate('/signup');
+            }}>Get started</button>
           </div>
         </div>
       </div>
@@ -35,15 +42,33 @@ const Welcome = () => {
 
       <div className="about-welcome">
         <div className="about-item-1 text-white">
-              <h1>Your passions, Our platform</h1>
+          <div className="about-content">
+            <h1>Your Passions, Our Platform</h1>
+            <p>Embark on a journey where your creativity knows no bounds. Chronicle Craft is the canvas for your imagination, providing a stage for your stories to flourish.</p>
+          </div>
+          <div className="about-image">
+            {/* <img src="path/to/image.jpg" alt="Illustration" /> */}
+          </div>
         </div>
+
         <div className="about-item text-white">
-              <h1>Your passions, Our platform</h1>
+          <div className="about-content">
+            <h1>Unleash Your Writing Potential</h1>
+            <p>Whether you're a seasoned writer or just starting, Chronicle Craft is your space to express, share, and collaborate. Dive into a community of storytellers and find inspiration at every turn.</p>
+          </div>
+          <div className="about-image">
+            {/* <img src="path/to/image2.jpg" alt="Illustration" /> */}
+          </div>
         </div>
+
         <div className="about-item text-white">
-              <h1>Your passions, Our platform</h1>
+          <div className="about-content">
+            <h1>Engage, Collaborate, Create</h1>
+            <p>Connect with fellow writers, complete intriguing stories, and receive feedback from the community. Chronicle Craft is more than a platform; it's a vibrant community where creativity thrives.</p>
+          </div>
+            {/* <img src="path/to/image3.jpg" alt="Illustration" /> */}
+          </div>
         </div>
-      </div>
       {/* <div className="faqs container-fluid">
         <FAQs />
       </div> */}

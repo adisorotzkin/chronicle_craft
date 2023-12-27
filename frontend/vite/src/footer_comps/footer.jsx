@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <footer>
             <div className="container-fluid">
-                <div className="row justify-content-around p-3">
+                <div className="row justify-content-around p-3 mt-3">
                     <div className="contact-btn col-3">
                         <button className='btn footer-btn border-none text-white' onClick={() => { navigate('/contact') }}>Have any questions? Contact us</button>
                     </div>
@@ -16,7 +16,7 @@ const Footer = () => {
                         <button className='btn footer-btn border-none text-white' onClick={() => { navigate('/login') }}>My account</button>
                     </div>
                     <div className="getStarted-btn col-3">
-                        <button className='btn footer-btn border-none text-white' onClick={() => { navigate('/signup') }}>Start exploring</button>
+                        <button className='btn footer-btn border-none text-white' onClick={() => { navigate('/') }}>Start exploring</button>
                     </div>
                 </div>
                 <div className="row justify-content-around p-3">
