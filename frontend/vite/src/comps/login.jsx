@@ -9,11 +9,13 @@ const Login = () => {
   const [showNext, setShowNext] = useState(true);
   const { postData } = apiService();
 
+  const {postData} = apiService();
+
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const handleLogin = async () => {
+  const handleLogin = async() => {
     try {
       const body = {
         email: emailRef.current.value,
@@ -21,9 +23,7 @@ const Login = () => {
       }
       const res = await postData('/users/login', body);
       console.log(res);
-
       navigate('/home');
-
     } catch (error) {
       console.error('Error logging in:', error);
     }
@@ -58,7 +58,7 @@ const Login = () => {
         </div>
         <div className="next-div col-1">
           {showNext && <button className='btn next-btn' onClick={onSub}><i className="fa fa-arrow-right" aria-hidden="true"></i></button>}
-          {showLoading && <div className='spinner-border' role='status'></div>}
+          {showLoading && <div className='spinner-border loading' role='status'></div>}
         </div>
       </div>
     </main>

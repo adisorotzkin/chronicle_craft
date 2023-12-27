@@ -2,8 +2,7 @@ import React, { useState, useRef, useContext } from 'react'
 import '../comps_css/signupLogin.css'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/context'
-import { apiService } from '../service/apisService';
-
+import { apiService } from '../service/apisService'
 
 const SignUp = () => {
     const {postData} = apiService();
@@ -19,32 +18,7 @@ const SignUp = () => {
     const usernameRef = useRef(null);
     const dobRef = useRef(null);
     const bioRef = useRef(null);
-
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-
-        if (file) {
-            setSelectedImage(file);
-        }
-    };
-
-    const handleImageUpload = async () => {
-        try {
-            if (selectedImage) {
-                const timestamp = new Date().getTime();
-                const fileName = `cv_image_${timestamp}`;
-                const storageRef = ref(storage, fileName);
-
-                await uploadBytes(storageRef, selectedImage);
-                setImageURL(await getDownloadURL(storageRef));
-
-                console.log('Image uploaded:', imageURL);
-            }
-        } catch (error) {
-            console.error('Error uploading image:', error);
-        }
-    };
-
+    
     const addNewDoc = async () => {
         try {
             const body = {
@@ -59,18 +33,14 @@ const SignUp = () => {
 
         } catch (error) {
           console.error('Error adding document:', error);
-        }
-      };
+        }
+      };
 
     const onSub = async () => {
         setShowNext(false);
         setShowLoading(true);
         // await handleImageUpload();
-        try {
-            await addNewDoc();
-        } catch (error) {
-            console.log('Error: ',error); 
-        }
+        await addNewDoc();
         navigate('/login');
     }
 

@@ -9,7 +9,7 @@ export const apiService  = () => {
             const response = await axios.post(`${baseUrl}${url}`,body);
             return response.data;
         }
-        catch (err) {
+        catch (err){
             if (err.response) {
                 // The request was made and the server responded with a status code
                 console.error(`Server responded with error: ${err.response.status}`, err.response.data);
@@ -20,6 +20,9 @@ export const apiService  = () => {
                 // Something happened in setting up the request
                 console.error('Error setting up the request', err.message);
             }
+
+            console.error(`error in postData ${err}`);
+
         }
 
     }
