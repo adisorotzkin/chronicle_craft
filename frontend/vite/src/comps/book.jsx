@@ -1,19 +1,25 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AppContext } from '../context/context';
 import { apiService } from '../service/apisService';
-
+import Submitcomment from './submitcomment';
+import { useNavigate } from 'react-router-dom';
 
 const Book = () => {
-  const { extParagraphsContentArr ,paragraphsIdArr} = useContext(AppContext);
+  const { extParagraphsContentArr, paragraphsIdArr } = useContext(AppContext);
   const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
   const [profileData, setProfileData] = useState(null);
-  const { getData, postData } = apiService();
+  const [shouldFetchData, setShouldFetchData] = useState(true); // New boolean state
+  const { getData, postAuthenticatedData } = apiService();
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('Fetching data...');
+
     const fetchData = async () => {
       try {
         if (
+          shouldFetchData && // Check the boolean condition
           extParagraphsContentArr &&
           extParagraphsContentArr[currentParagraphIndex] &&
           extParagraphsContentArr[currentParagraphIndex].data &&
@@ -21,7 +27,8 @@ const Book = () => {
         ) {
           const profile = await getData(`/users/single/${extParagraphsContentArr[currentParagraphIndex].data.author}`);
           console.log('Data from API:', profile.data);
-          setProfileData(profile.data); // Update profile data
+          setProfileData(profile.data);
+          setShouldFetchData(false); // Set it to false after successful fetch
         } else {
           console.warn('Author information not available for the current paragraph.');
         }
@@ -31,10 +38,11 @@ const Book = () => {
     };
 
     fetchData();
-  }, [extParagraphsContentArr, currentParagraphIndex, getData]);
+  }, [extParagraphsContentArr, currentParagraphIndex, getData, shouldFetchData]);
 
   const handleNextParagraph = () => {
     setCurrentParagraphIndex((prevIndex) => prevIndex + 1);
+    setShouldFetchData(true); // Reset the boolean when moving to the next paragraph
   };
 
   const handleCommentSubmit = async (event) => {
@@ -42,16 +50,10 @@ const Book = () => {
     const commentValue = inputRef.current.value;
     const commentDetails = {
       paragraphId: paragraphsIdArr[currentParagraphIndex],
-      content: commentValue
-    }
-    try {
-      await postData('/comments', commentDetails);
-      console.log('Comment submitted:', commentValue);
-    } catch (error) {
-      console.error('Error submitting comment:', error);
-    }
+      content: commentValue,
+    };
+    navigate('/submitcomment', { state: { commentDetails } });
   };
-
 
   return (
     <div className="container">
@@ -78,6 +80,7 @@ const Book = () => {
 };
 
 export default Book;
+
 
 
 
