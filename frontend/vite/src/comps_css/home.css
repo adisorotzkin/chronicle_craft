@@ -1,8 +1,8 @@
-.navbar{
+.outer-main-home{
+    display: flex;
     background-color: black;
-    height: 100vh;
+    color:white;
 }
-.main-home{
-    background-color: black;
-    height: 100vh;
+.inner-main-home{
+    margin-left: 18%;
 }

@@ -10,7 +10,8 @@
     padding-bottom: 20px;
     position: relative;
     border-right: white solid 1px;
-    width:100%;
+    width:18%;
+    position: fixed;
 }
 .logo{
     height: 50px;

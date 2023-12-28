@@ -6,7 +6,8 @@ export const apiService = () => {
     const postData = async (url, body) => {
         try {
             console.log(`${baseUrl}${url}`);
-            const response = await axios.post(`${baseUrl}${url}`, body);
+            const response = await axios.post(`${baseUrl}${url}`,body);
+            console.log(response);
             return response.data;
         }
         catch (err) {
@@ -59,7 +60,6 @@ export const apiService = () => {
       
 
     const getData = async (url) => {
-
         try {
             console.log(`${baseUrl}${url}`);
             return await axios.get(`${baseUrl}${url}`);
