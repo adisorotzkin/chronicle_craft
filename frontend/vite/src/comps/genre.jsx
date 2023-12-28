@@ -46,7 +46,7 @@ const Genre = (props) => {
                             <div key={item._id} className='book-item p-3' onClick={() => handleBookClick(item)}>
                                 <img src={item.coverImg} alt={`Book Cover - ${item.title}`} className='book-cover' />
                                 {/* Add any other book information you want to display */}
-                                <p>{item.title}</p>
+                                <p className='book-title'>{item.title}</p>
                             </div>
                         ))}
                     </div>

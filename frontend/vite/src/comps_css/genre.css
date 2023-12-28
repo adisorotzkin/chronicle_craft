@@ -4,4 +4,10 @@
 }
 .book-cover{
     cursor: pointer;
+    width: 130px;
+    border-radius: 8px;
+}
+.book-title{
+    display: flex;
+    justify-content: center;
 }
