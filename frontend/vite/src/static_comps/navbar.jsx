@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css'
 import Welcome from '../comps/welcome'
@@ -31,6 +31,10 @@ const Navbar = () => {
                 <div className="pt-4">
                     <i className="text-white fa fa-search" aria-hidden="true"></i>
                     <Link to="/search" className='link'> Search</Link>
+                </div>
+                <div className="pt-4">
+                    <i className="text-white fa fa-link" aria-hidden="true"></i>
+                    <Link to="/robbie" className='link'> Robbie</Link>
                 </div>
                 <div className="pt-4">
                     <i className="text-white fa fa-book" aria-hidden="true">

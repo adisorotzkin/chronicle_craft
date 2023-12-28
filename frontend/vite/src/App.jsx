@@ -16,6 +16,7 @@ import PrivacyPolicy from './footer_comps/privacyPolicy'
 import LegalNotices from './footer_comps/legalNotices';
 import BookItem from './comps/bookItem';
 import Home from './comps/home';
+import Robbie from './comps/robbie'
 
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
@@ -50,6 +51,7 @@ function App() {
                         <Route path='/legalNotices' element={<LegalNotices />} />
                         <Route path='/home' element={<Home />} />
                         <Route path='/welcome' element={<Welcome />} />
+                        <Route path='/robbie' element={<Robbie />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

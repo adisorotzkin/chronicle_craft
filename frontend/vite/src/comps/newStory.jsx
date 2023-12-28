@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { apiService } from '../service/apisService';
 import ImageGenerator from './imageGenerator'
 import { AppContext } from '../context/context';
+import '../comps_css/newStory.css'
+import Navbar from '../static_comps/navbar'
 
 
 const NewStory = () => {
@@ -11,10 +13,7 @@ const NewStory = () => {
   const genreRef = useRef(null);
   const navigate = useNavigate();
   const { postAuthenticatedData } = apiService();
-  const { imageUrl, setImageUrl } = useContext(AppContext);
-
-
-
+  const { imageUrl, setImageUrl, genresArray } = useContext(AppContext);
 
   const handleNext = async () => {
     const title = titleRef.current.value;
@@ -57,24 +56,34 @@ const NewStory = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Create a New Story</h2>
-      <form>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input type="text" id="title" ref={titleRef} />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <textarea id="description" ref={descriptionRef} />
-        </div>
-        <div>
-          <label htmlFor="genre">Genre:</label>
-          <input type="text" id="genre" ref={genreRef} />
-        </div>
-        <ImageGenerator />
-        <button type="button" onClick={handleNext}> Next </button>
-      </form>
+    <div className="outer-main-create">
+      <Navbar />
+      <div className="container inner-main-create p-5">
+        <h2>Create a New Story</h2>
+        <form className='form'>
+          <div className='form-group'>
+            <label htmlFor="title">Title:</label>
+            <input type="text" className='form-control' id="title" ref={titleRef} />
+          </div>
+          <div className='form-group'>
+            <label htmlFor="description">Description:</label>
+            <textarea id="description" className='form-control' ref={descriptionRef} />
+          </div>
+          <div className='form-group'>
+            <label htmlFor="genre">Genre:</label>
+            <select id="genre" className="form-control" ref={genreRef}>
+              <option value="" disabled selected>Select your genre</option>
+              {genresArray.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <ImageGenerator />
+          <button type="button" className="btn btn-next text-white border" onClick={handleNext}> Next </button>
+        </form>
+      </div>
     </div>
   );
 };
