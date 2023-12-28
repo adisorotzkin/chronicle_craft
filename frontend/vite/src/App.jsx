@@ -16,6 +16,7 @@ import PrivacyPolicy from './footer_comps/privacyPolicy'
 import LegalNotices from './footer_comps/legalNotices';
 import BookItem from './comps/bookItem';
 import Home from './comps/home';
+import NewParagraph from './comps/newParagraph'
 import Robbie from './comps/robbie'
 
 function App() {
@@ -51,7 +52,9 @@ function App() {
                         <Route path='/legalNotices' element={<LegalNotices />} />
                         <Route path='/home' element={<Home />} />
                         <Route path='/welcome' element={<Welcome />} />
+                        <Route path='newParagraph' element={<NewParagraph />} />
                         <Route path='/robbie' element={<Robbie />} />
+
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

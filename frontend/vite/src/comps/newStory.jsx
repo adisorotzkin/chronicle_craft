@@ -35,20 +35,10 @@ const NewStory = () => {
         coverImg: imageUrl
       }, localStorage.getItem('token'));
 
-      // if (response && response.data) {
-      //   alert('Story created successfully!');
-      //   navigate('/create-paragraph', {
-      //     state: {
-      //       storyInfo: {
-      //         title,
-      //         description,
-      //         genre
-      //       },
-      //     },
-      //   });
-      // } else {
-      //   alert('Failed to create the story. Please try again.');
-      // }
+        console.log("Story created successfully!" , response);
+        navigate('/newParagraph', {state: {storyInfo: response.story }});
+     
+      
     } catch (error) {
       console.error('Error creating story:', error);
       alert('An error occurred while creating the story. Please try again.');
