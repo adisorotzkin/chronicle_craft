@@ -40,7 +40,7 @@ export const apiService = () => {
             },
         });
         // console.log(response.dada);
-        //   return response.data;
+          return response.data;
         } catch (err) {
             if (err.response) {
                 // The request was made and the server responded with a status code
