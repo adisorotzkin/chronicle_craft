@@ -16,7 +16,6 @@ import PrivacyPolicy from './footer_comps/privacyPolicy'
 import LegalNotices from './footer_comps/legalNotices';
 import BookItem from './comps/bookItem';
 import Home from './comps/home';
-import Submitcomment from './comps/submitcomment';
 
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
@@ -24,6 +23,7 @@ function App() {
     const [getStartedEmail, setgetStartedEmail] = useState('');
     const [indexRoute, setIndexRoute] = useState('');
     const [genresArray] = useState(['Comedy', 'ScienceFiction', 'Drama', 'Biography', 'Fantasy', 'Kids', 'Horror', 'Thriller', 'Mystery', 'Romance']);
+  const [imageUrl, setImageUrl] = useState("/")
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -33,7 +33,7 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <AppContext.Provider value={{ extParagraphsContentArr, setextParagraphsContentArr, paragraphsIdArr, setparagraphsIdArr, getStartedEmail, setgetStartedEmail, genresArray}}>
+                <AppContext.Provider value={{ extParagraphsContentArr, setextParagraphsContentArr, paragraphsIdArr, setparagraphsIdArr, getStartedEmail, setgetStartedEmail, genresArray,imageUrl,setImageUrl}}>
                     <Routes>
                         <Route index element={indexRoute} />
                         <Route path="/signup" element={<SignUp />} />
@@ -49,7 +49,6 @@ function App() {
                         <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
                         <Route path='/legalNotices' element={<LegalNotices />} />
                         <Route path='/home' element={<Home />} />
-                        <Route path='/submitcomment' element={<Submitcomment />} />
                         <Route path='/welcome' element={<Welcome />} />
                     </Routes>
                 </AppContext.Provider>

@@ -1,17 +1,15 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AppContext } from '../context/context';
 import { apiService } from '../service/apisService';
-import Submitcomment from './submitcomment';
-import { useNavigate } from 'react-router-dom';
 
 const Book = () => {
   const { extParagraphsContentArr, paragraphsIdArr } = useContext(AppContext);
   const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
   const [profileData, setProfileData] = useState(null);
-  const [shouldFetchData, setShouldFetchData] = useState(true); // New boolean state
+  const [commentData, setCommentData] = useState(null);
+  const [shouldFetchData, setShouldFetchData] = useState(true);
   const { getData, postAuthenticatedData } = apiService();
   const inputRef = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('Fetching data...');
@@ -19,16 +17,19 @@ const Book = () => {
     const fetchData = async () => {
       try {
         if (
-          shouldFetchData && // Check the boolean condition
+          shouldFetchData &&
           extParagraphsContentArr &&
           extParagraphsContentArr[currentParagraphIndex] &&
           extParagraphsContentArr[currentParagraphIndex].data &&
           extParagraphsContentArr[currentParagraphIndex].data.author
         ) {
           const profile = await getData(`/users/single/${extParagraphsContentArr[currentParagraphIndex].data.author}`);
+          const comments = await getData(`/comments/paragraphId/${extParagraphsContentArr[currentParagraphIndex].data._id}`);
+          console.log('comments:', comments);
           console.log('Data from API:', profile.data);
+          setCommentData(comments.data);
           setProfileData(profile.data);
-          setShouldFetchData(false); // Set it to false after successful fetch
+          setShouldFetchData(false);
         } else {
           console.warn('Author information not available for the current paragraph.');
         }
@@ -42,7 +43,7 @@ const Book = () => {
 
   const handleNextParagraph = () => {
     setCurrentParagraphIndex((prevIndex) => prevIndex + 1);
-    setShouldFetchData(true); // Reset the boolean when moving to the next paragraph
+    setShouldFetchData(true);
   };
 
   const handleCommentSubmit = async (event) => {
@@ -52,7 +53,18 @@ const Book = () => {
       paragraphId: paragraphsIdArr[currentParagraphIndex],
       content: commentValue,
     };
-    navigate('/submitcomment', { state: { commentDetails } });
+
+    try {
+      if (commentDetails) {
+        await postAuthenticatedData('/comments', commentDetails, localStorage.getItem('token'));
+        console.log('Comment submitted:', commentDetails.content);
+
+        const comments = await getData(`/comments/paragraphId/${extParagraphsContentArr[currentParagraphIndex].data._id}`);
+        setCommentData(comments.data);
+      }
+    } catch (error) {
+      console.error('Error submitting comment:', error);
+    }
   };
 
   return (
@@ -68,6 +80,11 @@ const Book = () => {
           <p>bio: {profileData.bio} </p>
           <p>rating: {profileData.rating}</p>
 
+          <h2>Comments:</h2>
+          {commentData && commentData.map((comment) => (
+            <p key={comment._id}># content: {comment.content} </p>
+          ))}
+
           <form onSubmit={handleCommentSubmit}>
             <label htmlFor="comment">Add a Comment:</label>
             <input ref={inputRef} type="text" id="comment" name="comment" />
@@ -80,6 +97,7 @@ const Book = () => {
 };
 
 export default Book;
+
 
 
 
