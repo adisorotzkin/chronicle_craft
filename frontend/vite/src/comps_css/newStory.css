@@ -3,9 +3,17 @@
     color: white;
     display: flex;
     height: 100vh;
+    align-items: center;
 }
 .inner-main-create{
     margin-left: 18%;
     width: 50%;
     margin: 0 auto;
+}
+.btn-next{
+    display: flex;
+    float: right;
+}
+.required-fields {
+    color: #3ecca4;
 }

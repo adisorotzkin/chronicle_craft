@@ -9,7 +9,7 @@ async function main()
   console.log(config.userDb);
   console.log(config.passDb);
   
-  await mongoose.connect("mongodb+srv://Chana_Kahana:Chana8505@cluster0.ceovg2j.mongodb.net/ChronicleCraft");
+  await mongoose.connect(`mongodb+srv://${config.userDb}:${config.passDb}@cluster0.ceovg2j.mongodb.net/ChronicleCraft`);
 
   console.log("mongo connect")
 }

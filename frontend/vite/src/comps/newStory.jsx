@@ -62,15 +62,15 @@ const NewStory = () => {
         <h2>Create a New Story</h2>
         <form className='form'>
           <div className='form-group'>
-            <label htmlFor="title">Title:</label>
+            <label htmlFor="title">Title *</label>
             <input type="text" className='form-control' id="title" ref={titleRef} />
           </div>
           <div className='form-group'>
-            <label htmlFor="description">Description:</label>
+            <label htmlFor="description">Description *</label>
             <textarea id="description" className='form-control' ref={descriptionRef} />
           </div>
           <div className='form-group'>
-            <label htmlFor="genre">Genre:</label>
+            <label htmlFor="genre">Genre *</label>
             <select id="genre" className="form-control" ref={genreRef}>
               <option value="" disabled selected>Select your genre</option>
               {genresArray.map((genre) => (
@@ -81,8 +81,13 @@ const NewStory = () => {
             </select>
           </div>
           <ImageGenerator />
-          <button type="button" className="btn btn-next text-white border" onClick={handleNext}> Next </button>
+          <div className="btn-next">
+            <button type="button" className="btn text-white" onClick={handleNext}><i className="fa fa-arrow-right" aria-hidden="true"></i></button>
+          </div>
         </form>
+        <div className="required-fields">
+          <p>* Required fields</p>
+        </div>
       </div>
     </div>
   );
