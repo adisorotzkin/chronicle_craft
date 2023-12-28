@@ -1,0 +1,11 @@
+.outer-main-create{
+    background-color: black;
+    color: white;
+    display: flex;
+    height: 100vh;
+}
+.inner-main-create{
+    margin-left: 18%;
+    width: 50%;
+    margin: 0 auto;
+}
