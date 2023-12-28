@@ -16,6 +16,7 @@ import PrivacyPolicy from './footer_comps/privacyPolicy'
 import LegalNotices from './footer_comps/legalNotices';
 import BookItem from './comps/bookItem';
 import Home from './comps/home';
+import Submitcomment from './comps/submitcomment';
 
 function App() {
   const [extParagraphsContentArr,setextParagraphsContentArr] = useState([]);
@@ -41,6 +42,7 @@ function App() {
                     <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
                     <Route path='/legalNotices' element={<LegalNotices />} />
                     <Route path='/home' element={<Home />} />
+                    <Route path='/submitcomment' element={<Submitcomment />} />
                 </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

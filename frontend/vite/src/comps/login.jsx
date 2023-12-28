@@ -21,6 +21,7 @@ const Login = () => {
       const res = await postData('/users/login', body);
       console.log(res);
       localStorage.setItem('token', res.token);
+      console.log(res.user);
       localStorage.setItem('uid', res.user._id);
       navigate('/home');
     } 
