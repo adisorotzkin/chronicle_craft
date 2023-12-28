@@ -61,7 +61,6 @@ export const apiService  = () => {
       
       
     const getData = async (url) => {
-        
         try {
             console.log(`${baseUrl}${url}`);
             return await axios.get(`${baseUrl}${url}`);

@@ -1,0 +1,7 @@
+.books-list{
+    display: flex;
+    height: 200px;
+}
+.book-cover{
+    cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css'
 import Welcome from '../comps/welcome'
@@ -8,7 +8,7 @@ const Navbar = () => {
 
     const handleExit = () => {
         localStorage.clear();
-        navigate('/');
+        navigate('/welcome');
     }
 
     return (

@@ -1,0 +1,30 @@
+[{
+  "title": "Galactic Nexus",
+  "description": "Exploring the mysteries of a futuristic galactic civilization.",
+  "author": "author_id_1",
+  "dateCreated": "2023-02-15T10:30:00Z",
+  "charactersCtr": 3,
+  "paragraphsArr": [],
+  "coverImg": "galactic_nexus_cover.jpg",
+  "genre": "Science Fiction"
+},
+{
+  "title": "Realm of Enchantment",
+  "description": "A magical journey through a world filled with mythical creatures and ancient spells.",
+  "author": "author_id_2",
+  "dateCreated": "2023-03-20T15:20:00Z",
+  "charactersCtr": 4,
+  "paragraphsArr": [],
+  "coverImg": "realm_of_enchantment_cover.jpg",
+  "genre": "Fantasy"
+},
+{
+  "title": "Whispers in the Shadows",
+  "description": "Unraveling a mysterious conspiracy in a small, quiet town.",
+  "author": "author_id_3",
+  "dateCreated": "2023-04-10T18:45:00Z",
+  "charactersCtr": 2,
+  "paragraphsArr": [],
+  "coverImg": "whispers_in_the_shadows_cover.jpg",
+  "genre": "Mystery"
+}]

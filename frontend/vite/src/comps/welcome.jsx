@@ -51,18 +51,18 @@ const Welcome = () => {
             <h1>Your Passions, Our Platform</h1>
             <p>Embark on a journey where your creativity knows no bounds. Chronicle Craft is the canvas for your imagination, providing a stage for your stories to flourish.</p>
           </div>
-          <div className="about-image col-6">
+          <div className="about-image col-3">
             <img src='../about-1.png' alt="about-1" />
           </div>
         </div>
 
         <div className="about-item text-white row">
+        <div className="about-image col-6">
+            <img src="../about-2.png" alt="about-2" />
+          </div>
           <div className="about-content col-6">
             <h1>Unleash Your Writing Potential</h1>
             <p>Whether you're a seasoned writer or just starting, Chronicle Craft is your space to express, share, and collaborate. Dive into a community of storytellers and find inspiration at every turn.</p>
-          </div>
-          <div className="about-image col-6">
-            <img src="../about-2.png" alt="about-2" />
           </div>
         </div>
 
@@ -71,7 +71,7 @@ const Welcome = () => {
             <h1>Engage, Collaborate, Create</h1>
             <p>Connect with fellow writers, complete intriguing stories, and receive feedback from the community. Chronicle Craft is more than a platform; it's a vibrant community where creativity thrives.</p>
           </div>
-          <div className="about-image col-6">
+          <div className="about-image col-3">
             <img src="../about-3.png" alt="about-3" />
           </div>
         </div>
