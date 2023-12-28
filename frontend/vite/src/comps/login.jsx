@@ -8,8 +8,6 @@ const Login = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [showNext, setShowNext] = useState(true);
   const { postData } = apiService();
-
-
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -26,7 +24,8 @@ const Login = () => {
       console.log(res.user);
       localStorage.setItem('uid', res.user._id);
       navigate('/home');
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error logging in:', error);
     }
   }
