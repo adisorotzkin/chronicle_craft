@@ -3,6 +3,7 @@ import axios from "axios";
 const baseUrl="http://localhost:3001";
 
 export const apiService  = () => {
+    console.log("hello");
     const postData = async (url, body) => {
         try  {
             console.log(`${baseUrl}${url}`);

@@ -18,7 +18,7 @@ const SignUp = () => {
     const usernameRef = useRef(null);
     const dobRef = useRef(null);
     const bioRef = useRef(null);
-    
+
     const addNewDoc = async () => {
         try {
             const body = {
@@ -76,7 +76,7 @@ const SignUp = () => {
                 </div>
                 <div className="form-group">
                     <label className='form-label'>Profile picture</label>
-                    <input type="file" accept="image/*" onChange={handleImageChange} className='form-control' />
+                    <input type="file" accept="image/*" className='form-control' />
                 </div>
             </form>
 

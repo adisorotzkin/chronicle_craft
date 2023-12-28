@@ -20,7 +20,8 @@ const Login = () => {
       }
       const res = await postData('/users/login', body);
       console.log(res);
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('uid', res.user._id);
       navigate('/home');
     } 
     catch (error) {
