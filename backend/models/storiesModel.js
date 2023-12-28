@@ -18,7 +18,8 @@ exports.validStory = (_reqBody) => {
     let joiSchema = joi.object({
         title: joi.string().min(2).max(99).required(),
         description: joi.string().min(2).max(999).required(),
-        genre: joi.string()
+        genre: joi.string(),
+        coverImg: joi.string().allow("")
     })
     return joiSchema.validate(_reqBody);
 }

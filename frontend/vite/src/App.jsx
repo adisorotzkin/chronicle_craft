@@ -16,17 +16,18 @@ import PrivacyPolicy from './footer_comps/privacyPolicy'
 import LegalNotices from './footer_comps/legalNotices';
 import BookItem from './comps/bookItem';
 import Home from './comps/home';
-import Submitcomment from './comps/submitcomment';
 
 function App() {
   const [extParagraphsContentArr,setextParagraphsContentArr] = useState([]);
   const [paragraphsIdArr, setparagraphsIdArr] = useState([]);
   const [getStartedEmail, setgetStartedEmail] = useState('');
+  const [imageUrl, setImageUrl] = useState("/")
+
   
     return (
         <div className="App">
             <BrowserRouter>
-            <AppContext.Provider value = {{extParagraphsContentArr,setextParagraphsContentArr,paragraphsIdArr,setparagraphsIdArr, getStartedEmail, setgetStartedEmail}}>
+            <AppContext.Provider value = {{extParagraphsContentArr,setextParagraphsContentArr,paragraphsIdArr,setparagraphsIdArr, getStartedEmail, setgetStartedEmail,imageUrl,setImageUrl}}>
                 <Routes>
                     <Route index element={<Welcome />} />
                     <Route path="/signup" element={<SignUp />} />
@@ -42,7 +43,6 @@ function App() {
                     <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
                     <Route path='/legalNotices' element={<LegalNotices />} />
                     <Route path='/home' element={<Home />} />
-                    <Route path='/submitcomment' element={<Submitcomment />} />
                 </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

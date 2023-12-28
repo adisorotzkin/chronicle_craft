@@ -12,7 +12,7 @@ exports.CommentsModel = mongoose.model("comments", commentsSchema);
 
 exports.validComment = (_reqBody) => {
     let joiSchema = joi.object({
-        paragraphId:joi.string.allow(""),
+        paragraphId:joi.string().allow(""),
         content: joi.string().min(2).max(999).required()
     })
     return joiSchema.validate(_reqBody);
