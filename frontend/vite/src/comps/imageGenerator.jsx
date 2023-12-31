@@ -10,7 +10,7 @@ const ImageGenerator = () => {
     let inputRef = useRef(null)
     const [loading, setLoading] = useState(false)
     const { imageUrl, setImageUrl } = useContext(AppContext);
-
+    
 
 
 
