@@ -55,6 +55,11 @@ const Book = () => {
     setShouldFetchData(true);
   };
 
+
+  const handleSelectChange = (event) => {
+    const selectedIndex = parseInt(event.target.value, 10);
+    setCurrentParagraphIndex(selectedIndex);
+
   const handlePrevParagraph = () => {
     setCurrentParagraphIndex((prevIndex) => prevIndex - 1);
     setShouldFetchData(true);
@@ -124,6 +129,7 @@ const Book = () => {
 };
 
 export default Book;
+
 
 
 
