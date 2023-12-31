@@ -16,31 +16,31 @@ const NewStory = () => {
   const { postAuthenticatedData } = apiService();
   const { imageUrl, setImageUrl, genresArray } = useContext(AppContext);
 
-  const uploadImageToFirebase = async (imageUrl, storagePath) => {
-    try {
-      const response = await axios({
-        method: 'get',
-        url: imageUrl,
-        responseType: 'arraybuffer', // Set the responseType to 'arraybuffer'
-      });
+  // const uploadImageToFirebase = async (imageUrl, storagePath) => {
+  //   try {
+  //     const response = await axios({
+  //       method: 'get',
+  //       url: imageUrl,
+  //       responseType: 'arraybuffer', // Set the responseType to 'arraybuffer'
+  //     });
 
-      const buffer = Buffer.from(response.data, 'binary'); // Convert arraybuffer to Buffer
+  //     const buffer = Buffer.from(response.data, 'binary'); // Convert arraybuffer to Buffer
 
-      const bucket = storage.bucket();
-      const file = bucket.file(storagePath);
+  //     const bucket = storage.bucket();
+  //     const file = bucket.file(storagePath);
 
-      await file.save(buffer, {
-        metadata: {
-          contentType: 'image/jpeg',
-        },
-      });
+  //     await file.save(buffer, {
+  //       metadata: {
+  //         contentType: 'image/jpeg',
+  //       },
+  //     });
 
-      console.log('Image uploaded to Firebase Storage successfully.');
-    } catch (error) {
-      console.error('Error uploading image to Firebase Storage:', error);
-      throw error;
-    }
-  };
+  //     console.log('Image uploaded to Firebase Storage successfully.');
+  //   } catch (error) {
+  //     console.error('Error uploading image to Firebase Storage:', error);
+  //     throw error;
+  //   }
+  // };
 
   const handleNext = async () => {
     const title = titleRef.current.value;
@@ -52,18 +52,18 @@ const NewStory = () => {
       return;
     }
 
-    const storagePath = `images/${title.toLowerCase().replace(/ /g, '_')}.jpg`;
+    // const storagePath = `images/${title.toLowerCase().replace(/ /g, '_')}.jpg`;
 
-    await uploadImageToFirebase(imageUrl, storagePath);
+    // await uploadImageToFirebase(imageUrl, storagePath);
 
-    const firebaseImageUrl = `https://storage.googleapis.com/${storage.bucket().name}/${encodeURIComponent(storagePath)}`;
+    // const firebaseImageUrl = `https://storage.googleapis.com/${storage.bucket().name}/${encodeURIComponent(storagePath)}`;
 
     try {
       const response = await postAuthenticatedData('/stories', {
         title: title,
         description: description,
         genre: genre,
-        coverImg: firebaseImageUrl,
+        coverImg: imageUrl,
       }, localStorage.getItem('token'));
 
         console.log("Story created successfully!" , response);
