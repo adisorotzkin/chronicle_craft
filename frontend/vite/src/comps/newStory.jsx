@@ -66,8 +66,10 @@ const NewStory = () => {
         coverImg: firebaseImageUrl,
       }, localStorage.getItem('token'));
 
-      console.log('Story created successfully!', response);
-      navigate('/newParagraph', { state: { storyInfo: response } });
+        console.log("Story created successfully!" , response);
+        console.log(response);
+        navigate('/newParagraph', {state: {storyInfo: response }});
+    
     } catch (error) {
       console.error('Error creating story:', error);
       alert('An error occurred while creating the story. Please try again.');
