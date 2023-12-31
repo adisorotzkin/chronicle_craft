@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { apiService } from '../service/apisService';
 import '../comps_css/genre.css'
+import { useNavigate } from 'react-router-dom';
+import {AppContext} from '../context/context'
 
 const Genre = (props) => {
     const { getData } = apiService();
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [selectedBook, setSelectedBook] = useState(null);
     const [bookClicked, setBookClicked] = useState(false);
+    const { selectedBook, setSelectedBook } = useContext(AppContext);
 
     const handleBookClick = (book) => {
         // Set the selected book when a cover is clicked
         setSelectedBook(book);
         setBookClicked(!bookClicked);
     };
+
+    const handleReadClicked = () => {
+
+        navigate('/bookItem');
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,7 +53,6 @@ const Genre = (props) => {
                         {data.map((item) => (
                             <div key={item._id} className='book-item p-3' onClick={() => handleBookClick(item)}>
                                 <img src={item.coverImg} alt={`Book Cover - ${item.title}`} className='book-cover' />
-                                {/* Add any other book information you want to display */}
                                 <p className='book-title'>{item.title}</p>
                             </div>
                         ))}
@@ -53,12 +60,11 @@ const Genre = (props) => {
                 </div>
             )}
 
-            {/* Display additional information about the selected book */}
             {bookClicked && (
                 <div className="selected-book-info p-3">
                     <h4>{selectedBook.title}</h4>
                     <p>{selectedBook.description}</p>
-                    {/* Add more details as needed */}
+                    <button className='btn text-white border read-btn' onClick={() => {handleReadClicked()}}>Read</button>
                 </div>
             )}
         </div>

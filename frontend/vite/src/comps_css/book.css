@@ -1,4 +1,17 @@
-
+.outer-main-book{
+    background-color: black;
+    min-height: 100vh;
+}
+.inner-main-book{
+    margin-left: 18%;
+    color: white;
+}
+.paragraph-content{
+    min-height: 500px;
+    width: 100%;
+    border: white dashed 1px;
+    border-radius: 32px;
+}
   
   
   
