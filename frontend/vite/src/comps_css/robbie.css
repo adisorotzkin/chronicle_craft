@@ -1,5 +1,6 @@
 .outer-main-robbie{
-    /* background-color: black; */
+    background-color: black;
+    height: 100vh;
 }
 .inner-main-robbie{
     margin-left: 18%;

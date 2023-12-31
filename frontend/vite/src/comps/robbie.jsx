@@ -92,7 +92,7 @@ function Robbie() {
         <div className="outer-main-robbie">
             <Navbar />
             <div className="App inner-main-robbie">
-                <div style={{ position: "relative", height: "800px", width: "700px" }}>
+                <div style={{ position: "relative", height: "100vh", width: "1230px"}}>
                     <MainContainer>
                         <ChatContainer>
                             <MessageList

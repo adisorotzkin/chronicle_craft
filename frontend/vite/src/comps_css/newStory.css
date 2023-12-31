@@ -6,13 +6,18 @@
     align-items: center;
 }
 .inner-main-create{
-    margin-left: 18%;
+    margin-left: 32%;
     width: 50%;
-    margin: 0 auto;
 }
-.btn-next{
+.btn-next-div{
     display: flex;
     float: right;
+}
+.btn-next{
+    color: white;
+}
+.btn-next:hover{
+    color: #3ecca4;
 }
 .required-fields {
     color: #3ecca4;
