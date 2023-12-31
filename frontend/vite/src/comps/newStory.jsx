@@ -48,7 +48,7 @@ const NewStory = () => {
   return (
     <div className="outer-main-create">
       <Navbar />
-      <div className="container inner-main-create p-5">
+      <div className="container inner-main-create">
         <h2>Create a New Story</h2>
         <form className='form'>
           <div className='form-group'>
@@ -71,8 +71,8 @@ const NewStory = () => {
             </select>
           </div>
           <ImageGenerator />
-          <div className="btn-next">
-            <button type="button" className="btn text-white" onClick={handleNext}><i className="fa fa-arrow-right" aria-hidden="true"></i></button>
+          <div className="btn-next-div">
+            <button type="button" className="btn text-white" onClick={handleNext}><i className="fa fa-arrow-right btn-next" aria-hidden="true"></i></button>
           </div>
         </form>
         <div className="required-fields">

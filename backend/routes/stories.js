@@ -37,6 +37,11 @@ router.get("/search", async (req, res) => {
   let page = req.query.page || 1;
   try {
     let queryS = req.query.s;
+
+    if (!queryS) {
+      return res.status(400).json({ msg: "Search query is required." });
+    }
+
     let searchReg = new RegExp(queryS, "i")
     let data = await StoriesModel.find({ $or: [{ title: searchReg }, { author: searchReg }] })
       .limit(perPage)
