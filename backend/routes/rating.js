@@ -4,6 +4,22 @@ const { RatingsModel, validRating } = require("../models/ratingsModel")
 const router = express.Router();
 
 
+//Get a rating by authorId.
+router.get("/:idAuthor" , async(req,res)=> 
+{
+ try
+ {
+   let idAuthor = req.params.idAuthor
+   let data = await RatingsModel.find({author:idAuthor})
+   res.json(data);
+ }
+ catch(err)
+ {
+   console.log(err)
+   res.status(500).json({msg:"err",err})
+ }
+})
+
 //adding new rating with token
 router.post("/",  async (req, res) => {
   let validBody = validRating(req.body);

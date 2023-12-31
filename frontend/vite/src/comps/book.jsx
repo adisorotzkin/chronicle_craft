@@ -79,7 +79,7 @@ const Book = () => {
       <select id="paragraphSelect" onChange={handleSelectChange} value={currentParagraphIndex}>
         {extParagraphsContentArr.map((paragraph, index) => (
           <option key={index} value={index}>
-            Paragraph {index + 1}
+            {paragraph.data.name}
           </option>
         ))}
       </select>

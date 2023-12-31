@@ -7,6 +7,7 @@ import { AppContext } from '../context/context';
 const NewParagraph = () => {
   const contentRef = useRef(null);
   const isLastParagraphRef = useRef(null);
+  const nameRef = useRef(null);
   const characterNameRef = useRef(null);
   const characterDescriptionRef = useRef(null);
   const navigate = useNavigate();
@@ -16,7 +17,12 @@ const NewParagraph = () => {
   const { imageUrl, setImageUrl } = useContext(AppContext);
 
   const handleAdd = async () => {
+    const name = nameRef.current.value;
     const content = contentRef.current.value;
+    if (name.trim() === '') {
+      alert('Please enter paragraph name.');
+      return;
+    }
     if (content.trim() === '') {
       alert('Please enter paragraph content.');
       return;
@@ -27,6 +33,7 @@ const NewParagraph = () => {
     try {
       const response = await postAuthenticatedData('/paragraphs', {
         storyId: storyInfo._id,
+        name: name,
         content: content,
         end: isLastParagraphRef.current.checked
       }, localStorage.getItem('token'));
@@ -91,6 +98,9 @@ const NewParagraph = () => {
       <h2>Add a New Paragraph</h2>
       <form>
         <div className="mb-3">
+          <label htmlFor="name" className="form-label">Name:</label>
+          <input className="form-control" ref={nameRef} />
+
           <label htmlFor="content" className="form-label">Content:</label>
           <textarea className="form-control" id="content" ref={contentRef}></textarea>
         </div>
