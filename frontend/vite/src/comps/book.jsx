@@ -46,6 +46,12 @@ const Book = () => {
     setShouldFetchData(true);
   };
 
+  const handleSelectChange = (event) => {
+    const selectedIndex = parseInt(event.target.value, 10);
+    setCurrentParagraphIndex(selectedIndex);
+    setShouldFetchData(true);
+  };
+
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
     const commentValue = inputRef.current.value;
@@ -69,6 +75,15 @@ const Book = () => {
 
   return (
     <div className="container">
+      <label htmlFor="paragraphSelect">Select Paragraph:</label>
+      <select id="paragraphSelect" onChange={handleSelectChange} value={currentParagraphIndex}>
+        {extParagraphsContentArr.map((paragraph, index) => (
+          <option key={index} value={index}>
+            Paragraph {index + 1}
+          </option>
+        ))}
+      </select>
+
       <p>paragraph {currentParagraphIndex + 1}:</p>
       <p>{extParagraphsContentArr[currentParagraphIndex]?.data.content}</p>
       <button onClick={handleNextParagraph}>Next Paragraph</button>
@@ -97,6 +112,7 @@ const Book = () => {
 };
 
 export default Book;
+
 
 
 
