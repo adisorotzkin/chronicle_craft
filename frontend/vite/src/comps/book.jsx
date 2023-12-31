@@ -56,7 +56,6 @@ const Book = () => {
     setShouldFetchData(true);
   };
 
-
   const handleSelectChange = (event) => {
     const selectedIndex = parseInt(event.target.value, 10);
     setCurrentParagraphIndex(selectedIndex);
@@ -94,7 +93,7 @@ const Book = () => {
       <div className="inner-main-book p-5">
         <div className="select-paragraph mb-3 pe-3">
           <label htmlFor="paragraphSelect">Select Paragraph:</label>
-          <select id="paragraphSelect" className='select-input bg-dark text-white ms-2' onChange={(event) => { handleSelectChange(event) }} value={currentParagraphIndex}>
+          <select id="paragraphSelect" className='select-input bg-dark text-white ms-2' onChange={handleSelectChange} value={currentParagraphIndex}>
             {extParagraphsContentArr.map((paragraph, index) => (
               <option key={index} value={index}>
                 Paragraph {index + 1}
