@@ -14,7 +14,7 @@ const NewStory = () => {
   const genreRef = useRef(null);
   const navigate = useNavigate();
   const { postAuthenticatedData } = apiService();
-  const { imageUrl, genresArray } = useContext(AppContext);
+  const { imageUrl, setImageUrl, genresArray } = useContext(AppContext);
 
   // const uploadImageToFirebase = async (imageUrl, storagePath) => {
   //   try {
@@ -79,7 +79,7 @@ const NewStory = () => {
   return (
     <div className="outer-main-create">
       <Navbar />
-      <div className="container inner-main-create">
+      <div className="container inner-main-create mt-5">
         <h2>Create a New Story</h2>
         <form className='form'>
           <div className='form-group'>

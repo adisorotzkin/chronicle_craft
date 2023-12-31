@@ -27,12 +27,27 @@ router.get("/usersList" ,authAdmin, async(req,res)=>
 })
 
 //Get a user by id.
-router.get("/single/:idUser" , async(req,res)=> 
+router.get("/singleId/:idUser" , async(req,res)=> 
 {
  try
  {
    let idUser = req.params.idUser
    let data = await UsersModel.findOne({_id:idUser})
+   res.json(data);
+ }
+ catch(err)
+ {
+   console.log(err)
+   res.status(500).json({msg:"err",err})
+ }
+})
+//get a user by author name
+router.get("/singleUsername/:username" , async(req,res)=> 
+{
+ try
+ {
+   let username = req.params.username
+   let data = await UsersModel.findOne({username:username})
    res.json(data);
  }
  catch(err)

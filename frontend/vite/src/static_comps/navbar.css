@@ -12,6 +12,7 @@
     border-right: white solid 1px;
     width:18%;
     position: fixed;
+    top: 0;
 }
 .logo{
     height: 50px;
