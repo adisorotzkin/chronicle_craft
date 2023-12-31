@@ -25,7 +25,8 @@ function App() {
     const [getStartedEmail, setgetStartedEmail] = useState('');
     const [indexRoute, setIndexRoute] = useState('');
     const [genresArray] = useState(['Comedy', 'ScienceFiction', 'Drama', 'Biography', 'Fantasy', 'Kids', 'Horror', 'Thriller', 'Mystery', 'Romance']);
-  const [imageUrl, setImageUrl] = useState("/")
+    const [imageUrl, setImageUrl] = useState("/")
+    const [selectedBook, setSelectedBook] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -35,7 +36,7 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <AppContext.Provider value={{ extParagraphsContentArr, setextParagraphsContentArr, paragraphsIdArr, setparagraphsIdArr, getStartedEmail, setgetStartedEmail, genresArray,imageUrl,setImageUrl}}>
+                <AppContext.Provider value={{ extParagraphsContentArr, setextParagraphsContentArr, paragraphsIdArr, setparagraphsIdArr, getStartedEmail, setgetStartedEmail, genresArray, imageUrl, setImageUrl, selectedBook, setSelectedBook}}>
                     <Routes>
                         <Route index element={indexRoute} />
                         <Route path="/signup" element={<SignUp />} />

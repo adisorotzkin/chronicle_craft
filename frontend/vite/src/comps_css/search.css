@@ -1,7 +1,19 @@
 .outer-main-search{
     background-color: black;
-    height: 100vh;
+    min-height: 100vh;
 }
 .inner-main-search{
-    margin-left: 18%;
+    margin-left: 20%;
+}
+.search-result{
+    color: white;
+}
+.book-cover{
+    cursor: pointer;
+    width: 130px;
+    border-radius: 8px;
+}
+.book-title{
+    display: flex;
+    justify-content: center;
 }

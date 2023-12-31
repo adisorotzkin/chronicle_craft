@@ -6,11 +6,11 @@ import { AppContext } from '../context/context';
 
 const BookItem = () => {
   const { getData } = apiService();
-  const { setextParagraphsContentArr,setparagraphsIdArr } = useContext(AppContext);
+  const { setextParagraphsContentArr,setparagraphsIdArr, selectedBook } = useContext(AppContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const story = await getData('/stories/single/6582be832ed143ffa5d0c223');
+        const story = await getData(`/stories/single/${selectedBook._id}`);
         console.log('Data from API:', story.data);
 
         let paragraphsIdArr = story.data.paragraphsArr || [];

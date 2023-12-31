@@ -43,7 +43,7 @@ const ImageGenerator = () => {
         <div className='ai-image-generator'>
             {/* <div className="header">Ai image <span>generator</span></div> */}
             <div className="img-loading">
-                <div className="image"><img src={imageUrl === "/" ? default_image : imageUrl} /></div>
+                <div className="image"><img src={imageUrl === "/" ? default_image : imageUrl} className='cover-img'/></div>
                 <div className="loading">
                     <div className={loading ? "loading-bar-full" : "loading-bar"}></div>
                     <div className={loading ? "loading-text" : "d-none"}>Loading....</div>
