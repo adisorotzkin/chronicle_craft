@@ -11,7 +11,7 @@ const NewParagraph = () => {
   const characterDescriptionRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { postAuthenticatedData } = apiService();
+  const { postAuthenticatedData, updateData } = apiService();
   const { storyInfo } = location.state || {};
   const { imageUrl, setImageUrl } = useContext(AppContext);
 
@@ -34,22 +34,37 @@ const NewParagraph = () => {
         end: isLastParagraph
       }, localStorage.getItem('token'));
 
+      console.log(response);
+
+      const response2 = await updateData('/stories', storyInfo._id, {
+        title: storyInfo.title,
+        description: storyInfo.description,
+        genre: storyInfo.genre,
+        coverImg: storyInfo.coverImg,
+        paragraphsArr: [...storyInfo.paragraphsArr, response._id]  
+      });
+      
+
+      console.log(response2);
+
+
+
       alert('Paragraph added successfully!');
 
-      if (storyInfo.charactersCtr < 5) {
-        const addCharacter = window.confirm('Do you want to add a main character to the story?');
+      // if (storyInfo.charactersCtr < 5) {
+      //   const addCharacter = window.confirm('Do you want to add a main character to the story?');
 
-        if (addCharacter) {
-          const response2 = await postAuthenticatedData('/characters', {
-            storyId: storyInfo._id,
-            characterName: characterName,
-            description: characterDescription,
-            image: imageUrl
-          }, localStorage.getItem('token'));
+      //   if (addCharacter) {
+      //     const response2 = await postAuthenticatedData('/characters', {
+      //       storyId: storyInfo._id,
+      //       characterName: characterName,
+      //       description: characterDescription,
+      //       image: imageUrl
+      //     }, localStorage.getItem('token'));
 
-          alert('Main character added successfully!');
-        }
-      }
+      //     alert('Main character added successfully!');
+      //   }
+      // }
 
       // if (isLastParagraph) {
       //   navigate('/thank-you');
