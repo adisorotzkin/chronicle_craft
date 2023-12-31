@@ -11,6 +11,7 @@ exports.RatingsModel = mongoose.model("ratings", ratingsSchema);
 
 exports.validRating = (_reqBody) => {
     let joiSchema = joi.object({
+        author: joi.string(),
         rating: joi.number().min(1).max(5).required()
     })
     return joiSchema.validate(_reqBody);

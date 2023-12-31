@@ -94,10 +94,11 @@ const Book = () => {
       <div className="inner-main-book p-5">
         <div className="select-paragraph mb-3 pe-3">
           <label htmlFor="paragraphSelect">Select Paragraph:</label>
-          <select id="paragraphSelect" className='select-input bg-dark text-white ms-2' onChange={(event) => { handleSelectChange(event) }} value={currentParagraphIndex}>
+          <select id="paragraphSelect" className='select-input bg-dark text-white ms-2' onChange={handleSelectChange} value={currentParagraphIndex}>
             {extParagraphsContentArr.map((paragraph, index) => (
               <option key={index} value={index}>
-                Paragraph {index + 1}
+                            {paragraph.data.name}
+
               </option>
             ))}
           </select>
@@ -106,9 +107,31 @@ const Book = () => {
           <div className="paragraph-content container p-5">
             <p className='content'>{firstColumn}</p>
           </div>
-          <div className="paragraph-content container p-5">
-            <p className='content'>{secondColumn}</p>
+          <br />
+          <div className="buttons d-flex justify-content-between px-3">
+            <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
+            <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
           </div>
+  
+          {profileData && (
+            <>
+              <p>Author: {profileData.username}</p>
+              <img src={profileData.profilePicture} alt="Profile" />
+              <p>bio: {profileData.bio} </p>
+              <p>rating: {profileData.rating}</p>
+  
+              <h2>Comments:</h2>
+              {commentData && commentData.map((comment) => (
+                <p key={comment._id}># content: {comment.content} </p>
+              ))}
+  
+              <form onSubmit={handleCommentSubmit}>
+                <label htmlFor="comment">Add a Comment:</label>
+                <input ref={inputRef} type="text" id="comment" name="comment" />
+                <button className='btn text-white border' type="submit">Submit Comment</button>
+              </form>
+            </>
+          )}
         </div>
         <br />
         <div className="buttons d-flex justify-content-between px-3 mb-5">
