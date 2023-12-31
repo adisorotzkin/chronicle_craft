@@ -13,8 +13,10 @@ exports.CharactersModel = mongoose.model("characters", charactersSchema);
 
 exports.validCharacter = (_reqBody) => {
     let joiSchema = joi.object({
+        storyId: joi.string(),
         characterName: joi.string().min(2).max(99).required(),
-        description: joi.string().min(2).max(99).required()
+        description: joi.string().min(2).max(99).required(),
+        image: joi.string()
     })
     return joiSchema.validate(_reqBody);
 }
