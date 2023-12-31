@@ -5,7 +5,7 @@ let paragraphsSchema = new mongoose.Schema({
     storyId:String,
     author:String,
     content:String,
-    end: {type: Boolean, default: false},
+    end: Boolean,
     dateCreated:{ type: Date, default: Date.now() }
 })
 

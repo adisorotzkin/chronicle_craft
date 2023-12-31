@@ -110,6 +110,35 @@ router.post("/", auth, async (req, res) => {
   }
 })
 
+//edit story 
+router.put("/:idEdit",async (req, res) => 
+{
+  let validBody = validStory(req.body);
+  if (validBody.error) 
+  {
+    return res.status(400).json(validBody.error.details);
+  }
+  try 
+  {
+    let idEdit = req.params.idEdit;
+    let data;
+    
+    data = await StoriesModel.updateOne({ _id: idEdit }, req.body)
+    
+    if (!data) 
+    {
+      return res.status(400).json({ err: "This operation is not enabled or the token is not valid" })
+    }
+   
+    res.status(200).json({ msg: data })
+  }
+  catch (err) 
+  {
+    console.log(err);
+    res.status(400).json({ err })
+  }
+});
+
 //delete story by his user or admin
 router.delete("/:idDel", authAdmin, async (req, res) => {
   try {

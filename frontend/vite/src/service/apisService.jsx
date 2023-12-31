@@ -6,41 +6,36 @@ export const apiService = () => {
     const postData = async (url, body) => {
         try {
             console.log(`${baseUrl}${url}`);
-            const response = await axios.post(`${baseUrl}${url}`,body);
+            const response = await axios.post(`${baseUrl}${url}`, body);
             console.log(response);
             return response.data;
         }
         catch (err) {
             if (err.response) {
-                // The request was made and the server responded with a status code
                 console.error(`Server responded with error: ${err.response.status}`, err.response.data);
             } else if (err.request) {
-                // The request was made but no response was received
                 console.error('No response received from the server', err.request);
             } else {
-                // Something happened in setting up the request
                 console.error('Error setting up the request', err.message);
             }
 
             console.error(`error in postData ${err}`);
-
         }
-
     }
 
     const postAuthenticatedData = async (url, body, token) => {
         try {
-          const response = await axios({
-            url: `${baseUrl}${url}`,
-            method: 'post',
-            data: body,
-            headers: {
-              'x-api-key': token,
-              //   'Content-Type':'application-json',
-            },
-        });
-        // console.log(response.dada);
-          return response.data;
+            const response = await axios({
+                url: `${baseUrl}${url}`,
+                method: 'post',
+                data: body,
+                headers: {
+                    'x-api-key': token,
+                    //   'Content-Type':'application-json',
+                },
+            });
+            // console.log(response.dada);
+            return response.data;
         } catch (err) {
             if (err.response) {
                 // The request was made and the server responded with a status code
@@ -56,8 +51,8 @@ export const apiService = () => {
             console.error(`error in postData ${err}`);
 
         }
-      };
-      
+    };
+
 
     const getData = async (url) => {
         try {
@@ -73,14 +68,26 @@ export const apiService = () => {
         try {
             console.log(`${baseUrl}${url}/${params}`);
             console.log(body);
+    
             const res = await axios.put(`${baseUrl}${url}/${params}`, body);
+            
             console.log(res);
-            return res
-        }
-        catch (err) {
-            console.error(`error ${err}`);
+    
+            return res.data;  
+        } catch (err) {
+            if (err.response) {
+                console.error(`Server responded with error: ${err.response.status}`, err.response.data);
+            } else if (err.request) {
+                console.error('No response received from the server', err.request);
+            } else {
+                console.error('Error setting up the request', err.message);
+            }
+    
+            console.error(`Error in updateData: ${err.message}`);
+            throw err;  // Re-throw the error to propagate it up the call stack
         }
     };
+    
 
     const deleteData = async (url, params, query) => {
         try {

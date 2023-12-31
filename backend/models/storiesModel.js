@@ -19,7 +19,8 @@ exports.validStory = (_reqBody) => {
         title: joi.string().min(2).max(99).required(),
         description: joi.string().min(2).max(999).required(),
         genre: joi.string(),
-        coverImg: joi.string().allow("")
+        coverImg: joi.string().allow(""),
+        paragraphsArr: joi.array().items(joi.string()).optional()
     })
     return joiSchema.validate(_reqBody);
 }
