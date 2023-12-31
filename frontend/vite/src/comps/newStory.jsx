@@ -36,6 +36,7 @@ const NewStory = () => {
       }, localStorage.getItem('token'));
 
         console.log("Story created successfully!" , response);
+        console.log(response);
         navigate('/newParagraph', {state: {storyInfo: response }});
      
       

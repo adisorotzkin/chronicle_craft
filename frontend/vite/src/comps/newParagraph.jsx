@@ -11,14 +11,12 @@ const NewParagraph = () => {
   const characterDescriptionRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { postAuthenticatedData, updateData } = apiService();
+  const { postAuthenticatedData, updateData, getData } = apiService();
   const { storyInfo } = location.state || {};
   const { imageUrl, setImageUrl } = useContext(AppContext);
 
   const handleAdd = async () => {
     const content = contentRef.current.value;
-    const isLastParagraph = isLastParagraphRef.current.checked;
-
     if (content.trim() === '') {
       alert('Please enter paragraph content.');
       return;
@@ -26,24 +24,32 @@ const NewParagraph = () => {
 
     const characterName = characterNameRef.current.value;
     const characterDescription = characterDescriptionRef.current.value;
-
     try {
       const response = await postAuthenticatedData('/paragraphs', {
         storyId: storyInfo._id,
         content: content,
-        end: isLastParagraph
+        end: isLastParagraphRef.current.checked
       }, localStorage.getItem('token'));
 
       console.log(response);
+
+      const storyInfo2 = await getData(`/stories/single/${storyInfo._id}`);
+      console.log('Data from API:', storyInfo2.data);
+
+      console.log(storyInfo2.data.paragraphsArr);
+      const existingParagraphsArr = Array.isArray(storyInfo2.data.paragraphsArr) ? storyInfo2.data.paragraphsArr : [];
+
+      const updatedParagraphsArr = [...existingParagraphsArr, response._id];
+
 
       const response2 = await updateData('/stories', storyInfo._id, {
         title: storyInfo.title,
         description: storyInfo.description,
         genre: storyInfo.genre,
         coverImg: storyInfo.coverImg,
-        paragraphsArr: [...storyInfo.paragraphsArr, response._id]  
+        paragraphsArr: updatedParagraphsArr
       });
-      
+
 
       console.log(response2);
 
@@ -71,11 +77,14 @@ const NewParagraph = () => {
       // } else {
       //   navigate('/new-paragraph', { state: { storyInfo } });
       // }
+
     } catch (error) {
       console.error('Error adding paragraph:', error);
       alert('An error occurred while adding the paragraph. Please try again.');
     }
+
   };
+
 
   return (
     <div className="container mt-5">
