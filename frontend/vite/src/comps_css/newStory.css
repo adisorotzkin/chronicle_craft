@@ -3,6 +3,7 @@
     color: white;
     display: flex;
     align-items: center;
+    min-height: 100vh;
 }
 .inner-main-create{
     margin-left: 32%;

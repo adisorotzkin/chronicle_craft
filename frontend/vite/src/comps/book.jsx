@@ -33,7 +33,8 @@ const Book = () => {
           setFirstColumn(wordsArray.slice(0, midpointIndex).join(' '));
           setSecondColumn(wordsArray.slice(midpointIndex).join(' '));
 
-          const profile = await getData(`/users/single/${extParagraphsContentArr[currentParagraphIndex].data.author}`);
+          console.log(`author: ${extParagraphsContentArr[currentParagraphIndex].data.author}`);
+          const profile = await getData(`/users/singleId/${extParagraphsContentArr[currentParagraphIndex].data.author}`);
           const comments = await getData(`/comments/paragraphId/${extParagraphsContentArr[currentParagraphIndex].data._id}`);
           console.log('comments:', comments);
           console.log('Data from API:', profile.data);
@@ -88,26 +89,23 @@ const Book = () => {
   };
 
   return (
-    <div className="container">
-      <label htmlFor="paragraphSelect">Select Paragraph:</label>
-      <select id="paragraphSelect" onChange={handleSelectChange} value={currentParagraphIndex}>
-        {extParagraphsContentArr.map((paragraph, index) => (
-          <option key={index} value={index}>
-            {paragraph.data.name}
-          </option>
-        ))}
-      </select>
-  
-      <div className="outer-main-book">
-        <Navbar />
-        <div className="inner-main-book p-5">
-          <div className="paragraphs d-flex">
-            <div className="paragraph-content container p-5">
-              <p className='content'>{firstColumn}</p>
-            </div>
-            <div className="paragraph-content container p-5">
-              <p className='content'>{secondColumn}</p>
-            </div>
+    <div className="outer-main-book">
+      <Navbar />
+      <div className="inner-main-book p-5">
+        <div className="select-paragraph mb-3 pe-3">
+          <label htmlFor="paragraphSelect">Select Paragraph:</label>
+          <select id="paragraphSelect" className='select-input bg-dark text-white ms-2' onChange={handleSelectChange} value={currentParagraphIndex}>
+            {extParagraphsContentArr.map((paragraph, index) => (
+              <option key={index} value={index}>
+                            {paragraph.data.name}
+
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="paragraphs d-flex">
+          <div className="paragraph-content container p-5">
+            <p className='content'>{firstColumn}</p>
           </div>
           <br />
           <div className="buttons d-flex justify-content-between px-3">
@@ -135,12 +133,43 @@ const Book = () => {
             </>
           )}
         </div>
+        <br />
+        <div className="buttons d-flex justify-content-between px-3 mb-5">
+          <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
+          <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
+        </div>
+
+        {profileData && (
+          <div className='author-details'>
+            <div className="top-details mb-5 row p-4 bg-dark">
+              <div className="profile-img-div col-3">
+                <img className='profile-img' src={profileData.profilePicture} alt="Profile" />
+              </div>
+              <div className="details-div col-8">
+                <p><strong>Author:</strong> {profileData.username}</p>
+                <p><strong>Bio:</strong> {profileData.bio} </p>
+                <p><strong>Rating:</strong> {profileData.rating}</p>
+              </div>
+            </div>
+
+            <div className="bottom-details mb-5 row p-4 bg-dark">
+              <h2>Comments:</h2>
+              {commentData && commentData.map((comment) => (
+                <p key={comment._id}># content: {comment.content} </p>
+              ))}
+
+              <form onSubmit={handleCommentSubmit}>
+                <label htmlFor="comment">Add a Comment:</label>
+                <input ref={inputRef} type="text" id="comment" name="comment" />
+                <button className='btn text-white border' type="submit">Submit Comment</button>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
-  
-  
-};
+}
 
 export default Book;
 
