@@ -30,7 +30,7 @@ exports.validUser = (_reqBody) => {
         email: joi.string().min(2).max(99).email().required(),
         bio: joi.string().min(2).max(999).allow(""),
         profilePicture:joi.string().allow(""),
-        password: joi.string().min(6).max(30).required(),
+        password: joi.string().min(6).max(30).allow(""),
         dateOfBirth: joi.date().allow(""),
         registrationDate: joi.date().allow("")
     })

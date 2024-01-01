@@ -19,7 +19,7 @@ import Home from './comps/home';
 import NewParagraph from './comps/newParagraph'
 import Robbie from './comps/robbie'
 import UpdateProfile from './comps/updateProfile';
-
+import DeleteAccount from './comps/deleteAccount';
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
     const [paragraphsIdArr, setparagraphsIdArr] = useState([]);
@@ -59,6 +59,7 @@ function App() {
                         <Route path='newParagraph' element={<NewParagraph />} />
                         <Route path='/robbie' element={<Robbie />} />
                         <Route path='/updateProfile' element={<UpdateProfile />} />
+                        <Route path='/deleteAccount' element={<DeleteAccount />} />
 
                     </Routes>
                 </AppContext.Provider>

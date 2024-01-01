@@ -1,9 +1,9 @@
-// Import necessary dependencies and components
-import React, { useState, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/context';
 import { apiService } from '../service/apisService';
+import axios from 'axios';
 
 const UpdateProfile = () => {
   const { userData, setUserData } = useContext(AppContext);
@@ -11,42 +11,59 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
   const { updateAuthenticatedData } = apiService();
 
-  const [updatedUserInfo, setUpdatedUserInfo] = useState({
-    username: userData.username,
-    email: userData.email,
-    registrationDate: userData.registrationDate,
-    dateOfBirth: userData.dateOfBirth,
-    bio: userData.bio,
-    profilePicture: userData.profilePicture,
-  });
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const bioRef = useRef();
+  const profilePictureRef = useRef();
+  const dateOfBirthRef = useRef();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedUserInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: value,
-    }));
-  };
-
-  // Function to handle the "Update Profile" button click
-  const handleUpdateProfile = async () => {
+  const uploadImageToCloudinary = async (imageFile, name) => {
     try {
-      // Use the updateAuthenticatedData function to update the user profile
-      const updatedData = await updateAuthenticatedData(
-        '/users', // Update the URL according to your API endpoint
-        userData.id, // Use the user ID or any identifier needed for the update
-        updatedUserInfo,
-        userToken
+      const formData = new FormData();
+      formData.append('file', imageFile);
+      formData.append('upload_preset', 'cmezl4xo');
+      formData.append('public_id', name);
+
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
 
-      // Update the user data in the context with the latest information
+      console.log('Image uploaded successfully to Cloudinary:', response.data);
+      return response.data.url;
+    } catch (error) {
+      console.error('Error uploading image to Cloudinary:', error);
+      throw error;
+    }
+  };
+
+  const handleUpdateProfile = async () => {
+    try {
+      console.log(profilePictureRef.current.files[0]);
+      const urlPromise = uploadImageToCloudinary(profilePictureRef.current.files[0], Date.now())
+      const url = await urlPromise;
+      const updatedUserInfo = {
+        username: usernameRef.current.value,
+        email: emailRef.current.value,
+        bio: bioRef.current.value,
+        profilePicture: url,
+        dateOfBirth: dateOfBirthRef.current.value,
+        registrationDate: userData.registrationDate
+      };
+
+
+      const updatedData = await updateAuthenticatedData('/users/',userData._id, updatedUserInfo, userToken);
+
       setUserData(updatedData);
 
-      // Navigate back to the user profile page
       navigate('/profile');
     } catch (error) {
       console.error('Error updating user profile:', error);
-      // Handle error as needed
     }
   };
 
@@ -58,55 +75,27 @@ const UpdateProfile = () => {
           <Form>
             <Form.Group controlId="formUsername">
               <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                value={updatedUserInfo.username}
-                onChange={handleInputChange}
-              />
+              <Form.Control type="text" ref={usernameRef} defaultValue={userData.username} />
             </Form.Group>
 
             <Form.Group controlId="formEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={updatedUserInfo.email}
-                onChange={handleInputChange}
-              />
+              <Form.Control type="email" ref={emailRef} defaultValue={userData.email} />
             </Form.Group>
 
             <Form.Group controlId="formBio">
               <Form.Label>Bio</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                name="bio"
-                value={updatedUserInfo.bio}
-                onChange={handleInputChange}
-              />
+              <Form.Control as="textarea" rows={3} ref={bioRef} defaultValue={userData.bio} />
             </Form.Group>
 
-            {/* Add a file input for updating the profile picture */}
             <Form.Group controlId="formProfilePicture">
               <Form.Label>Profile Picture</Form.Label>
-              <Form.Control
-                type="file"
-                name="profilePicture"
-                accept="image/*"
-                onChange={(e) => handleInputChange({ target: { name: 'profilePicture', value: e.target.files[0] } })}
-              />
+              <Form.Control type="file" ref={profilePictureRef} accept="image/*" />
             </Form.Group>
 
-            {/* Add a date input for updating the date of birth */}
             <Form.Group controlId="formDateOfBirth">
               <Form.Label>Date of Birth</Form.Label>
-              <Form.Control
-                type="date"
-                name="dateOfBirth"
-                value={updatedUserInfo.dateOfBirth}
-                onChange={handleInputChange}
-              />
+              <Form.Control type="date" ref={dateOfBirthRef} defaultValue={userData.dateOfBirth} />
             </Form.Group>
 
             <Button variant="primary" onClick={handleUpdateProfile}>
@@ -120,4 +109,3 @@ const UpdateProfile = () => {
 };
 
 export default UpdateProfile;
-
