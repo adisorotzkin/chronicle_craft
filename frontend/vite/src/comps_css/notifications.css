@@ -1,0 +1,17 @@
+.outer-main-notifications{
+    background-color: black;
+    min-height: 100vh;
+    overflow: hidden;
+}
+.inner-main-notifications{
+    margin-left: 18%;
+    color: white;
+}
+.paragraphs-comments-item{
+    border-radius: 16px;
+    margin-bottom: 16px;
+    width: 700px;
+}
+.comment-date, .comment-uid{
+    font-size: smaller;
+}

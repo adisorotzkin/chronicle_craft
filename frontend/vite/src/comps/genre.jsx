@@ -53,7 +53,7 @@ const Genre = (props) => {
                         {data.map((item) => (
                             <div key={item._id} className='book-item p-3' onClick={() => handleBookClick(item)}>
                                 <img src={item.coverImg} alt={`Book Cover - ${item.title}`} className='book-cover' />
-                                <p className='book-title'>{item.title}</p>
+                                <p className='book-title mt-2'>{item.title}</p>
                             </div>
                         ))}
                     </div>
@@ -61,7 +61,7 @@ const Genre = (props) => {
             )}
 
             {bookClicked && (
-                <div className="selected-book-info p-3">
+                <div className="selected-book-info mb-5">
                     <h4>{selectedBook.title}</h4>
                     <p>{selectedBook.description}</p>
                     <button className='btn text-white border read-btn' onClick={() => {handleReadClicked()}}>Read</button>

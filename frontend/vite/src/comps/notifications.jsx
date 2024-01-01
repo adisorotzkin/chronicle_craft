@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../static_comps/navbar';
 import { apiService } from '../service/apisService';
 import StarRating from './starRating';
+import '../comps_css/notifications.css'
 
 const Notifications = () => {
   const userId = localStorage.getItem('uid');
@@ -59,43 +60,50 @@ const Notifications = () => {
   }, [userId, getData, apiRequestsCompleted]);
 
   return (
-    <div className="container mt-5">
-      <div className="mb-4">
-        <h2 className="text-dark">Your Rating</h2>
-        {userRating ? (
-          <>
-            <p className="text-success">Your average rating:</p>
-            <StarRating averageRating={userRating} />
-          </>
-        ) : (
-          <p className="text-danger">No rating found for the current user.</p>
-        )}
-      </div>
+    <div className="outer-main-notifications">
+      <Navbar />
+      <div className="inner-main-notifications container p-5">
+        <h1>Notifications:</h1>
+        <div className="rating-stars mb-5 mt-5 p-3">
+          <h3 className="">Your current average rating:</h3>
+          {userRating ? (
+            <div>
+              <StarRating averageRating={userRating} />
+            </div>
+          ) : (
+            <p className="text-danger">No rating found for the current user.</p>
+          )}
+        </div>
 
-      <div>
-        <h2 className="text-dark">Your Paragraph's Comments</h2>
-        {userComments.length > 0 ? (
-          <div>
-            {userComments.map((item, index) => (
-              // Check if the paragraph has comments
-              item.comments.length > 0 && (
-                <div key={index}>
-                  <h3>{item.paragraphName}</h3>
-                  <ul>
+        <div>
+          <h3 className="mb-4 mt-5">Your Paragraphs Comments:</h3>
+          {userComments.length > 0 ? (
+            <div className='p-3'>
+              {userComments.map((item, index) => (
+                item.comments.length > 0 && (
+                  <div key={index} className='paragraphs-comments-item bg-dark p-4'>
+                    <h4 className='mb-4'>{item.paragraphName} :</h4>
                     {item.comments.map((comment) => (
-                      <li key={comment._id}>{comment.content}</li>
+                      <div className="comment row mb-4" key={comment._id}>
+                        <img className='profile-img col-1 me-3' src={"/"} alt="Profile" />
+                        <div className="comment-inner col-10">
+                          <div className="comment-inner-inner d-flex">
+                            <p className='comment-uid fw-bold me-2'>@{comment.userId}</p>
+                            <p className='comment-date'>{comment.dateCreated && comment.dateCreated.substring(0, 10)}</p>
+                          </div>
+                          <p className=''>{comment.content}</p>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
-                </div>
-              )
-            ))}
-          </div>
-        ) : (
-          <p className="text-warning">No paragraphs found for the current user.</p>
-        )}
+                  </div>
+                )
+              ))}
+            </div>
+          ) : (
+            <p className="text-warning">No paragraphs found for the current user.</p>
+          )}
+        </div>
       </div>
-
-
     </div>
   );
 };

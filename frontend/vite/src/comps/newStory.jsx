@@ -29,7 +29,7 @@ const NewStory = () => {
       );
 
       console.log('Image uploaded successfully to Cloudinary:', response.data);
-      return response.data;
+      return response.data.url;
     } catch (error) {
       console.error('Error uploading image to Cloudinary:', error);
       throw error;
@@ -46,14 +46,15 @@ const NewStory = () => {
       return;
     }
 
-    setCloudImg(uploadImageToCloudinary(imageUrl, title));
+    setCloudImg(imageUrl ? uploadImageToCloudinary(imageUrl, title) : null);
+
 
     try {
       const response = await postAuthenticatedData('/stories', {
         title: title,
         description: description,
         genre: genre,
-        coverImg: cloudImg,
+        coverImg: imageUrl? cloudImg : null,
       }, localStorage.getItem('token'));
 
         console.log("Story created successfully!" , response);
