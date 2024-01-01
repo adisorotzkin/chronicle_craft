@@ -1,5 +1,4 @@
-import React, { useRef, useContext } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import React, { useRef, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/context';
 import { apiService } from '../service/apisService';
@@ -12,6 +11,7 @@ const UpdateProfile = () => {
   const userToken = localStorage.getItem('token');
   const navigate = useNavigate();
   const { updateAuthenticatedData } = apiService();
+  const [updatedUserInfo, setUpdatedUserInfo] = useState(userData);
 
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -49,14 +49,14 @@ const UpdateProfile = () => {
       console.log(profilePictureRef.current.files[0]);
       const urlPromise = uploadImageToCloudinary(profilePictureRef.current.files[0], Date.now())
       const url = await urlPromise;
-      const updatedUserInfo = {
+      setUpdatedUserInfo({
         username: usernameRef.current.value,
         email: emailRef.current.value,
         bio: bioRef.current.value,
         profilePicture: url,
         dateOfBirth: dateOfBirthRef.current.value,
         registrationDate: userData.registrationDate
-      };
+      });
 
 
       const updatedData = await updateAuthenticatedData('/users/',userData._id, updatedUserInfo, userToken);
@@ -71,6 +71,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="outer-main-update-profile">
+    {console.log(userData)}
       <Navbar/>
       <div className="inner-main-update-profile p-5">
         <h2>Update Your Profile</h2>
@@ -84,7 +85,7 @@ const UpdateProfile = () => {
                   className="form-control"
                   id="formUsername"
                   name="username"
-                  value={updatedUserInfo.username}
+                  value={userData.username}
                   ref={usernameRef}
                 />
               </div>
@@ -96,7 +97,7 @@ const UpdateProfile = () => {
                   className="form-control"
                   id="formEmail"
                   name="email"
-                  value={updatedUserInfo.email}
+                  value={userData.email}
                   ref={emailRef} 
                 />
               </div>
@@ -108,7 +109,7 @@ const UpdateProfile = () => {
                   id="formBio"
                   rows="3"
                   name="bio"
-                  value={updatedUserInfo.bio}
+                  value={userData.bio}
                   ref={bioRef} 
                 ></textarea>
               </div>
@@ -134,7 +135,7 @@ const UpdateProfile = () => {
                   className="form-control"
                   id="formDateOfBirth"
                   name="dateOfBirth"
-                  value={updatedUserInfo.dateOfBirth}
+                  value={userData.dateOfBirth}
                   ref={dateOfBirthRef}
                 />
               </div>

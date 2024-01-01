@@ -108,10 +108,10 @@ const Profile = () => {
         {userData ? (
           <div>
             <div className="row mb-5">
-              <div className="col-2 d-flex align-items-center">
+              <div className="col-3 d-flex align-items-center">
                 <img src={userData.profilePicture} className="profile-img" alt="Profile" />
               </div>
-              <div className="col-9 p-3">
+              <div className="col-8 p-3">
                 <div className="username-rating d-flex">
                   <h2 className='me-4 d-flex align-items-center'>{userData.username}</h2>
                   <p><StarRating averageRating={userData.rating} /></p>
