@@ -1,0 +1,17 @@
+.outer-main-profile{
+    background-color: black;
+    display: flex;
+    color: white;
+    min-height: 100vh;
+}
+.inner-main-profile{
+    margin-left: 18%;
+}
+.profile-img{
+    border-radius: 50%;
+}
+.list-group-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

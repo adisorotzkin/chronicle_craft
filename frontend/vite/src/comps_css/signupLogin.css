@@ -40,11 +40,11 @@
 }
 
 .next-btn {
-    color: #3ecca4;
+    color: white;
 }
 
 .next-btn:hover {
-    color: white;
+    color: #3ecca4;
 }
 
 .fa-arrow-right {
@@ -53,4 +53,11 @@
 
 .loading{
     color: #3ecca4;
+}
+.forgot-pass-btn{
+    cursor: pointer;
+    color: white;
+}
+.forgot-pass-btn:hover{
+    color:red;
 }

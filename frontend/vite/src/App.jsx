@@ -20,6 +20,8 @@ import NewParagraph from './comps/newParagraph'
 import Robbie from './comps/robbie'
 import UpdateProfile from './comps/updateProfile';
 import DeleteAccount from './comps/deleteAccount';
+import ForgotPassword from './comps/forgotPassword';
+
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
     const [paragraphsIdArr, setparagraphsIdArr] = useState([]);
@@ -29,7 +31,6 @@ function App() {
     const [imageUrl, setImageUrl] = useState(null)
     const [selectedBook, setSelectedBook] = useState('');
     const [userData, setUserData] = useState(null);
-
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -60,7 +61,7 @@ function App() {
                         <Route path='/robbie' element={<Robbie />} />
                         <Route path='/updateProfile' element={<UpdateProfile />} />
                         <Route path='/deleteAccount' element={<DeleteAccount />} />
-
+                        <Route path='/forgotPassword' element={<ForgotPassword />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

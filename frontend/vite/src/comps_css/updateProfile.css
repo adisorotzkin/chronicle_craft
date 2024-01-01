@@ -1,0 +1,8 @@
+.outer-main-update-profile{
+    background-color: black;
+    min-height: 100vh;
+    color: white;
+}
+.inner-main-update-profile{
+    margin-left: 18%;
+}

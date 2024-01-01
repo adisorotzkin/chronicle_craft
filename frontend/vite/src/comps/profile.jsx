@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Image, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Image, ListGroup, Nav } from 'react-bootstrap';
 import Navbar from '../static_comps/navbar';
 import { apiService } from '../service/apisService';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/context';
+import StarRating from './starRating';
+import '../comps_css/profile.css'
 
 const Profile = () => {
   const { getData, updateAuthenticatedData } = apiService();
@@ -14,14 +16,14 @@ const Profile = () => {
   const [userCommentsDetails, setUserCommentsDetails] = useState([]);
   const [shouldFetchActivity, setShouldFetchActivity] = useState(true);
   const navigate = useNavigate();
-  const { setSelectedBook ,userData, setUserData} = useContext(AppContext);
-  
+  const { setSelectedBook, userData, setUserData } = useContext(AppContext);
+
 
   const handleStoryClick = () => {
     navigate('/bookItem');
   };
 
-  const handleUpdetaDetails = () => {
+  const handleUpdateDetails = () => {
     navigate('/updateProfile');
   };
 
@@ -100,73 +102,85 @@ const Profile = () => {
   }, [userComments]);
 
   return (
-    <div>
-      {/* Navbar */}
-
-      <Container className="profile-container mt-5">
+    <div className="outer-main-profile">
+      <Navbar />
+      <div className="container inner-main-profile p-5">
         {userData ? (
-          <>
-            <Row className="mb-3">
-              <Col xs={12} md={4}>
-                <Image src={userData.profilePicture} fluid rounded />
-              </Col>
-              <Col xs={12} md={8}>
-                <h2>{userData.username}</h2>
-                <p>Email: {userData.email}</p>
-                <p>Bio: {userData.bio}</p>
-                <p>Active: {userData.active ? 'Yes' : 'No'}</p>
-                <p>Rating: {userData.rating}</p>
-                <button onClick={handleUpdetaDetails} className='btn btn-dark'>Updete details</button> <button onClick={handleDeleteAccount} className='btn btn-danger'>Delete your account</button>
-              </Col>
-            </Row>
+          <div>
+            <div className="row mb-5">
+              <div className="col-2 d-flex align-items-center">
+                <img src={userData.profilePicture} className="profile-img" alt="Profile" />
+              </div>
+              <div className="col-9 p-3">
+                <div className="username-rating d-flex">
+                  <h2 className='me-4 d-flex align-items-center'>{userData.username}</h2>
+                  <p><StarRating averageRating={userData.rating} /></p>
+                </div>
+                <p><strong>Email:</strong> {userData.email}</p>
+                <p><strong>Bio:</strong> {userData.bio}</p>
+                <p><strong>Active:</strong> {userData.active ? 'Yes' : 'No'}</p>
+              </div>
+              <div className="buttons col-1">
+                <button onClick={handleUpdateDetails} className="btn btn-dark me-3 mb-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete account"><i class="fa fa-list text-white" aria-hidden="true"></i></button>
+                <button onClick={handleDeleteAccount} className="btn btn-danger"><i class="fa fa-trash text-white" aria-hidden="true"></i></button>
+              </div>
+            </div>
 
-            <h1 className='mb-4'>Activity</h1>
-            <Row>
-              <Col>
+            <h1 className="mb-4">Activity</h1>
+            <div className="activity">
+              <div className="mb-5 w-75">
                 <h3>Written Stories</h3>
-                <ListGroup>
+                <ul className="list-group">
                   {userActivity.stories.map((story) => (
-                    <ListGroup.Item onClick={handleStoryClick} key={story.id}>{story.title}</ListGroup.Item>
+                    <li className="list-group-item" key={story.id}>
+                      {story.title}
+                      <button onClick={handleStoryClick} className="btn">View</button>
+                    </li>
                   ))}
-                </ListGroup>
-              </Col>
-              <Col>
+                </ul>
+              </div>
+              <div className="mb-5 w-75">
                 <h3>Written Paragraphs</h3>
-                <ListGroup>
+                <ul className="list-group">
                   {userActivity.paragraphs.map((paragraph) => (
-                    <ListGroup.Item onClick={async () => {
-                      const response = await getData(`/stories/single/${paragraph.storyId}`);
-                      setSelectedBook(response.data);
-                      navigate('/bookItem');
-                    }} key={paragraph.id}>{paragraph.name}</ListGroup.Item>
+                    <li className="list-group-item" key={paragraph.id}>
+                      {paragraph.name}
+                      <button onClick={async () => {
+                        const response = await getData(`/stories/single/${paragraph.storyId}`);
+                        setSelectedBook(response.data);
+                        navigate('/bookItem');
+                      }} className="btn">View</button>
+                    </li>
                   ))}
-                </ListGroup>
-              </Col>
-            </Row>
+                </ul>
+              </div>
+            </div>
 
-            <h3 className="mt-4">Your Comments</h3>
-            <ListGroup>
-              {userCommentsDetails.map((details, index) => (
-                <ListGroup.Item key={index}>
-                  {details ? (
-                    <>
-                      <p className="h5">{details.content}</p>
-                      <p className="text-muted">Paragraph Name: {details.paragraphName}</p>
-                      <p className="text-muted">Story Title: {details.storyTitle}</p>
-                    </>
-                  ) : (
-                    <p>Error fetching details for comment</p>
-                  )}
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
-          </>
+            <div className="your-comments w-75">
+              <h3 className="mt-4">Your Comments</h3>
+              <ul className="list-group">
+                {userCommentsDetails.map((details, index) => (
+                  <li className="list-group-item" key={index}>
+                    {details ? (
+                      <>
+                        <p className="h5">{details.content}</p>
+                        <p className="text-muted">Paragraph Name: {details.paragraphName}</p>
+                        <p className="text-muted">Story Title: {details.storyTitle}</p>
+                      </>
+                    ) : (
+                      <p>Error fetching details for comment</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         ) : (
           <p>Loading user data...</p>
         )}
-      </Container>
+      </div>
     </div>
-  );
+  )
 };
 
 export default Profile;

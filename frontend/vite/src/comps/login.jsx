@@ -30,6 +30,10 @@ const Login = () => {
     }
   }
 
+  const handleForgotPassword = async() => {
+    navigate('/forgotPassword');
+  }
+
   const onSub = async () => {
     setShowNext(false);
     setShowLoading(true);
@@ -50,6 +54,9 @@ const Login = () => {
         <div className="form-group">
           <label>Password *</label>
           <input type="password" placeholder='Enter a password' className='form-control' ref={passwordRef} />
+        </div>
+        <div className="forgot-pass-div py-2">
+          <p className='forgot-pass-btn' onClick={handleForgotPassword}>Forgot password?</p>
         </div>
       </form>
 
