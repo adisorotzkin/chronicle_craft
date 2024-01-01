@@ -28,7 +28,7 @@ const Profile = () => {
   };
 
   const handleDeleteAccount = () => {
-
+    navigate('/deleteAccount');
   };
 
   useEffect(() => {
