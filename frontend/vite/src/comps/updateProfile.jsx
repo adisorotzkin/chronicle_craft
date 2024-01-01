@@ -51,14 +51,17 @@ const UpdateProfile = () => {
       const updatedUserInfo = {
         username: usernameRef.current.value,
         email: emailRef.current.value,
+        password: "1234567",
         bio: bioRef.current.value,
         profilePicture: url,
         dateOfBirth: dateOfBirthRef.current.value,
-        registrationDate: userData.registrationDate
+        registrationDate: userData.registrationDate,
+        role: userData.role,
+        active: true
       };
 
 
-      const updatedData = await updateAuthenticatedData('/users/',userData._id, updatedUserInfo, userToken);
+      const updatedData = await updateAuthenticatedData('/users/', userData._id, updatedUserInfo, userToken);
 
       setUserData(updatedData);
 
@@ -70,35 +73,35 @@ const UpdateProfile = () => {
 
   return (
     <div className="outer-main-update-profile">
-      <Navbar/>
+      <Navbar />
       <div className="inner-main-update-profile p-5">
         <h2>Update Your Profile</h2>
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <form>
               <div className="mb-3">
-                <label  className="form-label">Username</label>
-                <input type="text" className="form-control" defaultValue={userData.username} ref={usernameRef}/>
+                <label className="form-label">Username</label>
+                <input type="text" className="form-control" defaultValue={userData.username} ref={usernameRef} />
               </div>
 
               <div className="mb-3">
-                <label  className="form-label">Email</label>
+                <label className="form-label">Email</label>
                 <input type="email" className="form-control" defaultValue={userData.email} ref={emailRef} />
               </div>
 
               <div className="mb-3">
-                <label  className="form-label">Bio</label>
+                <label className="form-label">Bio</label>
                 <textarea className="form-control" rows="3" defaultValue={userData.bio} ref={bioRef} ></textarea>
               </div>
 
               <div className="mb-3">
-                <label  className="form-label">Profile Picture</label>
-                <input type="file" className="form-control" accept="image/*"  ref={profilePictureRef}/>
+                <label className="form-label">Profile Picture</label>
+                <input type="file" className="form-control" accept="image/*" ref={profilePictureRef} />
               </div>
 
               <div className="mb-3">
-                <label  className="form-label">Date of Birth</label>
-                <input type="date" className="form-control" defaultValue={userData.dateOfBirth} ref={dateOfBirthRef}/>
+                <label className="form-label">Date of Birth</label>
+                <input type="date" className="form-control" defaultValue={userData.dateOfBirth} ref={dateOfBirthRef} />
               </div>
 
               <button type="button" className="btn btn-primary" onClick={handleUpdateProfile}>
