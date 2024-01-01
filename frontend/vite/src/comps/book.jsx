@@ -96,7 +96,7 @@ const Book = () => {
           <select id="paragraphSelect" className='select-input bg-dark text-white ms-2' onChange={handleSelectChange} value={currentParagraphIndex}>
             {extParagraphsContentArr.map((paragraph, index) => (
               <option key={index} value={index}>
-                            {paragraph.data.name}
+                {paragraph.data.name}
 
               </option>
             ))}
@@ -111,19 +111,19 @@ const Book = () => {
             <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
             <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
           </div>
-  
+
           {profileData && (
             <>
               <p>Author: {profileData.username}</p>
               <img src={profileData.profilePicture} alt="Profile" />
               <p>bio: {profileData.bio} </p>
               <p>rating: {profileData.rating}</p>
-  
+
               <h2>Comments:</h2>
               {commentData && commentData.map((comment) => (
                 <p key={comment._id}># content: {comment.content} </p>
               ))}
-  
+
               <form onSubmit={handleCommentSubmit}>
                 <label htmlFor="comment">Add a Comment:</label>
                 <input ref={inputRef} type="text" id="comment" name="comment" />

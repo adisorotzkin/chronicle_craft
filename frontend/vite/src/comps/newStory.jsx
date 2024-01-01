@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiService } from '../service/apisService';
 import ImageGenerator from './imageGenerator';
@@ -15,32 +15,26 @@ const NewStory = () => {
   const navigate = useNavigate();
   const { postAuthenticatedData } = apiService();
   const { imageUrl, setImageUrl, genresArray } = useContext(AppContext);
+  const [cloudImg, setCloudImg] = useState('');
 
-  // const uploadImageToFirebase = async (imageUrl, storagePath) => {
-  //   try {
-  //     const response = await axios({
-  //       method: 'get',
-  //       url: imageUrl,
-  //       responseType: 'arraybuffer', // Set the responseType to 'arraybuffer'
-  //     });
+  const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
+    try {
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
+        {
+          file: generatedImg,
+          upload_preset: 'cmezl4xo',
+          public_id: bookCoverName,
+        }
+      );
 
-  //     const buffer = Buffer.from(response.data, 'binary'); // Convert arraybuffer to Buffer
-
-  //     const bucket = storage.bucket();
-  //     const file = bucket.file(storagePath);
-
-  //     await file.save(buffer, {
-  //       metadata: {
-  //         contentType: 'image/jpeg',
-  //       },
-  //     });
-
-  //     console.log('Image uploaded to Firebase Storage successfully.');
-  //   } catch (error) {
-  //     console.error('Error uploading image to Firebase Storage:', error);
-  //     throw error;
-  //   }
-  // };
+      console.log('Image uploaded successfully to Cloudinary:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error uploading image to Cloudinary:', error);
+      throw error;
+    }
+  };
 
   const handleNext = async () => {
     const title = titleRef.current.value;
@@ -52,18 +46,14 @@ const NewStory = () => {
       return;
     }
 
-    // const storagePath = `images/${title.toLowerCase().replace(/ /g, '_')}.jpg`;
-
-    // await uploadImageToFirebase(imageUrl, storagePath);
-
-    // const firebaseImageUrl = `https://storage.googleapis.com/${storage.bucket().name}/${encodeURIComponent(storagePath)}`;
+    setCloudImg(uploadImageToCloudinary(imageUrl, title));
 
     try {
       const response = await postAuthenticatedData('/stories', {
         title: title,
         description: description,
         genre: genre,
-        coverImg: imageUrl,
+        coverImg: cloudImg,
       }, localStorage.getItem('token'));
 
         console.log("Story created successfully!" , response);
@@ -93,7 +83,7 @@ const NewStory = () => {
           <div className='form-group'>
             <label htmlFor="genre">Genre *</label>
             <select id="genre" className="form-control mb-2" ref={genreRef}>
-              <option value="" disabled selected>Select your genre</option>
+              <option value="" disabled>Select your genre</option>
               {genresArray.map((genre) => (
                 <option key={genre} value={genre}>
                   {genre}
