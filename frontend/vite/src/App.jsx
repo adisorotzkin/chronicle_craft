@@ -18,6 +18,7 @@ import BookItem from './comps/bookItem';
 import Home from './comps/home';
 import NewParagraph from './comps/newParagraph'
 import Robbie from './comps/robbie'
+import UpdateProfile from './comps/updateProfile';
 
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
@@ -27,6 +28,8 @@ function App() {
     const [genresArray] = useState(['Comedy', 'ScienceFiction', 'Drama', 'Biography', 'Fantasy', 'Kids', 'Horror', 'Thriller', 'Mystery', 'Romance']);
     const [imageUrl, setImageUrl] = useState("/")
     const [selectedBook, setSelectedBook] = useState('');
+    const [userData, setUserData] = useState(null);
+
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -36,7 +39,7 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <AppContext.Provider value={{ extParagraphsContentArr, setextParagraphsContentArr, paragraphsIdArr, setparagraphsIdArr, getStartedEmail, setgetStartedEmail, genresArray, imageUrl, setImageUrl, selectedBook, setSelectedBook}}>
+                <AppContext.Provider value={{ extParagraphsContentArr, setextParagraphsContentArr, paragraphsIdArr, setparagraphsIdArr, getStartedEmail, setgetStartedEmail, genresArray, imageUrl, setImageUrl, selectedBook, setSelectedBook,userData,setUserData}}>
                     <Routes>
                         <Route index element={indexRoute} />
                         <Route path="/signup" element={<SignUp />} />
@@ -55,6 +58,7 @@ function App() {
                         <Route path='/welcome' element={<Welcome />} />
                         <Route path='newParagraph' element={<NewParagraph />} />
                         <Route path='/robbie' element={<Robbie />} />
+                        <Route path='/updateProfile' element={<UpdateProfile />} />
 
                     </Routes>
                 </AppContext.Provider>
