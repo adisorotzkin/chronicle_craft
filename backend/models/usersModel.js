@@ -31,7 +31,8 @@ exports.validUser = (_reqBody) => {
         bio: joi.string().min(2).max(999).allow(""),
         profilePicture:joi.string().allow(""),
         password: joi.string().min(6).max(30).required(),
-        dateOfBirth: joi.date().allow("")
+        dateOfBirth: joi.date().allow(""),
+        registrationDate: joi.date().allow("")
     })
     return joiSchema.validate(_reqBody);
 }

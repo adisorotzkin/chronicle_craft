@@ -3,6 +3,7 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001";
 
 export const apiService = () => {
+
     const postData = async (url, body) => {
         try {
             console.log(`${baseUrl}${url}`);
@@ -68,12 +69,12 @@ export const apiService = () => {
         try {
             console.log(`${baseUrl}${url}/${params}`);
             console.log(body);
-    
+
             const res = await axios.put(`${baseUrl}${url}/${params}`, body);
-            
+
             console.log(res);
-    
-            return res.data;  
+
+            return res.data;
         } catch (err) {
             if (err.response) {
                 console.error(`Server responded with error: ${err.response.status}`, err.response.data);
@@ -82,12 +83,41 @@ export const apiService = () => {
             } else {
                 console.error('Error setting up the request', err.message);
             }
-    
+
             console.error(`Error in updateData: ${err.message}`);
-            throw err;  // Re-throw the error to propagate it up the call stack
+            throw err; 
         }
     };
-    
+
+    const updateAuthenticatedData = async (url, params, body, token) => {
+        console.log(`${baseUrl}${url}/${params}`);
+        console.log(body);
+      
+        try {
+          const headers = {
+            'x-api-key': token,
+          };
+      
+          const res = await axios.put(`${baseUrl}${url}/${params}`, body, { headers });
+      
+          console.log(res);
+      
+          return res.data;
+        } catch (err) {
+          if (err.response) {
+            console.error(`Server responded with error: ${err.response.status}`, err.response.data);
+          } else if (err.request) {
+            console.error('No response received from the server', err.request);
+          } else {
+            console.error('Error setting up the request', err.message);
+          }
+      
+          console.error(`Error in updateAuthenticatedData: ${err.message}`);
+          throw err;
+        }
+      };
+      
+
 
     const deleteData = async (url, params, query) => {
         try {
@@ -101,5 +131,5 @@ export const apiService = () => {
         }
     };
 
-    return { getData, postData, postAuthenticatedData, updateData, deleteData }
+    return { getData, postData, postAuthenticatedData, updateData, updateAuthenticatedData, deleteData }
 }
