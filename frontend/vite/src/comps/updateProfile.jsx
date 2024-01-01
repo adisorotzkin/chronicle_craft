@@ -4,6 +4,8 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/context';
 import { apiService } from '../service/apisService';
+import Navbar from '../static_comps/navbar';
+import '../comps_css/updateProfile.css';
 
 const UpdateProfile = () => {
   const { userData, setUserData } = useContext(AppContext);
@@ -51,72 +53,84 @@ const UpdateProfile = () => {
   };
 
   return (
-    <Container className="update-profile-container mt-5">
-      <h2>Update Your Profile</h2>
-      <Row>
-        <Col xs={12} md={6}>
-          <Form>
-            <Form.Group controlId="formUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                value={updatedUserInfo.username}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
+    <div className="outer-main-update-profile">
+      <Navbar/>
+      <div className="inner-main-update-profile p-5">
+        <h2>Update Your Profile</h2>
+        <div className="row">
+          <div className="col-xs-12 col-md-6">
+            <form>
+              <div className="mb-3">
+                <label htmlFor="formUsername" className="form-label">Username</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="formUsername"
+                  name="username"
+                  value={updatedUserInfo.username}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={updatedUserInfo.email}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
+              <div className="mb-3">
+                <label htmlFor="formEmail" className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="formEmail"
+                  name="email"
+                  value={updatedUserInfo.email}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-            <Form.Group controlId="formBio">
-              <Form.Label>Bio</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                name="bio"
-                value={updatedUserInfo.bio}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
+              <div className="mb-3">
+                <label htmlFor="formBio" className="form-label">Bio</label>
+                <textarea
+                  className="form-control"
+                  id="formBio"
+                  rows="3"
+                  name="bio"
+                  value={updatedUserInfo.bio}
+                  onChange={handleInputChange}
+                ></textarea>
+              </div>
 
-            {/* Add a file input for updating the profile picture */}
-            <Form.Group controlId="formProfilePicture">
-              <Form.Label>Profile Picture</Form.Label>
-              <Form.Control
-                type="file"
-                name="profilePicture"
-                accept="image/*"
-                onChange={(e) => handleInputChange({ target: { name: 'profilePicture', value: e.target.files[0] } })}
-              />
-            </Form.Group>
+              {/* Add a file input for updating the profile picture */}
+              <div className="mb-3">
+                <label htmlFor="formProfilePicture" className="form-label">Profile Picture</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="formProfilePicture"
+                  name="profilePicture"
+                  accept="image/*"
+                  onChange={(e) => handleInputChange({ target: { name: 'profilePicture', value: e.target.files[0] } })}
+                />
+              </div>
 
-            {/* Add a date input for updating the date of birth */}
-            <Form.Group controlId="formDateOfBirth">
-              <Form.Label>Date of Birth</Form.Label>
-              <Form.Control
-                type="date"
-                name="dateOfBirth"
-                value={updatedUserInfo.dateOfBirth}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
+              {/* Add a date input for updating the date of birth */}
+              <div className="mb-3">
+                <label htmlFor="formDateOfBirth" className="form-label">Date of Birth</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="formDateOfBirth"
+                  name="dateOfBirth"
+                  value={updatedUserInfo.dateOfBirth}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-            <Button variant="primary" onClick={handleUpdateProfile}>
-              Update Profile
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
-  );
+              <button type="button" className="btn btn-primary" onClick={handleUpdateProfile}>
+                Update Profile
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 };
 
 export default UpdateProfile;
