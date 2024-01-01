@@ -26,7 +26,7 @@ function App() {
     const [getStartedEmail, setgetStartedEmail] = useState('');
     const [indexRoute, setIndexRoute] = useState('');
     const [genresArray] = useState(['Comedy', 'ScienceFiction', 'Drama', 'Biography', 'Fantasy', 'Kids', 'Horror', 'Thriller', 'Mystery', 'Romance']);
-    const [imageUrl, setImageUrl] = useState("/")
+    const [imageUrl, setImageUrl] = useState(null)
     const [selectedBook, setSelectedBook] = useState('');
     const [userData, setUserData] = useState(null);
 

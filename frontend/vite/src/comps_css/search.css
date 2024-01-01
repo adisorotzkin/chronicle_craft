@@ -12,6 +12,13 @@
     cursor: pointer;
     width: 130px;
     border-radius: 8px;
+    min-height: 170px;
+}
+.book-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .book-title{
     display: flex;

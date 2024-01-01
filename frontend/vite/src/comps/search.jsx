@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
-import Navbar from '../static_comps/navbar'
-import '../comps_css/search.css'
+import React, { useRef, useState } from 'react';
+import Navbar from '../static_comps/navbar';
+import '../comps_css/search.css';
 import { apiService } from '../service/apisService';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,8 +21,7 @@ const Search = () => {
       console.log("Username result:", usernameResult);
       if (usernameResult.data) {
         searchContent = usernameResult.data._id;
-      }
-      else {
+      } else {
         searchContent = searchRef.current.value;
       }
 
@@ -38,15 +37,28 @@ const Search = () => {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleSearch();
+  };
 
   return (
     <div className='outer-main-search'>
       <Navbar />
       <div className='inner-main-search p-3'>
-        <form className="form-inline d-flex">
-          <input className="form-control mr-sm-2" type="search" placeholder="Search by title or author" aria-label="Search" ref={searchRef} />
-          <button className="btn my-2 my-sm-0" type="button" onClick={() => { handleSearch() }}><i className="text-white fa fa-search" aria-hidden="true"></i></button>
+        <form className="form-inline d-flex" onSubmit={handleSubmit}>
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search by title or author"
+            aria-label="Search"
+            ref={searchRef}
+          />
+          <button className="btn my-2 my-sm-0" type="submit">
+            <i className="text-white fa fa-search" aria-hidden="true"></i>
+          </button>
         </form>
         <div className="search-result mt-4">
           {data.length === 0 ? (
@@ -56,7 +68,7 @@ const Search = () => {
               {data.map((item) => (
                 <div key={item._id} className='book-item p-3 col-3' onClick={() => handleBookClick(item)}>
                   <img src={item.coverImg} alt={`Book Cover - ${item.title}`} className='book-cover' />
-                  <p className='book-title'>{item.title}</p>
+                  <p className='book-title mt-2'>{item.title}</p>
                 </div>
               ))}
             </div>
@@ -64,7 +76,9 @@ const Search = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
+
+

@@ -1,13 +1,24 @@
 .books-list{
     display: flex;
     height: 200px;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
 .book-cover{
     cursor: pointer;
     width: 130px;
     border-radius: 8px;
+    min-height: 170px;
 }
 .book-title{
     display: flex;
     justify-content: center;
+    min-height: 100px;
+}
+.selected-book-info{
+    border-radius: 16px;
+}
+.book-item{
+    width: 170px;
+    margin-top: 50px;
 }

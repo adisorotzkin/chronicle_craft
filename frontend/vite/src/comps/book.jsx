@@ -182,7 +182,7 @@ import Navbar from '../static_comps/navbar';
 import '../comps_css/book.css';
 
 const Book = () => {
-  const { extParagraphsContentArr, paragraphsIdArr } = useContext(AppContext);
+  const { extParagraphsContentArr, paragraphsIdArr, selectedBook } = useContext(AppContext);
   const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
   const [profileData, setProfileData] = useState(null);
   const [commentData, setCommentData] = useState(null);
@@ -190,6 +190,10 @@ const Book = () => {
   const [firstColumn, setFirstColumn] = useState('');
   const [secondColumn, setSecondColumn] = useState('');
   const { getData, postAuthenticatedData } = apiService();
+  const [addComment, setAddComment] = useState(false);
+  const [profileImg, setProfileImg] = useState('');
+  const [commentUid, setCommentUid] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -206,7 +210,7 @@ const Book = () => {
         ) {
           const content = extParagraphsContentArr[currentParagraphIndex]?.data.content || '';
           const wordsArray = content.split(' ');
-          const midpointIndex = Math.floor(wordsArray.length / 2);
+          const midpointIndex = Math.ceil(wordsArray.length / 2);
           setFirstColumn(wordsArray.slice(0, midpointIndex).join(' '));
           setSecondColumn(wordsArray.slice(midpointIndex).join(' '));
 
@@ -228,8 +232,9 @@ const Book = () => {
 
     fetchData();
   }, [extParagraphsContentArr, currentParagraphIndex, getData, shouldFetchData]);
-
+  
   const handleNextParagraph = () => {
+    setPageNumber(pageNumber + 2);
     setCurrentParagraphIndex((prevIndex) => prevIndex + 1);
     setShouldFetchData(true);
   };
@@ -240,6 +245,7 @@ const Book = () => {
   };
 
   const handlePrevParagraph = () => {
+    setPageNumber(pageNumber - 2);
     setCurrentParagraphIndex((prevIndex) => prevIndex - 1);
     setShouldFetchData(true);
   };
@@ -265,11 +271,23 @@ const Book = () => {
     }
   };
 
+  const getProfileImg = async () => {
+    let data = '';
+    try {
+      console.log(commentUid);
+      data = await getData(`/users/singleId/${commentUid}`);
+      console.log("profile pic: ", data.profilePicture);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+    setProfileImg(data.profilePicture);
+  }
+
   return (
     <div className="outer-main-book">
       <Navbar />
       <div className="inner-main-book p-5">
-        <div className="select-paragraph mb-3 pe-3">
+        <div className="select-paragraph mt-3 mb-3 pe-3">
           <label htmlFor="paragraphSelect">Select Paragraph:</label>
           <select
             id="paragraphSelect"
@@ -280,55 +298,27 @@ const Book = () => {
             {extParagraphsContentArr.map((paragraph, index) => (
               <option key={index} value={index}>
                 {paragraph.data.name}
+
               </option>
             ))}
           </select>
         </div>
         <div className="paragraphs d-flex">
-          <div className="paragraph-content container p-5">
-            <p className="content">{firstColumn}</p>
+          <div className="paragraph-content container p-2 bg-dark">
+            <p className='title-p mb-3'>{selectedBook.title}</p>
+            <p className='content p-3'>{firstColumn}</p>
+            <p className='page-number-1 px-4 py-2'>{pageNumber}</p>
           </div>
-          <br />
-          <div className="buttons d-flex justify-content-between px-3">
-            <button className="btn text-white border" onClick={handlePrevParagraph}>
-              Previous
-            </button>
-            <button className="btn text-white border" onClick={handleNextParagraph}>
-              Next
-            </button>
+          <div className="paragraph-content container p-2 bg-dark">
+            <p className='title-p mb-3'>{selectedBook.title}</p>
+            <p className='content p-3'>{secondColumn}</p>
+            <p className='page-number-2 px-4 py-2'>{pageNumber + 1}</p>
           </div>
-
-          {profileData && (
-            <>
-              <p>Author: {profileData.username}</p>
-              <img src={profileData.profilePicture} alt="Profile" />
-              <p>bio: {profileData.bio} </p>
-              <p>rating: {profileData.rating}</p>
-
-              <h2>Comments:</h2>
-              {commentData &&
-                commentData.map((comment) => (
-                  <p key={comment._id}># content: {comment.content} </p>
-                ))}
-
-              <form onSubmit={handleCommentSubmit}>
-                <label htmlFor="comment">Add a Comment:</label>
-                <input ref={inputRef} type="text" id="comment" name="comment" />
-                <button className="btn text-white border" type="submit">
-                  Submit Comment
-                </button>
-              </form>
-            </>
-          )}
         </div>
         <br />
-        <div className="buttons d-flex justify-content-between px-3 mb-5">
-          <button className="btn text-white border" onClick={handlePrevParagraph}>
-            Previous
-          </button>
-          <button className="btn text-white border" onClick={handleNextParagraph}>
-            Next
-          </button>
+        <div className="buttons d-flex justify-content-between px-3 mb-4">
+          <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
+          <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
         </div>
 
         {profileData && (
@@ -350,19 +340,29 @@ const Book = () => {
               </div>
             </div>
 
-            <div className="bottom-details mb-5 row p-4 bg-dark">
-              <h2>Comments:</h2>
-              {commentData &&
-                commentData.map((comment) => (
-                  <p key={comment._id}># content: {comment.content} </p>
-                ))}
+            <div className="bottom-details mb-5">
+              <h2 className='mb-4'>Comments:</h2>
+              {commentData && commentData.map((comment) => (
+                <div className="comment row mb-4" key={comment._id}>
+                  {/* {setCommentUid(comment.userId)} */}
+                  <img className='profile-img col-1 me-3' src={profileImg} alt="Profile" />
+                  <div className="comment-inner col-10">
+                    <div className="comment-inner-inner d-flex">
+                      <p className='comment-uid fw-bold me-2'>@{comment.userId}</p>
+                      <p className='comment-date'>{comment.dateCreated && comment.dateCreated.substring(0, 10)}</p>
+                    </div>
+                    <p className=''>{comment.content}</p>
+                  </div>
+                </div>
+              ))}
 
               <form onSubmit={handleCommentSubmit}>
-                <label htmlFor="comment">Add a Comment:</label>
-                <input ref={inputRef} type="text" id="comment" name="comment" />
-                <button className="btn text-white border" type="submit">
-                  Submit Comment
-                </button>
+                <button className='btn border text-white mb-2 mt-2' onClick={() => { setAddComment(!addComment) }}>Add a Comment</button>
+                {addComment && (
+                  <div className="add-comment w-25 d-flex">
+                    <input className="comment-input form-control me-2" ref={inputRef} type="text" id="comment" name="comment" />
+                    <button className='btn text-white border' type="submit">Submit</button>
+                  </div>)}
               </form>
             </div>
           </div>

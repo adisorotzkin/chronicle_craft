@@ -18,7 +18,7 @@ const StarRating = ({ averageRating }) => {
           &#9733;
         </span>
       ))}
-      <p>Selected Rating: {roundedRating}</p>
+      <p className='p-1'>Rating: {roundedRating}</p>
     </div>
   );
 };
