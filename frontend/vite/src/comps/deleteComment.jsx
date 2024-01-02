@@ -3,37 +3,37 @@ import { useLocation} from 'react-router-dom';
 import { apiService } from '../service/apisService';
 import { useNavigate } from 'react-router-dom';
 
-const DeleteParagraph = () => {
+const DeleteComment = () => {
   const token = localStorage.getItem('token');
   const { deleteAuthenticatedData } = apiService();
   const location = useLocation();
-  const { paragraph } = location.state || {};
+  const { commentId } = location.state || {};
   const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.backgroundColor = 'black';
 
-    const confirmDeletion = window.confirm('Are you sure you want to delete this paragraph?');
+    const confirmDeletion = window.confirm('Are you sure you want to delete this comment?');
 
     if (confirmDeletion) {
-      deleteParagraph();
+      deleteComment();
     } else {
       navigate('/profile')
     }
   }, []);
 
-  const deleteParagraph = async () => {
+  const deleteComment = async () => {
     try {
-      const res = await deleteAuthenticatedData('/paragraphs', paragraph._id, token);
-      alert('Paragraph deleted successfully');
+      const res = await deleteAuthenticatedData('/comments', commentId, token);
+      alert('comment deleted successfully');
       navigate('/profile')
     } catch (error) {
-      console.error('Error deleting paragraph:', error);
-      alert('Error deleting paragraph');
+      console.error('Error deleting comment:', error);
+      alert('Error deleting comment');
     }
   };
 
   return <div></div>;
 };
 
-export default DeleteParagraph;
+export default DeleteComment;

@@ -17,3 +17,10 @@ exports.validComment = (_reqBody) => {
     })
     return joiSchema.validate(_reqBody);
 }
+
+exports.validEditComment = (_reqBody) => {
+    let joiSchema = joi.object({
+        content: joi.string().min(2).max(999).required()
+    })
+    return joiSchema.validate(_reqBody);
+}
