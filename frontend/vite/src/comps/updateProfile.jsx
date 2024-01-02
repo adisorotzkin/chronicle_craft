@@ -79,65 +79,28 @@ const UpdateProfile = () => {
           <div className="col-xs-12 col-md-6">
             <form>
               <div className="mb-3">
-                <label htmlFor="formUsername" className="form-label">Username</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="formUsername"
-                  name="username"
-                  value={userData.username}
-                  ref={usernameRef}
-                />
+                <label  className="form-label">Username</label>
+                <input type="text" className="form-control" defaultValue={userData.username} ref={usernameRef}/>
               </div>
 
               <div className="mb-3">
-                <label htmlFor="formEmail" className="form-label">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="formEmail"
-                  name="email"
-                  value={userData.email}
-                  ref={emailRef} 
-                />
+                <label  className="form-label">Email</label>
+                <input type="email" className="form-control" defaultValue={userData.email} ref={emailRef} />
               </div>
 
               <div className="mb-3">
-                <label htmlFor="formBio" className="form-label">Bio</label>
-                <textarea
-                  className="form-control"
-                  id="formBio"
-                  rows="3"
-                  name="bio"
-                  value={userData.bio}
-                  ref={bioRef} 
-                ></textarea>
+                <label  className="form-label">Bio</label>
+                <textarea className="form-control" rows="3" defaultValue={userData.bio} ref={bioRef} ></textarea>
               </div>
 
-              {/* Add a file input for updating the profile picture */}
               <div className="mb-3">
-                <label htmlFor="formProfilePicture" className="form-label">Profile Picture</label>
-                <input
-                  type="file"
-                  className="form-control"
-                  id="formProfilePicture"
-                  name="profilePicture"
-                  accept="image/*"
-                  ref={profilePictureRef}
-                />
+                <label  className="form-label">Profile Picture</label>
+                <input type="file" className="form-control" accept="image/*"  ref={profilePictureRef}/>
               </div>
 
-              {/* Add a date input for updating the date of birth */}
               <div className="mb-3">
-                <label htmlFor="formDateOfBirth" className="form-label">Date of Birth</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  id="formDateOfBirth"
-                  name="dateOfBirth"
-                  value={userData.dateOfBirth}
-                  ref={dateOfBirthRef}
-                />
+                <label  className="form-label">Date of Birth</label>
+                <input type="date" className="form-control" defaultValue={userData.dateOfBirth} ref={dateOfBirthRef}/>
               </div>
 
               <button type="button" className="btn btn-primary" onClick={handleUpdateProfile}>
