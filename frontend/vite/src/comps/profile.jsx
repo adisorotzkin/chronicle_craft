@@ -114,6 +114,7 @@ const Profile = () => {
               <div className="col-8 p-3">
                 <div className="username-rating d-flex">
                   <h2 className='me-4 d-flex align-items-center'>{userData.username}</h2>
+                  {console.log('user data:', userData)}
                   <p><StarRating averageRating={userData.rating} /></p>
                 </div>
                 <p><strong>Email:</strong> {userData.email}</p>

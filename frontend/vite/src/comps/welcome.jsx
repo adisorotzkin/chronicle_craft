@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import FAQs from '../comps/FAQs'
 import Footer from '../footer_comps/footer'
 import { AppContext } from '../context/context'
+import { apiService } from '../service/apisService';
 
 const Welcome = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const { setgetStartedEmail, getStartedEmail } = useContext(AppContext);
+  const { getData } = apiService();
 
   return (
     <div className="welcome">
@@ -29,16 +31,26 @@ const Welcome = () => {
           </div>
           <div className="get-started mt-4">
             <input className='form-control me-2' type="email" placeholder='Enter your email' ref={emailRef} />
-            <button className='btn get-started-btn' onClick={() => {
+            <button className='btn get-started-btn' onClick={async () => {
               if (emailRef.current.value !== "") {
-                setgetStartedEmail(emailRef.current.value);
-                console.log(emailRef.current.value);
-                navigate('/signup');
-              }
-              else {
+                try {
+                  setgetStartedEmail(emailRef.current.value);
+                  const user = await getData(`/users/singleEmail/${emailRef.current.value}`);
+                  if (user.data) {
+                    navigate('/login');
+                  } else {
+                    navigate('/signup');
+                  }
+                } catch (error) {
+                  console.error("An error occurred:", error);
+                }
+              } else {
                 alert("Please enter your email to continue");
               }
-            }}>Get started</button>
+            }}>
+              Get Started
+            </button>
+
           </div>
         </div>
       </div>

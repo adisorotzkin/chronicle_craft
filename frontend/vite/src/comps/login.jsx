@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import '../comps_css/signupLogin.css'
 import { useNavigate } from 'react-router-dom'
 import { apiService } from '../service/apisService';
+import { AppContext } from '../context/context';
 
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const {getStartedEmail} = useContext(AppContext);
 
   const handleLogin = async() => {
     try {
@@ -49,11 +51,11 @@ const Login = () => {
       <form className='form'>
         <div className="form-group">
           <label>Email *</label>
-          <input type="email" placeholder='Enter email' className='form-control' ref={emailRef} />
+          <input type="email" placeholder='Enter email' className='form-control' ref={emailRef} defaultValue={getStartedEmail}/>
         </div>
         <div className="form-group">
           <label>Password *</label>
-          <input type="password" placeholder='Enter a password' className='form-control' ref={passwordRef} />
+          <input type="password" placeholder='Enter password' className='form-control' ref={passwordRef} />
         </div>
         <div className="forgot-pass-div py-2">
           <p className='forgot-pass-btn' onClick={handleForgotPassword}>Forgot password?</p>

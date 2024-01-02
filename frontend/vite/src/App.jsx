@@ -21,11 +21,12 @@ import Robbie from './comps/robbie'
 import UpdateProfile from './comps/updateProfile';
 import DeleteAccount from './comps/deleteAccount';
 import ForgotPassword from './comps/forgotPassword';
+import ResetPassword from './comps/resetPassword';
 
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
     const [paragraphsIdArr, setparagraphsIdArr] = useState([]);
-    const [getStartedEmail, setgetStartedEmail] = useState('');
+    const [getStartedEmail, setgetStartedEmail] = useState('Enter email');
     const [indexRoute, setIndexRoute] = useState('');
     const [genresArray] = useState(['Comedy', 'ScienceFiction', 'Drama', 'Biography', 'Fantasy', 'Kids', 'Horror', 'Thriller', 'Mystery', 'Romance']);
     const [imageUrl, setImageUrl] = useState(null)
@@ -62,6 +63,7 @@ function App() {
                         <Route path='/updateProfile' element={<UpdateProfile />} />
                         <Route path='/deleteAccount' element={<DeleteAccount />} />
                         <Route path='/forgotPassword' element={<ForgotPassword />} />
+                        <Route path='/reset-password' element={<ResetPassword />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>
