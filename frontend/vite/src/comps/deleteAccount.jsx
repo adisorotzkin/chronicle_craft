@@ -14,12 +14,9 @@ const DeleteAccount = () => {
       const updatedUserInfo = {
         username: userData.username,
         email: userData.email,
-        password: "1234567",
         bio: userData.bio,
         profilePicture: userData.profilePicture,
         dateOfBirth: userData.dateOfBirth,
-        registrationDate: userData.registrationDate,
-        role: userData.role,
         active: false
       };
 

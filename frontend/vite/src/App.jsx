@@ -21,6 +21,8 @@ import Robbie from './comps/robbie'
 import UpdateProfile from './comps/updateProfile';
 import DeleteAccount from './comps/deleteAccount';
 import ForgotPassword from './comps/forgotPassword';
+import EditParagraph from './comps/editParagraph'
+import DeletePeregraph from './comps/deletePeregraph';
 
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
@@ -62,6 +64,8 @@ function App() {
                         <Route path='/updateProfile' element={<UpdateProfile />} />
                         <Route path='/deleteAccount' element={<DeleteAccount />} />
                         <Route path='/forgotPassword' element={<ForgotPassword />} />
+                        <Route path='/editParagraph' element={<EditParagraph />} />
+                        <Route path='/deletePeregraph' element={<DeletePeregraph />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

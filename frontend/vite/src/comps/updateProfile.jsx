@@ -51,13 +51,9 @@ const UpdateProfile = () => {
       const updatedUserInfo = {
         username: usernameRef.current.value,
         email: emailRef.current.value,
-        password: "1234567",
         bio: bioRef.current.value,
         profilePicture: url,
-        dateOfBirth: dateOfBirthRef.current.value,
-        registrationDate: userData.registrationDate,
-        role: userData.role,
-        active: true
+        dateOfBirth: dateOfBirthRef.current.value
       };
 
 

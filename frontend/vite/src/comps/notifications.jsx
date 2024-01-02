@@ -30,7 +30,7 @@ const Notifications = () => {
           const commentsPromises = paragraphsResponse.data.map(async (paragraph) => {
             const commentsResponse = await getData(`/comments/paragraphId/${paragraph._id}`);
             return {
-              paragraphName: paragraph.content,
+              paragraphName: paragraph.name,
               comments: commentsResponse.data,
             };
           });

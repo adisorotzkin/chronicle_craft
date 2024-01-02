@@ -1,7 +1,7 @@
 const express= require("express");
 const bcrypt = require("bcrypt");
 const {auth, authAdmin} = require("../middlewares/auth");
-const {UsersModel,validUser, validLogin,createToken} = require("../models/usersModel")
+const {UsersModel,validUser,validUserEdit, validLogin,createToken} = require("../models/usersModel")
 const router = express.Router();
 
 
@@ -128,7 +128,7 @@ router.post("/login", async(req,res) =>
 //edit user by this user or admin
 router.put("/:idEdit",auth, async (req, res) => 
 {
-  let validBody = validUser(req.body);
+  let validBody = validUserEdit(req.body);
   if (validBody.error) 
   {
     return res.status(400).json(validBody.error.details);
@@ -150,8 +150,6 @@ router.put("/:idEdit",auth, async (req, res) =>
       return res.status(400).json({ err: "This operation is not enabled or the token is not valid" })
     }
     let user = await UsersModel.findOne({ _id: idEdit });
-    user.password = await bcrypt.hash(user.password, 10);
-    await user.save()
     res.status(200).json({ msg: data })
   }
   catch (err) 

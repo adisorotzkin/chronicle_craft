@@ -119,10 +119,13 @@ export const apiService = () => {
       
 
 
-    const deleteData = async (url, params, query) => {
+    const deleteAuthenticatedData = async (url, params, token) => {
         try {
             console.log(url);
-            const res = await axios.delete(`${baseUrl}${url}${params}${query}`);
+            const headers = {
+                'x-api-key': token,
+              };
+            const res = await axios.delete(`${baseUrl}${url}/${params}`,{ headers });
             console.log(res);
             return res
         }
@@ -131,5 +134,5 @@ export const apiService = () => {
         }
     };
 
-    return { getData, postData, postAuthenticatedData, updateData, updateAuthenticatedData, deleteData }
+    return { getData, postData, postAuthenticatedData, updateData, updateAuthenticatedData, deleteAuthenticatedData }
 }

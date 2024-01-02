@@ -21,3 +21,12 @@ exports.validParagraph = (_reqBody) => {
     })
     return joiSchema.validate(_reqBody);
 }
+
+exports.validParaEdit = (_reqBody) => {
+    let joiSchema = joi.object({
+        name: joi.string().min(2).max(99),
+        content: joi.string().min(2).max(999)
+    }); 
+
+    return joiSchema.validate(_reqBody);
+};

@@ -8,8 +8,7 @@ import StarRating from './starRating';
 import '../comps_css/profile.css'
 
 const Profile = () => {
-  const { getData, updateAuthenticatedData } = apiService();
-  // const [] = useState(null);
+  const { getData } = apiService();
   const [shouldFetchData, setShouldFetchData] = useState(true);
   const [userActivity, setUserActivity] = useState({ stories: [], paragraphs: [] });
   const [userComments, setUserComments] = useState([]);
@@ -31,6 +30,7 @@ const Profile = () => {
     navigate('/deleteAccount');
   };
 
+
   useEffect(() => {
     const currentUserId = localStorage.getItem('uid');
 
@@ -50,8 +50,11 @@ const Profile = () => {
       try {
         if (shouldFetchActivity) {
           const storiesResponse = await getData(`/stories/author/${currentUserId}`);
+          console.log(storiesResponse);
           const paragraphsResponse = await getData(`/paragraphs/${currentUserId}`);
+          console.log(paragraphsResponse);
           const commentsResponse = await getData(`/comments/userId/${currentUserId}`);
+          console.log(commentsResponse);
 
           setUserActivity({
             stories: storiesResponse.data,
@@ -59,6 +62,7 @@ const Profile = () => {
           });
 
           setUserComments(commentsResponse.data);
+          console.log(userComments);
 
           setShouldFetchActivity(false);
         }
@@ -73,13 +77,16 @@ const Profile = () => {
 
   const fetchParagraphAndStory = async (comment) => {
     try {
+
       const paragraphResponse = await getData(`/paragraphs/single/${comment.paragraphId}`);
-      const storyResponse = await getData(`/stories/single/${paragraphResponse.data.storyId}`);
+
+      // const storyResponse = await getData(`/stories/single/${paragraphResponse.data.storyId}`);
+      // console.log(storyResponse.data);
 
       return {
         content: comment.content,
-        paragraphName: paragraphResponse.data.name,
-        storyTitle: storyResponse.data.title,
+        paragraphName: paragraphResponse.data.name
+        // storyTitle: storyResponse.title,
       };
     } catch (error) {
       console.error('Error fetching paragraph and story:', error);
@@ -89,6 +96,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchCommentDetails = async () => {
+
       const detailsPromises = userComments.map(async (comment) => {
         const details = await fetchParagraphAndStory(comment);
         return details;
@@ -145,11 +153,18 @@ const Profile = () => {
                   {userActivity.paragraphs.map((paragraph) => (
                     <li className="list-group-item" key={paragraph.id}>
                       {paragraph.name}
+                      {paragraph.end === false && (
+                        <>
+                          <button onClick={() => { navigate('/editParagraph', { state: { paragraph: paragraph } }); }} className="btn border  mx-2"> Edit</button>
+                          <button onClick={() => { navigate('/deletePeregraph', { state: { paragraph: paragraph } }) }} className="btn border ">Delete </button>
+                        </>
+                      )}
                       <button onClick={async () => {
                         const response = await getData(`/stories/single/${paragraph.storyId}`);
                         setSelectedBook(response.data);
                         navigate('/bookItem');
-                      }} className="btn">View</button>
+                      }} className="btn border">View</button>
+
                     </li>
                   ))}
                 </ul>
@@ -165,7 +180,8 @@ const Profile = () => {
                       <>
                         <p className="h5">{details.content}</p>
                         <p className="text-muted">Paragraph Name: {details.paragraphName}</p>
-                        <p className="text-muted">Story Title: {details.storyTitle}</p>
+                        {/* <p className="text-muted">Story Title: {details.storyTitle}</p> */}
+                        <button onClick={() => {  }} className="btn border mx-2"> Edit</button>
                       </>
                     ) : (
                       <p>Error fetching details for comment</p>
@@ -184,6 +200,8 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
 
 
 
