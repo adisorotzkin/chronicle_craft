@@ -33,10 +33,25 @@ exports.validUser = (_reqBody) => {
         password: joi.string().min(6).max(30).allow(""),
         dateOfBirth: joi.date().allow(""),
         registrationDate: joi.date().allow(""),
+        role: joi.string().allow(""),
         active: joi.boolean().allow("")
     })
     return joiSchema.validate(_reqBody);
 }
+
+exports.validUserEdit = (_reqBody) => {
+    let joiSchema = joi.object({
+        username: joi.string().min(2).max(99),
+        email: joi.string().min(2).max(99).email(),
+        bio: joi.string().min(2).max(999),
+        profilePicture: joi.string(),
+        dateOfBirth: joi.date(),
+        active: joi.boolean()
+    }); 
+
+    return joiSchema.validate(_reqBody);
+};
+
 
 exports.validLogin = (_reqBody) => {
     let joiSchema = joi.object({

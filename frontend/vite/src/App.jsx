@@ -21,6 +21,8 @@ import Robbie from './comps/robbie'
 import UpdateProfile from './comps/updateProfile';
 import DeleteAccount from './comps/deleteAccount';
 import ForgotPassword from './comps/forgotPassword';
+import EditParagraph from './comps/editParagraph'
+import DeletePeregraph from './comps/deletePeregraph';
 import ResetPassword from './comps/resetPassword';
 
 function App() {
@@ -63,6 +65,8 @@ function App() {
                         <Route path='/updateProfile' element={<UpdateProfile />} />
                         <Route path='/deleteAccount' element={<DeleteAccount />} />
                         <Route path='/forgotPassword' element={<ForgotPassword />} />
+                        <Route path='/editParagraph' element={<EditParagraph />} />
+                        <Route path='/deletePeregraph' element={<DeletePeregraph />} />
                         <Route path='/reset-password' element={<ResetPassword />} />
                     </Routes>
                 </AppContext.Provider>
