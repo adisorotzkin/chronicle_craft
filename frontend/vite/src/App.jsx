@@ -23,11 +23,12 @@ import DeleteAccount from './comps/deleteAccount';
 import ForgotPassword from './comps/forgotPassword';
 import EditParagraph from './comps/editParagraph'
 import DeletePeregraph from './comps/deletePeregraph';
+import ResetPassword from './comps/resetPassword';
 
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
     const [paragraphsIdArr, setparagraphsIdArr] = useState([]);
-    const [getStartedEmail, setgetStartedEmail] = useState('');
+    const [getStartedEmail, setgetStartedEmail] = useState('Enter email');
     const [indexRoute, setIndexRoute] = useState('');
     const [genresArray] = useState(['Comedy', 'ScienceFiction', 'Drama', 'Biography', 'Fantasy', 'Kids', 'Horror', 'Thriller', 'Mystery', 'Romance']);
     const [imageUrl, setImageUrl] = useState(null)
@@ -66,6 +67,7 @@ function App() {
                         <Route path='/forgotPassword' element={<ForgotPassword />} />
                         <Route path='/editParagraph' element={<EditParagraph />} />
                         <Route path='/deletePeregraph' element={<DeletePeregraph />} />
+                        <Route path='/reset-password' element={<ResetPassword />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

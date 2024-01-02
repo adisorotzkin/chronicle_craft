@@ -14,7 +14,7 @@ const NewStory = () => {
   const genreRef = useRef(null);
   const navigate = useNavigate();
   const { postAuthenticatedData } = apiService();
-  const { imageUrl, setImageUrl, genresArray } = useContext(AppContext);
+  const { imageUrl, genresArray } = useContext(AppContext);
   const [cloudImg, setCloudImg] = useState('');
 
   const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {

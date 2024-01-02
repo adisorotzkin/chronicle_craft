@@ -23,6 +23,9 @@ const Notifications = () => {
 
           // Fetch ratings
           const ratingResponse = await getData(`/ratings/${userId}`);
+          console.log('ratingsResponse: ', ratingResponse);
+          const userData = await getData(`/users/singleId/${userId}`);
+          console.log('userData notifications: ', userData);
           const averageRating = calculateAverageRating(ratingResponse.data);
           setUserRating(averageRating);
 

@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/context';
 import { apiService } from '../service/apisService';
@@ -11,6 +11,7 @@ const UpdateProfile = () => {
   const userToken = localStorage.getItem('token');
   const navigate = useNavigate();
   const { updateAuthenticatedData } = apiService();
+  const [updatedUserInfo, setUpdatedUserInfo] = useState(userData);
 
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -48,7 +49,7 @@ const UpdateProfile = () => {
       console.log(profilePictureRef.current.files[0]);
       const urlPromise = uploadImageToCloudinary(profilePictureRef.current.files[0], Date.now())
       const url = await urlPromise;
-      const updatedUserInfo = {
+      setUpdatedUserInfo({
         username: usernameRef.current.value,
         email: emailRef.current.value,
         bio: bioRef.current.value,
@@ -69,7 +70,8 @@ const UpdateProfile = () => {
 
   return (
     <div className="outer-main-update-profile">
-      <Navbar />
+    {console.log(userData)}
+      <Navbar/>
       <div className="inner-main-update-profile p-5">
         <h2>Update Your Profile</h2>
         <div className="row">
