@@ -1,0 +1,22 @@
+.outer-main-para{
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+}
+.inner-main-para{
+    margin-left: 18%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.btn-div{
+    display: flex;
+    justify-content: flex-end;
+}
+.btn-add{
+    color: white;
+}
+.btn-add:hover{
+    color: #3ecca4;
+}

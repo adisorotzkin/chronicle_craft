@@ -42,24 +42,44 @@
 .get-started-btn:hover{
     color:white;
 }
-.empty-area{
-    height: 150px;
-}
-.about-item-1{
+.about-item {
     display: flex;
-    flex-direction: column;
-    justify-content:space-between;
-    align-items: center;
-    height: 300px;
-    border-bottom: white 3px solid;
-    padding-top: 50px;
-}
-.about-item{
-    display: flex;
-    flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     height: 450px;
     border-bottom: white 3px solid;
-    padding-top: 200px;
-}
+    padding: 0 100px;
+  }
+
+  .about-content-p{
+    font-size: large;
+  }
+  
+  .about-image-1 {
+    background-image: url('../images/feather.png');
+    background-size:contain;
+    background-position: center;
+    height: 125px;
+    max-width: 600px;
+    margin-left: 100px;
+    margin-right: 125px;
+  }
+  
+  .about-image-2 {
+    background-image: url('../images/notepad.png');
+    background-size: contain;
+    background-position: center;
+    height: 300px;
+    width: 400px;
+    /* border-radius: 50px;
+    box-shadow: 0 0 16px 16px black inset; */
+  }
+  
+  .about-image-3 {
+    background-image: url('../images/about-1-1.png');
+    background-size:contain;
+    background-position: center;
+    height: 300px;
+    width: 500px;
+  }
+  
