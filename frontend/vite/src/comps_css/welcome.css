@@ -44,22 +44,45 @@
 }
 .empty-area{
     height: 150px;
+    width: 100%;
 }
 .about-item-1{
     display: flex;
-    flex-direction: column;
     justify-content:space-between;
-    align-items: center;
     height: 300px;
     border-bottom: white 3px solid;
     padding-top: 50px;
 }
-.about-item{
+.about-item {
     display: flex;
-    flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     height: 450px;
     border-bottom: white 3px solid;
     padding-top: 200px;
-}
+  }
+  
+  .about-image-1 {
+    background-image: url('../images/about-1.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .about-image-2 {
+    background-image: url('../images/writing.gif');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 600px;
+    border-radius: 50px;
+    box-shadow: 0 0 16px 16px black inset;
+  }
+  
+  .about-image-3 {
+    background-image: url('../images/about-1-1.png');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 600px;
+  }
+  
