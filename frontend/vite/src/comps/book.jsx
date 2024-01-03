@@ -198,6 +198,7 @@ const Book = () => {
 
   useEffect(() => {
     console.log('Fetching data...');
+    console.log("selected book: ", selectedBook);
 
     const fetchData = async () => {
       try {
@@ -297,6 +298,7 @@ const Book = () => {
           >
             {extParagraphsContentArr.map((paragraph, index) => (
               <option key={index} value={index}>
+                {console.log("paragraphdata: ", paragraph.data)}
                 {paragraph.data.name}
 
               </option>
@@ -305,6 +307,7 @@ const Book = () => {
         </div>
         <div className="paragraphs d-flex">
           <div className="paragraph-content container p-2 bg-dark">
+            {console.log('selected book: ',selectedBook)}
             <p className='title-p mb-3'>{selectedBook.title}</p>
             <p className='content p-3'>{firstColumn}</p>
             <p className='page-number-1 px-4 py-2'>{pageNumber}</p>

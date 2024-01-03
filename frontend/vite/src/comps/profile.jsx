@@ -15,7 +15,7 @@ const Profile = () => {
   const [userCommentsDetails, setUserCommentsDetails] = useState([]);
   const [shouldFetchActivity, setShouldFetchActivity] = useState(true);
   const navigate = useNavigate();
-  const { setSelectedBook, userData, setUserData } = useContext(AppContext);
+  const { selectedBook, setSelectedBook, userData, setUserData } = useContext(AppContext);
 
 
   const handleStoryClick = () => {
@@ -163,6 +163,9 @@ const Profile = () => {
                       <button onClick={async () => {
                         const response = await getData(`/stories/single/${paragraph.storyId}`);
                         setSelectedBook(response.data);
+                        console.log("story id:" , paragraph.storyId);
+                        console.log("response data in profile", response.data);
+                        console.log("selected book in profile", selectedBook);
                         navigate('/bookItem');
                       }} className="btn border">View</button>
 

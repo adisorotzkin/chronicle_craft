@@ -8,6 +8,7 @@ const BookItem = () => {
   const { getData } = apiService();
   const { setextParagraphsContentArr,setparagraphsIdArr, selectedBook } = useContext(AppContext);
   useEffect(() => {
+    console.log("bookitem selectedbook: ", selectedBook);
     const fetchData = async () => {
       try {
         const story = await getData(`/stories/single/${selectedBook._id}`);
@@ -32,7 +33,6 @@ const BookItem = () => {
 
   return (
     <div>
-      
       <Book />
     </div>
   );
