@@ -50,7 +50,7 @@ const SignUp = () => {
     return (
         <main className='main-signup'>
             <div className="logo-signup d-flex">
-                <img src='../public/images/logo.jpg' alt='logo' className="logo" />
+                <img src='../images/logo.jpg' alt='logo' className="logo" />
             </div>
             <form className='form'>
                 <div className="form-group">

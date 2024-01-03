@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className='main-navbar fixed-left vh-100'>
             {/* Logo */}
             <div className="logo">
-                <img src='../public/images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate(<Welcome />) }} />
+                <img src='../images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate(<Welcome />) }} />
             </div>
 
             {/* Navigation Links */}
