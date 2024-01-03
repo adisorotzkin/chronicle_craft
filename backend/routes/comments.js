@@ -1,6 +1,6 @@
 const express = require("express");
 const { auth } = require("../middlewares/auth");
-const { CommentsModel, validComment } = require("../models/commentsModel")
+const { CommentsModel, validComment, validEditComment } = require("../models/commentsModel")
 const router = express.Router();
 
 
@@ -76,7 +76,7 @@ router.post("/", auth, async (req, res) => {
 })
 //edit comment by his user or admin
 router.put("/:idEdit", auth, async (req, res) => {
-  let validBody = validComment(req.body);
+  let validBody = validEditComment(req.body);
   if (validBody.error) {
     return res.status(400).json(validBody.error.details);
   }

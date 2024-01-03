@@ -55,7 +55,7 @@ const UpdateProfile = () => {
         bio: bioRef.current.value,
         profilePicture: url,
         dateOfBirth: dateOfBirthRef.current.value
-      };
+      });
 
 
       const updatedData = await updateAuthenticatedData('/users/', userData._id, updatedUserInfo, userToken);
