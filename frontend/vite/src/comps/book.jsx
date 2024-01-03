@@ -119,7 +119,6 @@ const Book = () => {
             id="paragraphSelect"
             className="select-input bg-dark text-white ms-2"
             onChange={handleSelectChange}
-            value={currentParagraphIndex}
           >
             {extParagraphsContentArr.map((paragraph, index) => (
               <option key={index} value={index}>

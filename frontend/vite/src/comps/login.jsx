@@ -28,6 +28,10 @@ const Login = () => {
       navigate('/home');
     } 
     catch (error) {
+      alert("Email or password are wrong. Please try again");
+      
+      setShowLoading(false);
+      setShowNext(true);
       console.error('Error logging in:', error);
     }
   }
@@ -51,7 +55,7 @@ const Login = () => {
       <form className='form'>
         <div className="form-group">
           <label>Email *</label>
-          <input type="email" placeholder='Enter email' className='form-control' ref={emailRef} defaultValue={getStartedEmail}/>
+          <input type="email" placeholder='Enter email' className='form-control' ref={emailRef} defaultValue={getStartedEmail ? getStartedEmail : null}/>
         </div>
         <div className="form-group">
           <label>Password *</label>

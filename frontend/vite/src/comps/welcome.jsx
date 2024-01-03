@@ -55,31 +55,29 @@ const Welcome = () => {
         </div>
       </div>
 
-      <div className="empty-area"></div>
-
       <div className="about-welcome">
-        <div className="about-item-1 text-white p-5">
-          <div className="about-content">
+        <div className="about-item text-white">
+          <div className="about-content w-50">
             <h1>Your Passions, Our Platform</h1>
-            <p>Embark on a journey where your creativity knows no bounds. Chronicle Craft is the canvas for your imagination, providing a stage for your stories to flourish.</p>
+            <p className='about-content-p'>Embark on a journey where your creativity knows no bounds. Chronicle Craft is the canvas for your imagination, providing a stage for your stories to flourish.</p>
           </div>
           <div className="about-image-1 w-25">
           </div>
         </div>
 
-        <div className="about-item text-white p-5">
+        <div className="about-item text-white">
           <div className="about-image-2 me-5">
           </div>
-          <div className="about-content">
+          <div className="about-content w-50">
             <h1>Unleash Your Writing Potential</h1>
-            <p>Whether you're a seasoned writer or just starting, Chronicle Craft is your space to express, share, and collaborate. Dive into a community of storytellers and find inspiration at every turn.</p>
+            <p className='about-content-p'>Whether you're a seasoned writer or just starting, Chronicle Craft is your space to express, share, and collaborate. Dive into a community of storytellers and find inspiration at every turn.</p>
           </div>
         </div>
 
-        <div className="about-item text-white p-5">
-          <div className="about-content">
+        <div className="about-item text-white">
+          <div className="about-content w-50">
             <h1>Engage, Collaborate, Create</h1>
-            <p>Connect with fellow writers, complete intriguing stories, and receive feedback from the community. Chronicle Craft is more than a platform; it's a vibrant community where creativity thrives.</p>
+            <p className='about-content-p'>Connect with fellow writers, complete intriguing stories, and receive feedback from the community. Chronicle Craft is more than a platform; it's a vibrant community where creativity thrives.</p>
           </div>
           <div className="about-image-3">
           </div>

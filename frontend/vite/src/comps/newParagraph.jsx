@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { apiService } from '../service/apisService';
 import ImageGenerator from './imageGenerator';
 import { AppContext } from '../context/context';
+import axios from 'axios';
+import Navbar from '../static_comps/navbar';
+import '../comps_css/newParagraph.css'
 
 const NewParagraph = () => {
   const contentRef = useRef(null);
@@ -16,6 +19,9 @@ const NewParagraph = () => {
   const { storyInfo } = location.state || {};
   const { imageUrl, setImageUrl } = useContext(AppContext);
   const [cloudImg, setCloudImg] = useState('');
+  const [addCharacter, setAddCharacter] = useState(false);
+
+  console.log("storyInfo: ", storyInfo);
 
   const handleAdd = async () => {
     const name = nameRef.current.value;
@@ -40,9 +46,6 @@ const NewParagraph = () => {
         content: content,
         end: isLastParagraphRef.current.checked
       }, localStorage.getItem('token'));
-
-      console.log("post response: ",response);
-      console.log(`/stories/single/${storyInfo._id}`);
 
       const storyInfo2 = await getData(`/stories/single/${storyInfo._id}`);
       console.log('Data from API:', storyInfo2.data);
@@ -70,42 +73,37 @@ const NewParagraph = () => {
               public_id: bookCoverName,
             }
           );
-    
+
           console.log('Image uploaded successfully to Cloudinary:', response.data);
-          // await Promise.all(response)
           return response.data.url;
         } catch (error) {
           console.error('Error uploading image to Cloudinary:', error);
           throw error;
-        }
-      };
+        }
+      };
 
       alert('Paragraph added successfully!');
 
-      if (storyInfo.charactersCtr < 5) {
-        const addCharacter = window.confirm('Do you want to add a main character to the story?');
-
-        const urlImgFromCloud =await uploadImageToCloudinary(imageUrl, characterName)
+      if (addCharacter) {
+        const urlImgFromCloud = await uploadImageToCloudinary(imageUrl, characterName)
         setCloudImg(urlImgFromCloud);
 
-        if (addCharacter) {
-          const response2 = await postAuthenticatedData('/characters', {
-            storyId: storyInfo._id,
-            characterName: characterName,
-            description: characterDescription,
-            image: urlImgFromCloud
-          }, localStorage.getItem('token'));
+        const response2 = await postAuthenticatedData('/characters', {
+          storyId: storyInfo._id,
+          characterName: characterName,
+          description: characterDescription,
+          image: urlImgFromCloud
+        }, localStorage.getItem('token'));
 
-          alert('Main character added successfully!');
-        }
+        console.log("character response: ", response2);
+
+        alert('Main character added successfully!');
       }
-
-      // if (isLastParagraphRef) {
-      //   navigate('/thank-you');
-      // } else {
-      //   navigate('/new-paragraph', { state: { storyInfo } });
-      // }
-
+      if (isLastParagraphRef) {
+        navigate('/thank-you');
+      } else {
+        navigate('/new-paragraph', { state: { storyInfo } });
+      }
     } catch (error) {
       console.error('Error adding paragraph:', error);
       alert('An error occurred while adding the paragraph. Please try again.');
@@ -115,38 +113,47 @@ const NewParagraph = () => {
 
 
   return (
-    <div className="container mt-5">
-      <h2>Add a New Paragraph</h2>
-      <form>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name:</label>
-          <input className="form-control" ref={nameRef} />
+    <div className="outer-main-para">
+      <Navbar />
+      <div className="inner-main-para p-5">
+        <h2>Add a New Paragraph:</h2>
+        <form>
+          <div className="mb-3 mt-4">
+            <label htmlFor="name" className="form-label">Name:</label>
+            <input className="form-control mb-3" ref={nameRef} />
 
-          <label htmlFor="content" className="form-label">Content:</label>
-          <textarea className="form-control" id="content" ref={contentRef}></textarea>
-        </div>
-        <div className="mb-3">
-          <div className="form-check">
-            <input className="form-check-input" type="checkbox" id="isLastParagraph" ref={isLastParagraphRef} />
-            <label className="form-check-label" htmlFor="isLastParagraph">Is this the last paragraph?</label>
+            <label htmlFor="content" className="form-label">Content:</label>
+            <textarea className="form-control" id="content" ref={contentRef}></textarea>
           </div>
-        </div>
-        {storyInfo.charactersCtr < 5 && (
-          <div>
-            <h4>Add a New Main Character to This Story</h4>
-            <div className="mb-3">
-              <label htmlFor="characterName" className="form-label">Character Name:</label>
-              <input type="text" className="form-control" id="characterName" ref={characterNameRef} />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="characterDescription" className="form-label">Character Description:</label>
-              <textarea className="form-control" id="characterDescription" ref={characterDescriptionRef}></textarea>
+          <div className="mb-3">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" id="isLastParagraph" ref={isLastParagraphRef} />
+              <label className="form-check-label" htmlFor="isLastParagraph">Is this the last paragraph?</label>
             </div>
           </div>
-        )}
-        <ImageGenerator />
-        <button type="button" onClick={handleAdd}>Add</button>
-      </form>
+          {storyInfo.charactersCtr < 5 && (
+            <div>
+              <button className='btn border text-white mt-4' onClick={() => { setAddCharacter(!addCharacter) }}>Add character</button>
+              {addCharacter && (
+                <div className="add-character">
+                  <div className="mb-3">
+                    <label htmlFor="characterName" className="form-label">Character Name:</label>
+                    <input type="text" className="form-control" id="characterName" ref={characterNameRef} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="characterDescription" className="form-label">Character Description:</label>
+                    <textarea className="form-control" id="characterDescription" ref={characterDescriptionRef}></textarea>
+                  </div>
+                  <ImageGenerator />
+                </div>
+              )}
+            </div>
+          )}
+          <div className="btn-div pe-2">
+            <button type="button" className='btn btn-add fw-bold fs-4' onClick={handleAdd}>Add</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

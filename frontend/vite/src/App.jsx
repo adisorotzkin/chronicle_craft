@@ -33,7 +33,7 @@ import Reports from './admin_comps/reports';
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
     const [paragraphsIdArr, setparagraphsIdArr] = useState([]);
-    const [getStartedEmail, setgetStartedEmail] = useState('Enter email');
+    const [getStartedEmail, setgetStartedEmail] = useState(null);
     const [indexRoute, setIndexRoute] = useState('');
     const [genresArray] = useState(['Comedy', 'ScienceFiction', 'Drama', 'Biography', 'Fantasy', 'Kids', 'Horror', 'Thriller', 'Mystery', 'Romance']);
     const [imageUrl, setImageUrl] = useState(null)
