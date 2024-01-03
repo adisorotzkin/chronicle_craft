@@ -131,7 +131,7 @@ const NewParagraph = () => {
             <label className="form-check-label" htmlFor="isLastParagraph">Is this the last paragraph?</label>
           </div>
         </div>
-        {storyInfo.charactersCtr < 5 && (
+        {storyInfo?.charactersCtr < 5 && (
           <div>
             <h4>Add a New Main Character to This Story</h4>
             <div className="mb-3">

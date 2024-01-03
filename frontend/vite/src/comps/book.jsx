@@ -4,8 +4,10 @@ import { apiService } from '../service/apisService';
 import Navbar from '../static_comps/navbar';
 import '../comps_css/book.css';
 import { useNavigate } from 'react-router-dom';
+import StarRating from './starRating';
 
 const Book = () => {
+
   const { extParagraphsContentArr, paragraphsIdArr, selectedBook } = useContext(AppContext);
   const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
   const [profileData, setProfileData] = useState(null);
@@ -66,8 +68,19 @@ const Book = () => {
   };
 
   const handleSelectChange = (event) => {
-    const selectedIndex = parseInt(event.target.value, 10);
-    setCurrentParagraphIndex(selectedIndex);
+    const selectPara = event.target.value;
+    console.log(extParagraphsContentArr);
+    for (let i = 0; i < extParagraphsContentArr?.length; i++) {
+      if (extParagraphsContentArr[i].data?.name === selectPara) {
+        setCurrentParagraphIndex(i);
+        break;
+      }
+    }
+  };
+
+
+  const hadleAddPara = () => {
+    navigate('/newParagraph', { state: { storyInfo: selectedBook } });
   };
 
   const handlePrevParagraph = () => {
@@ -113,25 +126,28 @@ const Book = () => {
     <div className="outer-main-book">
       <Navbar />
       <div className="inner-main-book p-5">
-        <div className="select-paragraph mt-3 mb-3 pe-3">
-          <label htmlFor="paragraphSelect">Select Paragraph:</label>
-          <select
-            id="paragraphSelect"
-            className="select-input bg-dark text-white ms-2"
-            onChange={handleSelectChange}
-            value={currentParagraphIndex}
-          >
-            {extParagraphsContentArr.map((paragraph, index) => (
-              <option key={index} value={index}>
-                {paragraph.data?.name}
-
-              </option>
-            ))}
-          </select>
+        <div className='mt-3 mb-3 '>
+          <div>
+            {!extParagraphsContentArr[currentParagraphIndex]?.data?.end && (
+              <button onClick={hadleAddPara} className='btn text-white border'>Add new paragraph</button>
+            )}
+          </div>
+          <div className="select-paragraph ">
+            <label htmlFor="paragraphSelect">Select Paragraph:</label>
+            <select className="select-input bg-dark text-white ms-2" onChange={handleSelectChange}>
+              {extParagraphsContentArr.map((paragraph, index) => (
+                <option key={index} value={index}>
+                  {paragraph.data?.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
+
         <div className="paragraphs d-flex">
+
           <div className="paragraph-content container p-2 bg-dark">
-            {console.log('selected book: ',selectedBook)}
+            {console.log('selected book: ', selectedBook)}
             <p className='title-p mb-3'>{selectedBook.title}</p>
             <p className='content p-3'>{firstColumn}</p>
             <p className='page-number-1 px-4 py-2'>{pageNumber}</p>
@@ -147,6 +163,12 @@ const Book = () => {
           <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
           <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
         </div>
+        {/* {!extParagraphsContentArr[currentParagraphIndex]?.data.end && (
+          <div className='d-flex justify-content-center'>
+            <button className='btn text-white border'>Add new paragraph</button>
+          </div>
+        )} */}
+
 
         {profileData && (
           <div className="author-details">
@@ -162,12 +184,12 @@ const Book = () => {
                   <strong>Bio:</strong> {profileData.bio}{' '}
                 </p>
                 <p>
-                  <strong>Rating:</strong> {profileData.rating}
+                  <strong>Rating:</strong><StarRating averageRating={profileData.rating} />
                 </p>
               </div>
               <div className='col-2'>
-                <br /><br /><br /><br /><br /><br/>
-                <button className='btn text-white border' onClick={()=>{navigate('/addRateing', { state: { author: profileData } })}}>Rate me now</button>
+                <br /><br /><br /><br /><br /><br />
+                <button className='btn text-white border' onClick={() => { navigate('/addRateing', { state: { author: profileData } }) }}>Rate me now</button>
               </div>
             </div>
 

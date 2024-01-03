@@ -3,12 +3,16 @@ import Navbar from '../static_comps/navbar';
 import '../comps_css/search.css';
 import { apiService } from '../service/apisService';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/context';
+
 
 const Search = () => {
   const searchRef = useRef();
   const navigate = useNavigate();
   const { getData } = apiService();
   const [data, setData] = useState([]);
+  const { setSelectedBook } = useContext(AppContext);
+
   let searchContent = '';
 
   const handleBookClick = () => {

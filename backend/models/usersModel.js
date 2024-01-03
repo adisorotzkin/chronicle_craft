@@ -4,22 +4,21 @@ const jwt = require("jsonwebtoken");
 const { config } = require("../config/secret.js");
 
 let usersSchema = new mongoose.Schema({
-    username:String,
-    email:String,
-    password:String,
-    registrationDate:{ type: Date, default: Date.now()},
-    profilePicture:String,
-    bio:String,
+    username: String,
+    email: String,
+    password: String,
+    registrationDate: { type: Date, default: Date.now() },
+    profilePicture: String,
+    bio: String,
     dateOfBirth: Date,
-    role:{ type: String, default: "user"},
+    role: { type: String, default: "user" },
     active: { type: Boolean, default: true },
-    rating:  { type: Number, default: 0 }
+    rating: { type: Number, default: 0 }
 })
 
 exports.UsersModel = mongoose.model("users", usersSchema);
 
-exports.createToken = (_id, role) => 
-{
+exports.createToken = (_id, role) => {
     let token = jwt.sign({ _id, role }, config.tokenSecret, { expiresIn: "60mins" });
     return token;
 }
@@ -29,7 +28,7 @@ exports.validUser = (_reqBody) => {
         username: joi.string().min(2).max(99).required(),
         email: joi.string().min(2).max(99).email().required(),
         bio: joi.string().min(2).max(999).allow(""),
-        profilePicture:joi.string().allow(""),
+        profilePicture: joi.string().allow(""),
         password: joi.string().min(6).max(30).allow(""),
         dateOfBirth: joi.date().allow(""),
         registrationDate: joi.date().allow(""),
@@ -46,8 +45,9 @@ exports.validUserEdit = (_reqBody) => {
         bio: joi.string().min(2).max(999),
         profilePicture: joi.string(),
         dateOfBirth: joi.date(),
-        active: joi.boolean()
-    }); 
+        active: joi.boolean(),
+        rating: joi.number().min(1).max(5)
+    });
 
     return joiSchema.validate(_reqBody);
 };
@@ -60,3 +60,4 @@ exports.validLogin = (_reqBody) => {
     })
     return joiSchema.validate(_reqBody);
 }
+
