@@ -6,9 +6,9 @@ export const apiService = () => {
 
     const postData = async (url, body) => {
         try {
-            console.log(`${baseUrl}${url}`);
+            // console.log(`${baseUrl}${url}`);
             const response = await axios.post(`${baseUrl}${url}`, body);
-            console.log(response);
+            // console.log(response);
             return response.data;
         }
         catch (err) {
@@ -57,7 +57,7 @@ export const apiService = () => {
 
     const getData = async (url) => {
         try {
-            console.log(`${baseUrl}${url}`);
+            // console.log(`${baseUrl}${url}`);
             return await axios.get(`${baseUrl}${url}`);
         }
         catch (err) {
@@ -95,12 +95,12 @@ export const apiService = () => {
 
     const updateData = async (url, params, body) => {
         try {
-            console.log(`${baseUrl}${url}/${params}`);
-            console.log(body);
+            // console.log(`${baseUrl}${url}/${params}`);
+            // console.log(body);
 
             const res = await axios.put(`${baseUrl}${url}/${params}`, body);
 
-            console.log(res);
+            // console.log(res);
 
             return res.data;
         } catch (err) {
@@ -159,6 +159,7 @@ export const apiService = () => {
             console.error(`error ${err}`);
         }
     };
+
 
     return { getData, postData, postAuthenticatedData, updateData, updateAuthenticatedData, deleteAuthenticatedData, getAuthenticatedData }
 }

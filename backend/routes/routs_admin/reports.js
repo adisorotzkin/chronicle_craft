@@ -1,6 +1,6 @@
 const express = require("express");
-const { auth, authAdmin } = require("../middlewares/auth");
-const { ReportsModel, validReport } = require("../models/reportsModel")
+const { auth, authAdmin } = require("../../middlewares/auth");
+const { ReportsModel, validReport } = require("../../models/reportsModel")
 const router = express.Router();
 
 router.get("/", authAdmin, async (req, res) => {
