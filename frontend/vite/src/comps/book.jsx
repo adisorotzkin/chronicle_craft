@@ -46,9 +46,9 @@ const Book = () => {
           const profile = await getData(`/users/singleId/${extParagraphsContentArr[currentParagraphIndex].data.author}`);
           const comments = await getData(`/comments/paragraphId/${extParagraphsContentArr[currentParagraphIndex].data._id}`);
           console.log('comments:', comments);
-          console.log('Data from API:', profile.data);
-          setCommentData(comments.data);
-          setProfileData(profile.data);
+          console.log('Data from API:', profile?.data);
+          setCommentData(comments?.data);
+          setProfileData(profile?.data);
           setShouldFetchData(false);
         } else {
           console.warn('Author information not available for the current paragraph.');
@@ -102,7 +102,7 @@ const Book = () => {
         console.log('Comment submitted:', commentDetails.content);
 
         const comments = await getData(`/comments/paragraphId/${extParagraphsContentArr[currentParagraphIndex].data._id}`);
-        setCommentData(comments.data);
+        setCommentData(comments?.data);
       }
     } catch (error) {
       console.error('Error submitting comment:', error);

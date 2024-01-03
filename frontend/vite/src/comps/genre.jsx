@@ -26,11 +26,11 @@ const Genre = (props) => {
         const fetchData = async () => {
             try {
                 const result = await getData(`/stories/genre/${props.genre}`);
-                console.log('API Result:', result);
+                // console.log('API Result:', result);
 
                 if (result.data) {
                     setData(result.data);
-                    console.log('Data Set:', result.data);
+                    // console.log('Data Set:', result.data);
                 } else {
                     console.log('No data received.');
                 }

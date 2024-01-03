@@ -12,9 +12,9 @@ const BookItem = () => {
     const fetchData = async () => {
       try {
         const story = await getData(`/stories/single/${selectedBook._id}`);
-        console.log('Data from API:', story.data);
+        console.log('Data from API:', story?.data);
 
-        let paragraphsIdArr = story.data.paragraphsArr || [];
+        let paragraphsIdArr = story?.data.paragraphsArr || [];
         let paragraphsContentArr = [];
         for (let i = 0; i < paragraphsIdArr.length; i++) {
           paragraphsContentArr[i] = await getData(`/paragraphs/single/${paragraphsIdArr[i]}`);
