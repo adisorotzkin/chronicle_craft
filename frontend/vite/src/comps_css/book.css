@@ -46,9 +46,8 @@
 .profile-img {
     border-radius: 50%;
 }
-
-.paragraphs {
-    margin-top: 110px;
+.paragraphs{
+    margin-top: 80px;
     margin-bottom: 80px;
 }
 
@@ -75,13 +74,6 @@
     bottom: 0;
     right: 0;
 }
-
-.comment-date,
-.comment-uid {
-    font-size: smaller;
-}
-
-
 
 .character-lightbox-overlay {
     position: fixed;
@@ -129,4 +121,21 @@
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+.comment{
+    display: flex;
+}
+.comment-date, .comment-uid{
+    font-size: smaller;
+}
+.top-inyan{
+    display: flex;
+    justify-content: space-between;
+}
+.add-para-btn{
+    opacity: 0.7;
+}
+  
+  
+  
 
