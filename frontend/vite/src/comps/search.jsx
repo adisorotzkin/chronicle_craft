@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import Navbar from '../static_comps/navbar';
 import '../comps_css/search.css';
 import { apiService } from '../service/apisService';
@@ -11,13 +11,14 @@ const Search = () => {
   const navigate = useNavigate();
   const { getData } = apiService();
   const [data, setData] = useState([]);
-  const { setSelectedBook } = useContext(AppContext);
+  const { setSelectedBook, selectedBook } = useContext(AppContext);
 
   let searchContent = '';
 
-  const handleBookClick = () => {
-    navigate('/bookItem');
-  };
+  // const handleBookClick = () => {
+  //   setSelectedBook()
+  //   navigate('/bookItem');
+  // };
 
   const handleSearch = async () => {
     try {
@@ -70,7 +71,10 @@ const Search = () => {
           ) : (
             <div className='book-list row flex-wrap'>
               {data.map((item) => (
-                <div key={item._id} className='book-item p-3 col-3' onClick={() => handleBookClick(item)}>
+                <div key={item._id} className='book-item p-3 col-3' onClick={() => {
+                  setSelectedBook(item)
+                  navigate('/bookItem')
+                }}>
                   <img src={item.coverImg} alt={`Book Cover - ${item.title}`} className='book-cover' />
                   <p className='book-title mt-2'>{item.title}</p>
                 </div>
