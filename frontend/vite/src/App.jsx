@@ -24,6 +24,10 @@ import ForgotPassword from './comps/forgotPassword';
 import EditParagraph from './comps/editParagraph'
 import DeletePeregraph from './comps/deletePeregraph';
 import ResetPassword from './comps/resetPassword';
+import CommentEdited from './comps/commentEdited';
+import DeleteComment from './comps/deleteComment';
+import AddRateing from './comps/addRateing';
+
 
 function App() {
     const [extParagraphsContentArr, setextParagraphsContentArr] = useState([]);
@@ -68,6 +72,9 @@ function App() {
                         <Route path='/editParagraph' element={<EditParagraph />} />
                         <Route path='/deletePeregraph' element={<DeletePeregraph />} />
                         <Route path='/reset-password' element={<ResetPassword />} />
+                        <Route path='/commentEdited' element={<CommentEdited />} />
+                        <Route path='/deleteComment' element={<DeleteComment />} />
+                        <Route path='/addRateing' element={<AddRateing />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

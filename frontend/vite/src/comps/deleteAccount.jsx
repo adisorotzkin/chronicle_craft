@@ -10,6 +10,8 @@ const DeleteAccount = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.body.style.backgroundColor = 'black';
+
     const deleteAccount = async () => {
       const updatedUserInfo = {
         username: userData.username,

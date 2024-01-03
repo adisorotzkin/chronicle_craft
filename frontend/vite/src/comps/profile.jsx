@@ -6,17 +6,32 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/context';
 import StarRating from './starRating';
 import '../comps_css/profile.css'
+import { useRef } from 'react';
 
 const Profile = () => {
-  const { getData } = apiService();
+  const token = localStorage.getItem('token');
+  const { getData, updateAuthenticatedData } = apiService();
   const [shouldFetchData, setShouldFetchData] = useState(true);
   const [userActivity, setUserActivity] = useState({ stories: [], paragraphs: [] });
   const [userComments, setUserComments] = useState([]);
   const [userCommentsDetails, setUserCommentsDetails] = useState([]);
   const [shouldFetchActivity, setShouldFetchActivity] = useState(true);
   const navigate = useNavigate();
-  const { selectedBook, setSelectedBook, userData, setUserData } = useContext(AppContext);
+  const { setSelectedBook, userData, setUserData } = useContext(AppContext);
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+  const commentEditRef = useRef();
 
+  // const handleEditComment = async (id) => {
+
+  // }
+
+  const handleEditButtonClick = () => {
+    setIsEditFormVisible(!isEditFormVisible);
+  };
+
+  const handleDeleteCommentClick = () => {
+
+  };
 
   const handleStoryClick = () => {
     navigate('/bookItem');
@@ -85,7 +100,8 @@ const Profile = () => {
 
       return {
         content: comment.content,
-        paragraphName: paragraphResponse.data.name
+        paragraphName: paragraphResponse.data.name,
+        commentId: comment._id
         // storyTitle: storyResponse.title,
       };
     } catch (error) {
@@ -180,16 +196,38 @@ const Profile = () => {
               <ul className="list-group">
                 {userCommentsDetails.map((details, index) => (
                   <li className="list-group-item" key={index}>
-                    {details ? (
-                      <>
-                        <p className="h5">{details.content}</p>
-                        <p className="text-muted">Paragraph Name: {details.paragraphName}</p>
-                        {/* <p className="text-muted">Story Title: {details.storyTitle}</p> */}
-                        <button onClick={() => {  }} className="btn border mx-2"> Edit</button>
-                      </>
-                    ) : (
-                      <p>Error fetching details for comment</p>
-                    )}
+                    <>
+                      {details ? (
+                        <>
+                          <p className="h5">{details.content}</p>
+                          <p className="text-muted">Paragraph Name: {details.paragraphName}</p>
+                          {/* <p className="text-muted">Story Title: {details.storyTitle}</p> */}
+                          <button onClick={handleEditButtonClick} className="btn border mx-2"> Edit</button>
+                          {isEditFormVisible && (
+                            <div className="edit-form">
+                              <textarea ref={commentEditRef} defaultValue={details.content} />
+                              <button
+                                onClick={async () => {
+                                  const updatedContent = commentEditRef.current.value;
+                                  console.log('Comment ID:', details.commentId);
+
+                                  const resComment = await updateAuthenticatedData('/comments', details.commentId, { content: updatedContent }, token);
+                                  console.log(resComment);
+                                  setIsEditFormVisible(!isEditFormVisible)
+                                  navigate('/commentEdited');
+                                }}
+                                className='btn border'> Save </button>
+                            </div>
+                          )}
+                          <button onClick={()=>{
+                            navigate('/deleteComment', { state: { commentId: details.commentId } });
+                          }} className="btn border mx-2">Delete</button>
+                        </>
+
+                      ) : (
+                        <p>Error fetching details for comment</p>
+                      )}
+                    </>
                   </li>
                 ))}
               </ul>
