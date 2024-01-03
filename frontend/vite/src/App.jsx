@@ -26,6 +26,7 @@ import DeletePeregraph from './comps/deletePeregraph';
 import ResetPassword from './comps/resetPassword';
 import CommentEdited from './comps/commentEdited';
 import DeleteComment from './comps/deleteComment';
+import AddRateing from './comps/addRateing';
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
                         <Route path='/reset-password' element={<ResetPassword />} />
                         <Route path='/commentEdited' element={<CommentEdited />} />
                         <Route path='/deleteComment' element={<DeleteComment />} />
+                        <Route path='/addRateing' element={<AddRateing />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

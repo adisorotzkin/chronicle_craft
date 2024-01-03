@@ -3,6 +3,7 @@ import { AppContext } from '../context/context';
 import { apiService } from '../service/apisService';
 import Navbar from '../static_comps/navbar';
 import '../comps_css/book.css';
+import { useNavigate } from 'react-router-dom';
 
 const Book = () => {
   const { extParagraphsContentArr, paragraphsIdArr, selectedBook } = useContext(AppContext);
@@ -18,6 +19,7 @@ const Book = () => {
   const [commentUid, setCommentUid] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('Fetching data...');
@@ -55,7 +57,7 @@ const Book = () => {
 
     fetchData();
   }, [extParagraphsContentArr, currentParagraphIndex, getData, shouldFetchData]);
-  
+
   const handleNextParagraph = () => {
     setPageNumber(pageNumber + 2);
     setCurrentParagraphIndex((prevIndex) => prevIndex + 1);
@@ -150,7 +152,7 @@ const Book = () => {
               <div className="profile-img-div col-3">
                 <img className="profile-img" src={profileData.profilePicture} alt="Profile" />
               </div>
-              <div className="details-div col-8">
+              <div className="details-div col-6">
                 <p>
                   <strong>Author:</strong> {profileData.username}
                 </p>
@@ -160,6 +162,10 @@ const Book = () => {
                 <p>
                   <strong>Rating:</strong> {profileData.rating}
                 </p>
+              </div>
+              <div className='col-2'>
+                <br /><br /><br /><br /><br /><br/>
+                <button className='btn text-white border' onClick={()=>{navigate('/addRateing', { state: { author: profileData } })}}>Rate me now</button>
               </div>
             </div>
 
