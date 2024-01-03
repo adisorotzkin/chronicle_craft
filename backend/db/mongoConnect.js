@@ -6,8 +6,6 @@ main().catch(err => console.log(err));
 async function main() 
 {
   mongoose.set('strictQuery' , false);
-  console.log(config.userDb);
-  console.log(config.passDb);
   
   await mongoose.connect(`mongodb+srv://${config.userDb}:${config.passDb}@cluster0.ceovg2j.mongodb.net/ChronicleCraft`);
 

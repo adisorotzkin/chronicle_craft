@@ -4,9 +4,6 @@ const nodemailer = require('nodemailer');
 const { UsersModel, createToken } = require("../models/usersModel")
 const { config } = require('../config/secret');
 
-console.log('email:', config.email);
-console.log('password:', config.emailPass);
-// Your nodemailer setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -23,16 +20,12 @@ router.post('/', async (req, res) => {
         const { email } = req.body;
         console.log(email);
 
-        // Validate the email or check if it exists in your database
         const existingUser = await UsersModel.findOne({ email });
         if (!existingUser) {
             return res.status(404).json({ message: 'User with this email does not exist' });
         }
-        // Generate a unique token or temporary password
         const resetToken = createToken(existingUser._id, existingUser.role);
-        // res.json({ resetToken, existingUser });
 
-        // Send an email with a link containing the resetToken
         const mailOptions = {
             from: config.email,
             to: email,

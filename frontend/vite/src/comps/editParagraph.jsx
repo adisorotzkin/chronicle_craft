@@ -33,7 +33,7 @@ const EditParagraph = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{backgroundColor: black}}>
       <h1>Edit Paragraph</h1>
       <form>
         <div className="mb-3">

@@ -21,10 +21,6 @@ const Profile = () => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
   const commentEditRef = useRef();
 
-  // const handleEditComment = async (id) => {
-
-  // }
-
   const handleEditButtonClick = () => {
     setIsEditFormVisible(!isEditFormVisible);
   };
@@ -179,9 +175,6 @@ const Profile = () => {
                       <button onClick={async () => {
                         const response = await getData(`/stories/single/${paragraph.storyId}`);
                         setSelectedBook(response.data);
-                        console.log("story id:" , paragraph.storyId);
-                        console.log("response data in profile", response.data);
-                        console.log("selected book in profile", selectedBook);
                         navigate('/bookItem');
                       }} className="btn border">View</button>
 
@@ -219,7 +212,7 @@ const Profile = () => {
                                 className='btn border'> Save </button>
                             </div>
                           )}
-                          <button onClick={()=>{
+                          <button onClick={() => {
                             navigate('/deleteComment', { state: { commentId: details.commentId } });
                           }} className="btn border mx-2">Delete</button>
                         </>
@@ -239,7 +232,7 @@ const Profile = () => {
       </div>
     </div>
   )
-};
+}
 
 export default Profile;
 

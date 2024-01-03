@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { apiService } from '../service/apisService';
 import ImageGenerator from './imageGenerator';
@@ -15,6 +15,7 @@ const NewParagraph = () => {
   const { postAuthenticatedData, updateData, getData } = apiService();
   const { storyInfo } = location.state || {};
   const { imageUrl, setImageUrl } = useContext(AppContext);
+  const [cloudImg, setCloudImg] = useState('');
 
   const handleAdd = async () => {
     const name = nameRef.current.value;
@@ -28,6 +29,8 @@ const NewParagraph = () => {
       return;
     }
 
+    console.log("storyInfo._id: ", storyInfo._id);
+
     const characterName = characterNameRef.current.value;
     const characterDescription = characterDescriptionRef.current.value;
     try {
@@ -38,7 +41,8 @@ const NewParagraph = () => {
         end: isLastParagraphRef.current.checked
       }, localStorage.getItem('token'));
 
-      console.log(response);
+      console.log("post response: ",response);
+      console.log(`/stories/single/${storyInfo._id}`);
 
       const storyInfo2 = await getData(`/stories/single/${storyInfo._id}`);
       console.log('Data from API:', storyInfo2.data);
@@ -48,7 +52,6 @@ const NewParagraph = () => {
 
       const updatedParagraphsArr = [...existingParagraphsArr, response._id];
 
-
       const response2 = await updateData('/stories', storyInfo._id, {
         title: storyInfo.title,
         description: storyInfo.description,
@@ -57,29 +60,47 @@ const NewParagraph = () => {
         paragraphsArr: updatedParagraphsArr
       });
 
-
-      console.log(response2);
-
-
+      const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
+        try {
+          const response = await axios.post(
+            'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
+            {
+              file: generatedImg,
+              upload_preset: 'cmezl4xo',
+              public_id: bookCoverName,
+            }
+          );
+    
+          console.log('Image uploaded successfully to Cloudinary:', response.data);
+          // await Promise.all(response)
+          return response.data.url;
+        } catch (error) {
+          console.error('Error uploading image to Cloudinary:', error);
+          throw error;
+        }
+      };
 
       alert('Paragraph added successfully!');
 
-      // if (storyInfo.charactersCtr < 5) {
-      //   const addCharacter = window.confirm('Do you want to add a main character to the story?');
+      if (storyInfo.charactersCtr < 5) {
+        const addCharacter = window.confirm('Do you want to add a main character to the story?');
 
-      //   if (addCharacter) {
-      //     const response2 = await postAuthenticatedData('/characters', {
-      //       storyId: storyInfo._id,
-      //       characterName: characterName,
-      //       description: characterDescription,
-      //       image: imageUrl
-      //     }, localStorage.getItem('token'));
+        const urlImgFromCloud =await uploadImageToCloudinary(imageUrl, characterName)
+        setCloudImg(urlImgFromCloud);
 
-      //     alert('Main character added successfully!');
-      //   }
-      // }
+        if (addCharacter) {
+          const response2 = await postAuthenticatedData('/characters', {
+            storyId: storyInfo._id,
+            characterName: characterName,
+            description: characterDescription,
+            image: urlImgFromCloud
+          }, localStorage.getItem('token'));
 
-      // if (isLastParagraph) {
+          alert('Main character added successfully!');
+        }
+      }
+
+      // if (isLastParagraphRef) {
       //   navigate('/thank-you');
       // } else {
       //   navigate('/new-paragraph', { state: { storyInfo } });

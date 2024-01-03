@@ -27,6 +27,7 @@ import ResetPassword from './comps/resetPassword';
 import CommentEdited from './comps/commentEdited';
 import DeleteComment from './comps/deleteComment';
 import AddRateing from './comps/addRateing';
+import Reports from './admin_comps/reports';
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
                         <Route path='/commentEdited' element={<CommentEdited />} />
                         <Route path='/deleteComment' element={<DeleteComment />} />
                         <Route path='/addRateing' element={<AddRateing />} />
+                        <Route path='/reports' element={<Reports />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>

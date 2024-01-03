@@ -1,0 +1,9 @@
+.outer-main-reports{
+    display: flex;
+    background-color: black;
+    min-height: 100vh;
+    color: white;
+}
+.inner-main-reports{
+    margin-left: 18%;
+}

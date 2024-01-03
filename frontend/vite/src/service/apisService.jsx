@@ -65,6 +65,34 @@ export const apiService = () => {
         }
     };
 
+    const getAuthenticatedData = async (url, token) => {
+        try {
+            const response = await axios({
+                url: `${baseUrl}${url}`,
+                method: 'get',
+                headers: {
+                    'x-api-key': token,
+                    // 'Content-Type': 'application-json', // If needed, add Content-Type header for specific cases
+                },
+            });
+
+            return response.data;
+        } catch (err) {
+            if (err.response) {
+                // The request was made and the server responded with a status code
+                console.error(`Server responded with error: ${err.response.status}`, err.response.data);
+            } else if (err.request) {
+                // The request was made but no response was received
+                console.error('No response received from the server', err.request);
+            } else {
+                // Something happened in setting up the request
+                console.error('Error setting up the request', err.message);
+            }
+
+            console.error(`Error in getAuthenticatedData ${ err }`);
+        }
+    };
+
     const updateData = async (url, params, body) => {
         try {
             console.log(`${baseUrl}${url}/${params}`);
@@ -85,38 +113,38 @@ export const apiService = () => {
             }
 
             console.error(`Error in updateData: ${err.message}`);
-            throw err; 
+            throw err;
         }
     };
 
     const updateAuthenticatedData = async (url, params, body, token) => {
         console.log(`${baseUrl}${url}/${params}`);
         console.log(body);
-      
+
         try {
-          const headers = {
-            'x-api-key': token,
-          };
-      
-          const res = await axios.put(`${baseUrl}${url}/${params}`, body, { headers });
-      
-          console.log(res);
-      
-          return res.data;
+            const headers = {
+                'x-api-key': token,
+            };
+
+            const res = await axios.put(`${baseUrl}${url}/${params}`, body, { headers });
+
+            console.log(res);
+
+            return res.data;
         } catch (err) {
-          if (err.response) {
-            console.error(`Server responded with error: ${err.response.status}`, err.response.data);
-          } else if (err.request) {
-            console.error('No response received from the server', err.request);
-          } else {
-            console.error('Error setting up the request', err.message);
-          }
-      
-          console.error(`Error in updateAuthenticatedData: ${err.message}`);
-          throw err;
+            if (err.response) {
+                console.error(`Server responded with error: ${err.response.status}`, err.response.data);
+            } else if (err.request) {
+                console.error('No response received from the server', err.request);
+            } else {
+                console.error('Error setting up the request', err.message);
+            }
+
+            console.error(`Error in updateAuthenticatedData: ${err.message}`);
+            throw err;
         }
-      };
-      
+    };
+
 
 
     const deleteAuthenticatedData = async (url, params, token) => {
@@ -124,8 +152,8 @@ export const apiService = () => {
             console.log(url);
             const headers = {
                 'x-api-key': token,
-              };
-            const res = await axios.delete(`${baseUrl}${url}/${params}`,{ headers });
+            };
+            const res = await axios.delete(`${baseUrl}${url}/${params}`, { headers });
             console.log(res);
             return res
         }
@@ -134,5 +162,5 @@ export const apiService = () => {
         }
     };
 
-    return { getData, postData, postAuthenticatedData, updateData, updateAuthenticatedData, deleteAuthenticatedData }
+    return { getData, postData, postAuthenticatedData, updateData, updateAuthenticatedData, deleteAuthenticatedData, getAuthenticatedData }
 }

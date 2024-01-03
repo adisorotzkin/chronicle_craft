@@ -7,6 +7,7 @@ const charactersR = require("./characters");
 const ratingsR = require("./rating");
 const forgotPasswordR = require("./forgot_password");
 const resetPasswordR = require("./reset_password");
+const reportsR = require("./reports");
 
 
 exports.routesInit = (app) => {
@@ -19,6 +20,7 @@ exports.routesInit = (app) => {
     app.use("/ratings", ratingsR);
     app.use("/forgot-password", forgotPasswordR);
     app.use("/reset-password", resetPasswordR);
+    app.use("/reports", reportsR);
     app.get('/reset-password/:token', (req, res) => {
         const token = req.params.token;
         console.log(token);
