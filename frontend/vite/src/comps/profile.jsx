@@ -166,12 +166,16 @@ const Profile = () => {
                   {userActivity.paragraphs.map((paragraph) => (
                     <li className="list-group-item" key={paragraph.id}>
                       {paragraph.name}
-                      {paragraph.end === false && (
+                      {paragraph.end && (
                         <>
                           <button onClick={() => { navigate('/editParagraph', { state: { paragraph: paragraph } }); }} className="btn border  mx-2"> Edit</button>
                           <button onClick={() => { navigate('/deletePeregraph', { state: { paragraph: paragraph } }) }} className="btn border ">Delete </button>
                         </>
                       )}
+                      {paragraph.end == false && (
+                        <h5 className='text-black-50'>Unable to edit</h5>
+                      )}
+
                       <button onClick={async () => {
                         const response = await getData(`/stories/single/${paragraph.storyId}`);
                         setSelectedBook(response.data);

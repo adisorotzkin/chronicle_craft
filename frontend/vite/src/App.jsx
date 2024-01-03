@@ -65,7 +65,7 @@ function App() {
                         <Route path='/legalNotices' element={<LegalNotices />} />
                         <Route path='/home' element={<Home />} />
                         <Route path='/welcome' element={<Welcome />} />
-                        <Route path='newParagraph' element={<NewParagraph />} />
+                        <Route path='/newParagraph' element={<NewParagraph />} />
                         <Route path='/robbie' element={<Robbie />} />
                         <Route path='/updateProfile' element={<UpdateProfile />} />
                         <Route path='/deleteAccount' element={<DeleteAccount />} />

@@ -89,7 +89,7 @@ export const apiService = () => {
                 console.error('Error setting up the request', err.message);
             }
 
-            console.error(`Error in getAuthenticatedData ${ err }`);
+            console.error(`Error in getAuthenticatedData ${err}`);
         }
     };
 
@@ -144,8 +144,6 @@ export const apiService = () => {
             throw err;
         }
     };
-
-
 
     const deleteAuthenticatedData = async (url, params, token) => {
         try {
