@@ -3,6 +3,21 @@
     min-height: 100vh;
 }
 
+*::-webkit-scrollbar {
+    width: 10px;
+    background-color: black;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #3a3838;
+    border-radius: 5px
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #070707;
+    border-radius: 20px
+}
+
 .inner-main-book {
     margin-left: 18%;
     color: white;
@@ -46,9 +61,10 @@
 .profile-img {
     border-radius: 50%;
 }
-.paragraphs{
-    margin-top: 80px;
-    margin-bottom: 80px;
+
+.paragraphs {
+    margin-top: 70px;
+    margin-bottom: 70px;
 }
 
 .author-details {
@@ -92,6 +108,9 @@
     background: #070707;
     color: #f8f4f4;
     max-width: 600px;
+    height: 75%;
+    overflow-y: auto;
+    overflow-x: hidden;
     width: 80%;
     padding: 20px;
     border-radius: 20px;
@@ -122,20 +141,28 @@
     margin-top: 10px;
 }
 
-.comment{
+.comment {
     display: flex;
 }
-.comment-date, .comment-uid{
+
+.comment-date,
+.comment-uid {
     font-size: smaller;
 }
-.top-inyan{
+
+.top-inyan {
     display: flex;
     justify-content: space-between;
 }
-.add-para-btn{
+
+.add-para-btn {
     opacity: 0.7;
 }
-  
-  
-  
-
+.character-img{
+    margin-left: 20px;
+    width: 75px;
+    border-radius: 50%;
+}
+.character-img:hover{
+    cursor: pointer;
+}

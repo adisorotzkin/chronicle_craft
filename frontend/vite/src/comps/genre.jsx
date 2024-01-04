@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { apiService } from '../service/apisService';
 import '../comps_css/genre.css'
 import { useNavigate } from 'react-router-dom';
-import {AppContext} from '../context/context'
+import { AppContext } from '../context/context'
 
 const Genre = (props) => {
     const { getData } = apiService();
@@ -12,13 +12,11 @@ const Genre = (props) => {
     const { selectedBook, setSelectedBook } = useContext(AppContext);
 
     const handleBookClick = (book) => {
-        // Set the selected book when a cover is clicked
         setSelectedBook(book);
         setBookClicked(!bookClicked);
     };
 
     const handleReadClicked = () => {
-
         navigate('/bookItem');
     }
 
@@ -26,11 +24,8 @@ const Genre = (props) => {
         const fetchData = async () => {
             try {
                 const result = await getData(`/stories/genre/${props.genre}`);
-                // console.log('API Result:', result);
-
                 if (result.data) {
                     setData(result.data);
-                    // console.log('Data Set:', result.data);
                 } else {
                     console.log('No data received.');
                 }
@@ -50,12 +45,12 @@ const Genre = (props) => {
                 <div className="genre-list">
                     <h1>{props.genre}</h1>
                     <div className="books-list">
-                        {data.map((item) => (
-                            <div key={item._id} className='book-item p-3' onClick={() => handleBookClick(item)}>
-                                <img src={item.coverImg} alt={`Book Cover - ${item.title}`} className='book-cover' />
-                                <p className='book-title mt-2'>{item.title}</p>
-                            </div>
-                        ))}
+                            {data.map((item) => (
+                                <div key={item._id} className='book-item p-3' onClick={() => handleBookClick(item)}>
+                                    <img src={item.coverImg} alt={`Book Cover - ${item.title}`} className='book-cover' />
+                                    <p className='book-title mt-2'>{item.title}</p>
+                                </div>
+                            ))}
                     </div>
                 </div>
             )}
@@ -64,7 +59,7 @@ const Genre = (props) => {
                 <div className="selected-book-info mb-5">
                     <h4>{selectedBook.title}</h4>
                     <p>{selectedBook.description}</p>
-                    <button className='btn text-white border read-btn' onClick={() => {handleReadClicked()}}>Read</button>
+                    <button className='btn text-white border read-btn' onClick={() => { handleReadClicked() }}>Read</button>
                 </div>
             )}
         </div>
@@ -72,3 +67,5 @@ const Genre = (props) => {
 }
 
 export default Genre
+
+
