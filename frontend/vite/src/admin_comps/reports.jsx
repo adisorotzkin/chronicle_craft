@@ -89,35 +89,40 @@ const Reports = () => {
 
     return (
         <div className='outer-main-reports'>
-            < Navbar />
-            <div className="inner-main-reports p-5">
-                <div className="mb-4">
-                    <h2>Your Reports</h2>
-
-                    <div>
-                        {reports.length > 0 ? (
-                            <div>
-                                {reports.map((item, index) => (
-                                    <div className='border border-info text-end' key={index}>
-                                        <h3>report content: {item.reportReason}</h3>
-                                        <h3>reported paragraph{item.paragraphName}</h3>
-                                        <h6>reporter name: {item.reporterName}</h6>
-                                        <h6>author name: {item.authorName}</h6>
-                                        <button onClick={() => {
-                                            setSelectedBook(item.book);
-                                            navigate('/bookItem');
-                                        }} className='btn btn-success'>see paragraph</button>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-warning">No reports found to report to admin.</p>
-                        )}
-                    </div>
-                </div>
+          <Navbar />
+          <div className="inner-main-reports p-5">
+            <div className="mb-4">
+              <h2 className="reports-title">Your Reports</h2>
+              <div className="reports-list">
+                {reports.length > 0 ? (
+                  <div>
+                    {reports.map((item, index) => (
+                      <div className='report-info' key={index}>
+                        <h3 className="report-content">Report content: {item.reportReason}</h3>
+                        <h3 className="reported-paragraph">Reported paragraph: {item.paragraphName}</h3>
+                        <h6 className="reporter-name">Reporter name: {item.reporterName}</h6>
+                        <h6 className="author-name">Author name: {item.authorName}</h6>
+                        <button
+                          onClick={() => {
+                            setSelectedBook(item.book);
+                            navigate('/bookItem');
+                          }}
+                          className='see-paragraph-btn'
+                        >
+                          See paragraph
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-warning no-reports-message">No reports found to report to admin.</p>
+                )}
+              </div>
             </div>
+          </div>
         </div>
-    );
+      );
+      
 };
 
 export default Reports;
