@@ -9,35 +9,41 @@ const Navbar = () => {
     const navigate = useNavigate();
     const { getData } = apiService();
     const uid = localStorage.getItem('uid');
-    const [admin,setAdmim] = useState(false);
+    const [admin, setAdmim] = useState(false);
 
     useEffect(() => {
 
-    const fetchData = async () => {
-        try {
-            const user = await getData(`/users/singleId/${uid}`);            // console.log('API Result:', result);
-            console.assert(user);
-            if (user.data.role === 'admin') {
-                setAdmim(true);
-                // console.log('Data Set:', result.data);
-            } else {
-                console.log('No you are not an admin.');
+        const fetchData = async () => {
+            try {
+                const user = await getData(`/users/singleId/${uid}`);            // console.log('API Result:', result);
+                console.assert(user);
+                if (user.data.role === 'admin') {
+                    setAdmim(true);
+                    // console.log('Data Set:', result.data);
+                } else {
+                    console.log('No you are not an admin.');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+        };
 
-    fetchData();
-}, [uid]);
+        fetchData();
+    }, [uid]);
 
 
 
     const reportsLink = admin ? (
-        <div className="pt-4">
-            <i className="text-white fa fa-user" aria-hidden="true"></i>
-            <Link to="/reports" className='link'> Reports</Link>
-        </div>
+        <>
+            <div className="pt-4">
+                <i className="text-white fa fa-envelope" aria-hidden="true"></i>
+                <Link to="/reports" className='link'> Reports</Link>
+            </div>
+            <div className="pt-4">
+                <i className="text-white fa fa-id-card" aria-hidden="true"></i>
+                <Link to="/usersList" className='link'>Users List</Link>
+            </div>
+        </>
     ) : null;
 
 

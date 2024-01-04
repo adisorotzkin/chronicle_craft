@@ -28,6 +28,7 @@ import CommentEdited from './comps/commentEdited';
 import DeleteComment from './comps/deleteComment';
 import AddRateing from './comps/addRateing';
 import Reports from './admin_comps/reports';
+import UsersList from './admin_comps/usersList';
 
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
                         <Route path='/deleteComment' element={<DeleteComment />} />
                         <Route path='/addRateing' element={<AddRateing />} />
                         <Route path='/reports' element={<Reports />} />
+                        <Route path='/usersList' element={<UsersList />} />
                     </Routes>
                 </AppContext.Provider>
             </BrowserRouter>
