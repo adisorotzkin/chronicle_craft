@@ -21,8 +21,6 @@ const NewParagraph = () => {
   const [cloudImg, setCloudImg] = useState('');
   const [addCharacter, setAddCharacter] = useState(false);
 
-  console.log("storyInfo: ", storyInfo);
-
   const handleAdd = async () => {
     const name = nameRef.current.value;
     const content = contentRef.current.value;
@@ -37,8 +35,11 @@ const NewParagraph = () => {
 
     console.log("storyInfo._id: ", storyInfo._id);
 
-    const characterName = characterNameRef.current.value;
-    const characterDescription = characterDescriptionRef.current.value;
+    if (addCharacter) {
+      const characterName = characterNameRef.current.value;
+      const characterDescription = characterDescriptionRef.current.value;
+    }
+
     try {
       const response = await postAuthenticatedData('/paragraphs', {
         storyId: storyInfo._id,
@@ -97,19 +98,19 @@ const NewParagraph = () => {
 
         console.log("character response: ", response2);
 
-        alert('Main character added successfully!');
+        alert('Character added successfully!');
       }
-      if (isLastParagraphRef) {
-        navigate('/thank-you');
-      } else {
-        navigate('/new-paragraph', { state: { storyInfo } });
-      }
+      navigate('/bookItem');
     } catch (error) {
       console.error('Error adding paragraph:', error);
       alert('An error occurred while adding the paragraph. Please try again.');
     }
 
   };
+
+  const handleAddCharacter = () => {
+    setAddCharacter(!addCharacter);
+  }
 
 
   return (
@@ -133,7 +134,7 @@ const NewParagraph = () => {
           </div>
           {storyInfo.charactersCtr < 5 && (
             <div>
-              <button className='btn border text-white mt-4' onClick={() => { setAddCharacter(!addCharacter) }}>Add character</button>
+              <button type="button" className='btn border text-white my-4' onClick={handleAddCharacter}>Add character</button>
               {addCharacter && (
                 <div className="add-character">
                   <div className="mb-3">

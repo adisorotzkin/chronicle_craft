@@ -17,7 +17,7 @@ const Welcome = () => {
       <div className='main-welcome'>
         <div className="top container-fluid row justify-content-between">
           <div className="logo-welcome d-flex col-4">
-            <img src='../public/images/logo.jpg' alt='logo' className="logo" />
+            <img src='../images/logo.jpg' alt='logo' className="logo" />
           </div>
           <div className="login-btn col-1">
             <button className='btn btn-login' onClick={() => { navigate('/login'); }}>Log in</button>

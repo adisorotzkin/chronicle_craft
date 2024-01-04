@@ -40,8 +40,8 @@ const AddRateing = () => {
 
     return (
         <div className='mainRatings' >
-            <div className="profile-img-div col-3">
-                <img className="profile-img" src={profileData.profilePicture} alt="Profile" />
+            <div className="profile-img-div-rating col-3">
+                <img className="profile-img-rating" src={profileData.profilePicture} alt="Profile" />
             </div>
             <div className='divider'></div>
             <div className='pt-5'>

@@ -50,7 +50,7 @@ const ImageGenerator = () => {
                 </div>
             </div>
             <div className="search-box form-control bg-dark">
-                <input type='text' ref={inputRef} className='search-input' placeholder='Enter cover description' />
+                <input type='text' ref={inputRef} className='search-input' placeholder='Enter description' />
                 <div className="generate-btn" onClick={() => { imageGeneratorFunc() }}>generate image</div>
             </div>
         </div>

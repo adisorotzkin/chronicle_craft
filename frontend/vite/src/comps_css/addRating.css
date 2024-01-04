@@ -20,11 +20,11 @@
     text-align: center;
 } */
 
-.profile-img-div {
+.profile-img-div-rating {
     margin-right: 30px;
 }
 
-.profile-img {
+.profile-img-rating {
     width: 200px;
     height: 200px;
     border-radius: 50%;
