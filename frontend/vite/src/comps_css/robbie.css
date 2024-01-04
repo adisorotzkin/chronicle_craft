@@ -1,7 +1,34 @@
+
 .outer-main-robbie{
     background-color: black;
     height: 100vh;
 }
 .inner-main-robbie{
     margin-left: 18%;
+}
+
+
+/* robbie-styles.css */
+.cs-message__content {
+    background-color: #30a7719a !important;
+    color: #333 !important;
+  }
+  
+  .cs-message-input__content-editor{
+    background-color: #82CAA9!important;
+    color: #333!important;
+  }
+
+  .cs-message-input__content-editor-wrapper{
+    background-color: #82CAA9 !important;
+    color: #333!important;
+  }
+
+
+.cs-button--attachment {
+    color: #30a771 !important;
+}
+
+.cs-typing-indicator__text{
+    color: #30a771!important;
 }
