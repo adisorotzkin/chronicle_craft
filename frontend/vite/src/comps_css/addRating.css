@@ -1,51 +1,44 @@
-.mainRatings {
-    background-color: #000;
-    color: #fff;
+.outer-main-rating {
+    color: #d6b64e;
     margin: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-image: url('../images/rating.png');
+    min-height: 100vh;
+    background-image: url('../images/5-star.gif');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
-/* .container {
+.inner-main-rating{
+    padding: 100px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-} */
+    /* color:#f9d96c; */
+}
+.empty-area{
+    height: 425px;
+}
+.profile-data{
+    display: flex;
+}
 
 .profile-img-div-rating {
     margin-right: 30px;
 }
 
 .profile-img-rating {
-    width: 200px;
-    height: 200px;
     border-radius: 50%;
-    border: 5px solid #fff; 
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    object-position: center;
 }
 
-.divider {
-    border-bottom: 3px solid #fff;
-    height: 30px;
-    width: 150px;
-    margin: 0 12%;
-}
-
-.content {
+/* .content {
     padding: 20px;
-}
-
-.h2ating {
-    margin-bottom: 20px;
-    font-size: 1.5em;
 }
 
 .labaelRating {
@@ -56,28 +49,18 @@
 #rating {
     width: 50px;
     margin-right: 10px;
-    padding: 8px; 
+    padding: 8px;
 }
 
 .btnRatings {
     padding: 12px 24px;
     cursor: pointer;
-    background-color: #2c3e50; /* Change button background color */
-    border: 2px solid #fff;
+    background-color: #2c3e50;
+        border: 2px solid #fff;
     color: #fff;
     font-size: 1.2em;
 }
-
-
 .star-container {
     display: inline-block;
     margin-top: 20px;
-}
-
-
-
-  
-  
-
-
-  
+} */

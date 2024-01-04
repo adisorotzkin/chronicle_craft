@@ -7,13 +7,20 @@
 .inner-main-profile{
     margin-left: 18%;
 }
-.profile-img{
+.profile-img {
     border-radius: 50%;
     width: 200px;
     height: 200px;
-}
+    object-fit: cover;
+    object-position: center;
+  }
+  
 .list-group-item{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+}
+.buttons-profile{
+    display: flex;
+    justify-content: flex-end;
 }

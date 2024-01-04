@@ -1,9 +1,53 @@
-.outer-main-reports{
+.outer-main-reports {
     display: flex;
     background-color: black;
     min-height: 100vh;
     color: white;
-}
-.inner-main-reports{
+  }
+  
+  .inner-main-reports {
     margin-left: 18%;
-}
+  }
+  
+  .reports-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .reports-list {
+    width: 100%;
+  }
+  
+  .report-info {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid #12b69d;
+    border-radius: 20px;
+  }
+  
+  .report-content,
+  .reported-paragraph,
+  .reporter-name,
+  .author-name {
+    margin: 3px;
+  }
+  
+  .see-paragraph-btn {
+    background-color: #12b69d;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-top: 4px;
+    border-radius: 20px;
+    font-size: 1em;
+  }
+  
+  .see-paragraph-btn:hover {
+    background-color: #12b69d5d;
+  }
+  
+  .no-reports-message {
+    color: #ffc107;
+  }
+  

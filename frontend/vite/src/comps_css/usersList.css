@@ -1,0 +1,75 @@
+.outer-main-reports{
+    display: flex;
+    background-color: black;
+    min-height: 100vh;
+    color: white;
+}
+.inner-main-reports{
+    margin-left: 18%;
+}
+
+
+.users-list-title {
+    /* font-size: 1.5rem; */
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  
+  .users-list {
+    width: 100%;
+  }
+  
+  .user-info {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid #12b69d;
+    border-radius: 20px;
+  }
+  
+  .user-name,
+  .user-email,
+  .date-of-birth,
+  .user-bio,
+  .user-role {
+    margin: 3px;
+  }
+  
+  .delete-user-btn {
+    background-color: #12b69d;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-top: 4px;
+    border-radius: 20px;
+    font-size: 1em;
+  }
+  
+  .delete-user-btn:hover {
+    color: #c82333;
+  }
+  
+  .no-reports-message {
+    color: #ffc107;
+  }
+
+
+  .user-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .user-text-info {
+    flex: 1;
+  }
+  
+  .profile-picture img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border:#12b69d solid 4px;
+    margin-left: 10px;
+    object-fit: cover;
+  }
+  

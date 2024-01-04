@@ -35,10 +35,10 @@ const NewParagraph = () => {
 
     console.log("storyInfo._id: ", storyInfo._id);
 
-    if (addCharacter) {
-      const characterName = characterNameRef.current.value;
-      const characterDescription = characterDescriptionRef.current.value;
-    }
+    // if (addCharacter) {
+    //   const characterName = characterNameRef.current.value;
+    //   const characterDescription = characterDescriptionRef.current.value;
+    // }
 
     try {
       const response = await postAuthenticatedData('/paragraphs', {
@@ -63,25 +63,6 @@ const NewParagraph = () => {
         coverImg: storyInfo.coverImg,
         paragraphsArr: updatedParagraphsArr
       });
-
-      // const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
-      //   try {
-      //     const response = await axios.post(
-      //       'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
-      //       {
-      //         file: generatedImg,
-      //         upload_preset: 'cmezl4xo',
-      //         public_id: bookCoverName,
-      //       }
-      //     );
-
-      //     console.log('Image uploaded successfully to Cloudinary:', response.data);
-      //     return response.data.url;
-      //   } catch (error) {
-      //     console.error('Error uploading image to Cloudinary:', error);
-      //     throw error;
-      //   }
-      // };
 
       const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
         try {
@@ -112,20 +93,19 @@ const NewParagraph = () => {
       alert('Paragraph added successfully!');
 
       if (addCharacter) {
-        const urlImgFromCloud = await uploadImageToCloudinary(imageUrl, characterName)
+        const urlImgFromCloud = await uploadImageToCloudinary(imageUrl, characterNameRef)
         setCloudImg(urlImgFromCloud);
 
         const response2 = await postAuthenticatedData('/characters', {
           storyId: storyInfo._id,
-          characterName: characterName,
-          description: characterDescription,
+          characterName: characterNameRef.current.value,
+          description: characterDescriptionRef.current.value,
           image: urlImgFromCloud
         }, localStorage.getItem('token'));
 
         console.log("character response: ", response2);
 
         alert('Character added successfully!');
-
         const response3 = await updateData('/stories/',storyInfo._id, {charctersCtr: storyInfo.charctersCtr+1})
         console.log(response3);
       }
@@ -153,7 +133,7 @@ const NewParagraph = () => {
             <input className="form-control mb-3" ref={nameRef} />
 
             <label htmlFor="content" className="form-label">Content:</label>
-            <textarea className="form-control" id="content" ref={contentRef}></textarea>
+            <textarea className="form-control para-text-area" rows='5' id="content" ref={contentRef}></textarea>
           </div>
           <div className="mb-3">
             <div className="form-check">

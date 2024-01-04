@@ -19,7 +19,7 @@ let usersSchema = new mongoose.Schema({
 exports.UsersModel = mongoose.model("users", usersSchema);
 
 exports.createToken = (_id, role) => {
-    let token = jwt.sign({ _id, role }, config.tokenSecret, { expiresIn: "60mins" });
+    let token = jwt.sign({ _id, role }, config.tokenSecret, { expiresIn: "7d" });
     return token;
 }
 
@@ -44,9 +44,9 @@ exports.validUserEdit = (_reqBody) => {
         email: joi.string().min(2).max(99).email(),
         bio: joi.string().min(2).max(999),
         profilePicture: joi.string(),
-        dateOfBirth: joi.date(),
-        active: joi.boolean(),
-        rating: joi.number().min(1).max(5)
+        dateOfBirth: joi.date().allow(null),
+        active: joi.boolean().allow(null),
+        rating: joi.number().min(1).max(5).allow(null)
     });
 
     return joiSchema.validate(_reqBody);

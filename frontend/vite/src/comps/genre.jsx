@@ -75,9 +75,7 @@ const Genre = (props) => {
                 <div className='selected-book-info mb-5'>
                     <h4>{selectedBook.title}</h4>
                     <p>{selectedBook.description}</p>
-                    <button className='btn text-white border read-btn' onClick={handleReadClicked}>
-                        Read
-                    </button>
+                    <button className='btn text-white border read-btn' onClick={() => { handleReadClicked() }}>Read</button>
                 </div>
             )}
         </div>
@@ -85,5 +83,3 @@ const Genre = (props) => {
 };
 
 export default Genre;
-
-
