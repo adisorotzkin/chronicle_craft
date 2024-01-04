@@ -9,8 +9,19 @@
 
 
 /* robbie-styles.css */
+
+.scrollbar-container 
+{
+  background-image: url('../images/backgroundRobbie.jpeg') !important;
+
+
+}
+
+
+
+
 .cs-message__content {
-    background-color: #30a7719a !important;
+    background-color: #82CAA9 !important;
     color: #333 !important;
   }
   
@@ -18,6 +29,8 @@
     background-color: #82CAA9!important;
     color: #333!important;
   }
+
+
 
   .cs-message-input__content-editor-wrapper{
     background-color: #82CAA9 !important;
@@ -31,4 +44,7 @@
 
 .cs-typing-indicator__text{
     color: #30a771!important;
+}
+.cs-button--send{
+  color: #30a7719f!important;
 }

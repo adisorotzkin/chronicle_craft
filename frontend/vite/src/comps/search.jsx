@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Navbar from '../static_comps/navbar';
 import '../comps_css/search.css';
 import { apiService } from '../service/apisService';

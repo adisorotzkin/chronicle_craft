@@ -7,7 +7,7 @@ const router = express.Router();
 
 //Get list of all users - by token admin.
 router.get("/usersList", authAdmin, async (req, res) => {
-  let perPage = req.query.perPage || 10;
+  let perPage = req.query.perPage || 30;
   let page = req.query.page || 1;
 
   try {
