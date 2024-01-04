@@ -191,8 +191,8 @@ const Book = () => {
         </div>
 
         {selectedCharacter && (
-        <CharacterLightbox character={selectedCharacter} onClose={closeCharacterLightbox} />
-      )}
+          <CharacterLightbox character={selectedCharacter} onClose={closeCharacterLightbox} />
+        )}
 
 
         {profileData && (

@@ -17,11 +17,9 @@ const Notifications = () => {
     const fetchData = async () => {
       try {
         if (userId && !apiRequestsCompleted) {
-          // Fetch paragraphs
           const paragraphsResponse = await getData(`/paragraphs/${userId}`);
           setUserParagraphs(paragraphsResponse.data || []);
 
-          // Fetch ratings
           const ratingResponse = await getData(`/ratings/${userId}`);
           console.log('ratingsResponse: ', ratingResponse);
           const userData = await getData(`/users/singleId/${userId}`);
@@ -29,16 +27,14 @@ const Notifications = () => {
           const averageRating = calculateAverageRating(ratingResponse.data);
           setUserRating(averageRating);
 
-          // Fetch comments for each paragraph
           const commentsPromises = paragraphsResponse.data.map(async (paragraph) => {
-            const commentsResponse = await getData(`/comments/paragraphId/${paragraph._id}`);
+          const commentsResponse = await getData(`/comments/paragraphId/${paragraph._id}`);
             return {
               paragraphName: paragraph.name,
               comments: commentsResponse.data,
             };
           });
 
-          // Wait for all comments requests to complete
           const allComments = await Promise.all(commentsPromises);
           setUserComments(allComments);
 
@@ -88,7 +84,7 @@ const Notifications = () => {
                     <h4 className='mb-4'>{item.paragraphName} :</h4>
                     {item.comments.map((comment) => (
                       <div className="comment row mb-4" key={comment._id}>
-                        <img className='profile-img col-1 me-3' src={"/"} alt="Profile" />
+                        <img className='profile-img col-1 me-3' src={"/"} />
                         <div className="comment-inner col-10">
                           <div className="comment-inner-inner d-flex">
                             <p className='comment-uid fw-bold me-2'>@{comment.userId}</p>
@@ -112,3 +108,6 @@ const Notifications = () => {
 };
 
 export default Notifications;
+
+
+
