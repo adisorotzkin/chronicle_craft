@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const joi = require("joi");
 
 let storiesSchema = new mongoose.Schema({
-    title:String,
-    description:String,
-    author:String,
-    dateCreated:{ type: Date, default: Date.now() },
+    title: String,
+    description: String,
+    author: String,
+    dateCreated: { type: Date, default: Date.now() },
     charactersCtr: { type: Number, default: 0 },
     paragraphsArr: Array,
     coverImg: String,
@@ -21,6 +21,13 @@ exports.validStory = (_reqBody) => {
         genre: joi.string(),
         coverImg: joi.string().allow(""),
         paragraphsArr: joi.array().items(joi.string()).optional()
+    })
+    return joiSchema.validate(_reqBody);
+}
+
+exports.validEditStory = (_reqBody) => {
+    let joiSchema = joi.object({
+        charactersCtr: joi.number().min(0).max(5)
     })
     return joiSchema.validate(_reqBody);
 }

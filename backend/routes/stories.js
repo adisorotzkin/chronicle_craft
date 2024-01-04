@@ -1,6 +1,6 @@
 const express = require("express");
 const { auth, authAdmin } = require("../middlewares/auth");
-const { StoriesModel, validStory } = require("../models/storiesModel")
+const { StoriesModel, validStory, validEditStory } = require("../models/storiesModel")
 const router = express.Router();
 
 //Get all stories, presenting 10 results per page.
@@ -55,7 +55,7 @@ router.get("/search", async (req, res) => {
 })
 //search a story follwing genre, presenting 6 results per page.
 router.get("/genre/:genre", async (req, res) => {
-  let perPage = req.query.perPage || 6;
+  let perPage = req.query.perPage || 3;
   let page = req.query.page || 1;
   
 
@@ -113,7 +113,7 @@ router.post("/", auth, async (req, res) => {
 //edit story 
 router.put("/:idEdit",async (req, res) => 
 {
-  let validBody = validStory(req.body);
+  let validBody = validEditStory(req.body);
   if (validBody.error) 
   {
     return res.status(400).json(validBody.error.details);
