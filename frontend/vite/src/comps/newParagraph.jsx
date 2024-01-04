@@ -64,17 +64,42 @@ const NewParagraph = () => {
         paragraphsArr: updatedParagraphsArr
       });
 
+      // const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
+      //   try {
+      //     const response = await axios.post(
+      //       'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
+      //       {
+      //         file: generatedImg,
+      //         upload_preset: 'cmezl4xo',
+      //         public_id: bookCoverName,
+      //       }
+      //     );
+
+      //     console.log('Image uploaded successfully to Cloudinary:', response.data);
+      //     return response.data.url;
+      //   } catch (error) {
+      //     console.error('Error uploading image to Cloudinary:', error);
+      //     throw error;
+      //   }
+      // };
+
       const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
         try {
+          const formData = new FormData();
+          formData.append('file', generatedImg);
+          formData.append('upload_preset', 'cmezl4xo');
+          formData.append('public_id', bookCoverName);
+      
           const response = await axios.post(
             'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
+            formData,
             {
-              file: generatedImg,
-              upload_preset: 'cmezl4xo',
-              public_id: bookCoverName,
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
             }
           );
-
+      
           console.log('Image uploaded successfully to Cloudinary:', response.data);
           return response.data.url;
         } catch (error) {
@@ -82,6 +107,7 @@ const NewParagraph = () => {
           throw error;
         }
       };
+      
 
       alert('Paragraph added successfully!');
 

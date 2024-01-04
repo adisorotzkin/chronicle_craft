@@ -1,12 +1,14 @@
-.outer-main-book{
+.outer-main-book {
     background-color: black;
     min-height: 100vh;
 }
-.inner-main-book{
+
+.inner-main-book {
     margin-left: 18%;
     color: white;
 }
-.paragraph-content{
+
+.paragraph-content {
     min-height: 500px;
     width: 100%;
     border: white dashed 1px;
@@ -15,65 +17,145 @@
     flex-direction: column;
     position: relative;
 }
-.profile-img{
+
+.profile-img {
     border-radius: 50%;
 }
-.details-div{
+
+.details-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.top-details, .bottom-details{
+
+.top-details,
+.bottom-details {
     border-radius: 32px;
 }
-.select-paragraph{
+
+.select-paragraph {
     display: flex;
     justify-content: flex-end;
 }
-.select-input{
+
+.select-input {
     opacity: 0.7;
     border-radius: 4px;
 }
-.profile-img{
+
+.profile-img {
     border-radius: 50%;
 }
-.paragraphs{
+
+.paragraphs {
     margin-top: 80px;
     margin-bottom: 80px;
 }
-.author-details{
+
+.author-details {
     margin-top: 85px;
 }
-.title-p{
+
+.title-p {
     display: flex;
     justify-content: center;
     opacity: 0.7;
 }
-.page-number-1{
+
+.page-number-1 {
     opacity: 0.7;
     position: absolute;
     bottom: 0;
     left: 0;
 }
-.page-number-2{
+
+.page-number-2 {
     opacity: 0.7;
     position: absolute;
     bottom: 0;
     right: 0;
 }
-.comment{
+
+.character-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(97, 92, 92, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.lightBoxContent {
+    background: #070707;
+    color: #f8f4f4;
+    max-width: 600px;
+    height: 75%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 80%;
+    padding: 20px;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightBoxContent::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+.lightBoxContent::-webkit-scrollbar-thumb {
+    background-color: #3a3838;
+    border-radius: 5px
+}
+
+.lightBoxContent::-webkit-scrollbar-track {
+    background-color: #070707;
+    /* Set the color of the scrollbar track */
+    border-radius: 20px
+}
+
+.lightBoxContent img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 15px solid #3ecca4;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.lightBoxContent button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3ecca4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.comment {
     display: flex;
 }
-.comment-date, .comment-uid{
+
+.comment-date,
+.comment-uid {
     font-size: smaller;
 }
-.top-inyan{
+
+.top-inyan {
     display: flex;
     justify-content: space-between;
 }
-.add-para-btn{
+
+.add-para-btn {
     opacity: 0.7;
 }
-  
-  
-  

@@ -5,10 +5,11 @@ import Navbar from '../static_comps/navbar';
 import '../comps_css/book.css';
 import { useNavigate } from 'react-router-dom';
 import StarRating from './starRating';
+import CharacterLightbox from './CharacterLightbox';
 
 const Book = () => {
 
-  const { extParagraphsContentArr, paragraphsIdArr, selectedBook } = useContext(AppContext);
+  const { extParagraphsContentArr, paragraphsIdArr, setSelectedBook, selectedBook } = useContext(AppContext);
   const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
   const [profileData, setProfileData] = useState(null);
   const [commentData, setCommentData] = useState(null);
@@ -20,8 +21,11 @@ const Book = () => {
   const [profileImg, setProfileImg] = useState('');
   const [commentUid, setCommentUid] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
+  const [characters, setCharacters] = useState([]);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     console.log('Fetching data...');
@@ -50,6 +54,10 @@ const Book = () => {
           setCommentData(comments?.data);
           setProfileData(profile?.data);
           setShouldFetchData(false);
+
+          const mainCharacters = await getData(`/characters/storyId/${selectedBook._id}`);
+          console.log(mainCharacters);
+          setCharacters(mainCharacters.data)
         } else {
           console.warn('Author information not available for the current paragraph.');
         }
@@ -60,6 +68,14 @@ const Book = () => {
 
     fetchData();
   }, [extParagraphsContentArr, currentParagraphIndex, getData, shouldFetchData]);
+
+  const openCharacterLightbox = (character) => {
+    setSelectedCharacter(character);
+  };
+
+  const closeCharacterLightbox = () => {
+    setSelectedCharacter(null);
+  };
 
   const handleNextParagraph = () => {
     setPageNumber(pageNumber + 2);
@@ -75,7 +91,6 @@ const Book = () => {
       setShouldFetchData(true);
     }
   };
-
 
   const hadleAddPara = () => {
     navigate('/newParagraph', { state: { storyInfo: selectedBook } });
@@ -159,6 +174,21 @@ const Book = () => {
           <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
           <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
         </div>
+
+        <div className='mainCharacters d-flex justify-content-between'>
+          {characters.map((character, index) => (
+            <div key={index} className='character' onClick={() => openCharacterLightbox(character)}>
+              <div className="col-3">
+                <img className="profile-img" src={character.image} alt={character.characterName} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {selectedCharacter && (
+          <CharacterLightbox character={selectedCharacter} onClose={closeCharacterLightbox} />
+        )}
+
 
         {profileData && (
           <div className="author-details">
