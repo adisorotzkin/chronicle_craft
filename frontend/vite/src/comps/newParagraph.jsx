@@ -106,7 +106,8 @@ const NewParagraph = () => {
         console.log("character response: ", response2);
 
         alert('Character added successfully!');
-
+        const response3 = await updateData('/stories/',storyInfo._id, {charctersCtr: storyInfo.charctersCtr+1})
+        console.log(response3);
       }
       navigate('/bookItem');
     } catch (error) {

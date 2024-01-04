@@ -1,9 +1,9 @@
-// Notifications.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../static_comps/navbar';
 import { apiService } from '../service/apisService';
 import StarRating from './starRating';
 import '../comps_css/notifications.css'
+import CommentProfileImage from './commentProfileImage'
 
 const Notifications = () => {
   const userId = localStorage.getItem('uid');
@@ -17,7 +17,7 @@ const Notifications = () => {
     const fetchData = async () => {
       try {
         if (userId && !apiRequestsCompleted) {
-          const paragraphsResponse = await getData(`/paragraphs/${userId}`);
+          const paragraphsResponse = await getData( `/paragraphs/${userId}`);
           setUserParagraphs(paragraphsResponse.data || []);
 
           const ratingResponse = await getData(`/ratings/${userId}`);
@@ -84,7 +84,7 @@ const Notifications = () => {
                     <h4 className='mb-4'>{item.paragraphName} :</h4>
                     {item.comments.map((comment) => (
                       <div className="comment row mb-4" key={comment._id}>
-                        <img className='profile-img col-1 me-3' src={"/"} />
+                        <CommentProfileImage comment= {comment}/>
                         <div className="comment-inner col-10">
                           <div className="comment-inner-inner d-flex">
                             <p className='comment-uid fw-bold me-2'>@{comment.userId}</p>

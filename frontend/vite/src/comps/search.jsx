@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import Navbar from '../static_comps/navbar';
 import '../comps_css/search.css';
 import { apiService } from '../service/apisService';
@@ -15,11 +15,7 @@ const Search = () => {
 
   let searchContent = '';
 
-  // const handleBookClick = () => {
-  //   setSelectedBook()
-  //   navigate('/bookItem');
-  // };
-
+  
   const handleSearch = async () => {
     try {
       const usernameResult = await getData(`/users/singleUsername/${searchRef.current.value}`);

@@ -6,6 +6,7 @@ import '../comps_css/book.css';
 import { useNavigate } from 'react-router-dom';
 import StarRating from './starRating';
 import CharacterLightbox from './CharacterLightbox';
+import CommentProfileImage from './commentProfileImage';
 
 const Book = () => {
 
@@ -220,9 +221,9 @@ const Book = () => {
               {commentData && commentData.map((comment) => (
                 <div className="comment mb-4" key={comment._id}>
                   {/* {setCommentUid(comment.userId)} */}
-                  <img className='profile-img me-3' src={profileImg} alt="Profile" />
+                  <CommentProfileImage comment={comment}/>
                   <div className="comment-inner">
-                    <div className="comment-inner-inner d-flex">
+                    <div className="comment-inner-inner d-flex p-2 ">
                       <p className='comment-uid fw-bold me-2'>@{comment.userId}</p>
                       <p className='comment-date'>{comment.dateCreated && comment.dateCreated.substring(0, 10)}</p>
                     </div>
