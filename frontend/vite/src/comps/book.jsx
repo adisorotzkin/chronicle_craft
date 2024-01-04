@@ -232,7 +232,7 @@ const Book = () => {
               ))}
 
               <form onSubmit={handleCommentSubmit}>
-                <button className='btn border text-white mb-4 mt-2' onClick={() => { setAddComment(!addComment) }}>Add a Comment</button>
+                <button type="button" className='btn border text-white mb-4 mt-2' onClick={() => { setAddComment(!addComment) }}>Add a Comment</button>
                 {addComment && (
                   <div className="add-comment w-25 d-flex">
                     <input className="comment-input form-control me-2" ref={inputRef} type="text" id="comment" name="comment" />

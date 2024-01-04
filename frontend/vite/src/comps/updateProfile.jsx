@@ -102,7 +102,7 @@ const UpdateProfile = () => {
                 <input type="date" className="form-control" defaultValue={userData.dateOfBirth} ref={dateOfBirthRef} />
               </div>
 
-              <button type="button" className="btn btn-primary" onClick={handleUpdateProfile}>
+              <button type="button" className="btn btn-update mt-3" onClick={handleUpdateProfile}>
                 Update Profile
               </button>
             </form>

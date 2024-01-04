@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Image, ListGroup, Nav } from 'react-bootstrap';
 import Navbar from '../static_comps/navbar';
 import { apiService } from '../service/apisService';
 import { useNavigate } from 'react-router-dom';
@@ -153,9 +152,13 @@ const Profile = () => {
                 <h3>Written Stories</h3>
                 <ul className="list-group">
                   {userActivity.stories.map((story) => (
-                    <li className="list-group-item" key={story.id}>
-                      {story.title}
-                      <button onClick={handleStoryClick} className="btn">View</button>
+                    <li className="list-group-item row" key={story.id}>
+                      <div className="para-name col-4">
+                        {story.title}
+                      </div>
+                      <div className='buttons-profile col-8'>
+                        <button onClick={handleStoryClick} className="btn">View</button>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -164,23 +167,29 @@ const Profile = () => {
                 <h3>Written Paragraphs</h3>
                 <ul className="list-group">
                   {userActivity.paragraphs.map((paragraph) => (
-                    <li className="list-group-item" key={paragraph.id}>
-                      {paragraph.name}
-                      {paragraph.end && (
-                        <>
-                          <button onClick={() => { navigate('/editParagraph', { state: { paragraph: paragraph } }); }} className="btn border  mx-2"> Edit</button>
-                          <button onClick={() => { navigate('/deletePeregraph', { state: { paragraph: paragraph } }) }} className="btn border ">Delete </button>
-                        </>
-                      )}
-                      {paragraph.end == false && (
-                        <h5 className='text-black-50'>Unable to edit</h5>
-                      )}
+                    <li className="list-group-item row" key={paragraph.id}>
+                      <div className="para-name col-4">
+                        {paragraph.name}
+                      </div>
+                      <div className="buttons-profile col-8">
+                        {paragraph.end && (
+                          <>
+                            <button onClick={() => { navigate('/editParagraph', { state: { paragraph: paragraph } }); }} className="btn border mx-2"> Edit</button>
+                            <button onClick={() => { navigate('/deletePeregraph', { state: { paragraph: paragraph } }) }} className="btn border ">Delete </button>
+                          </>
+                        )}
+                        {paragraph.end == false && (
+                          <div className="d-flex align-item-center ">
+                            <p className='text-black-50 me-4'>Unable to edit</p>
+                          </div>
+                        )}
 
-                      <button onClick={async () => {
-                        const response = await getData(`/stories/single/${paragraph.storyId}`);
-                        setSelectedBook(response.data);
-                        navigate('/bookItem');
-                      }} className="btn border">View</button>
+                        <button onClick={async () => {
+                          const response = await getData(`/stories/single/${paragraph.storyId}`);
+                          setSelectedBook(response.data);
+                          navigate('/bookItem');
+                        }} className="btn border">View</button>
+                      </div>
 
                     </li>
                   ))}
