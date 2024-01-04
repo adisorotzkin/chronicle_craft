@@ -5,7 +5,7 @@ import StarRating from './starRating';
 import '../comps_css/addRating.css';
 import { useNavigate } from 'react-router-dom';
 
-const AddRateing = () => {
+const AddRating = () => {
     const location = useLocation();
     const { author: profileData } = location.state || {};
     const { getData, postData, updateAuthenticatedData } = apiService();
@@ -59,5 +59,5 @@ const AddRateing = () => {
     );
 };
 
-export default AddRateing;
+export default AddRating;
 

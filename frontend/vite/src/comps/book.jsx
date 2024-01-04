@@ -159,12 +159,6 @@ const Book = () => {
           <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
           <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
         </div>
-        {/* {!extParagraphsContentArr[currentParagraphIndex]?.data.end && (
-          <div className='d-flex justify-content-center'>
-            <button className='btn text-white border'>Add new paragraph</button>
-          </div>
-        )} */}
-
 
         {profileData && (
           <div className="author-details">
@@ -185,7 +179,7 @@ const Book = () => {
               </div>
               <div className='col-2'>
                 <br /><br /><br /><br /><br /><br />
-                <button className='btn text-white border' onClick={() => { navigate('/addRateing', { state: { author: profileData } }) }}>Rate me now</button>
+                <button className='btn text-white border' onClick={() => { navigate('/addRating', { state: { author: profileData } }) }}>Rate me now</button>
               </div>
             </div>
 
