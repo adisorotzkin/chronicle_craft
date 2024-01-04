@@ -46,7 +46,8 @@
 .profile-img {
     border-radius: 50%;
 }
-.paragraphs{
+
+.paragraphs {
     margin-top: 80px;
     margin-bottom: 80px;
 }
@@ -92,11 +93,30 @@
     background: #070707;
     color: #f8f4f4;
     max-width: 600px;
+    height: 75%;
+    overflow-y: auto;
+    overflow-x: hidden;
     width: 80%;
     padding: 20px;
     border-radius: 20px;
     align-items: center;
     justify-content: center;
+}
+
+.lightBoxContent::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+.lightBoxContent::-webkit-scrollbar-thumb {
+    background-color: #3a3838;
+    border-radius: 5px
+}
+
+.lightBoxContent::-webkit-scrollbar-track {
+    background-color: #070707;
+    /* Set the color of the scrollbar track */
+    border-radius: 20px
 }
 
 .lightBoxContent img {
@@ -122,20 +142,20 @@
     margin-top: 10px;
 }
 
-.comment{
+.comment {
     display: flex;
 }
-.comment-date, .comment-uid{
+
+.comment-date,
+.comment-uid {
     font-size: smaller;
 }
-.top-inyan{
+
+.top-inyan {
     display: flex;
     justify-content: space-between;
 }
-.add-para-btn{
+
+.add-para-btn {
     opacity: 0.7;
 }
-  
-  
-  
-
