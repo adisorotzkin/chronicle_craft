@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { apiService } from '../service/apisService';
 import '../comps_css/signupLogin.css';
+import { useLocation } from 'react-router-dom';
 
 const ForgotPassword = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [ShowBtn, setShowBtn] = useState(true);
-  const [email, setEmail] = useState('');
   const { postData } = apiService();
+  const location = useLocation();
+  const email = location.state?.email;
 
   const handleForgotPassword = async () => {
     setShowBtn(false);
@@ -34,8 +36,8 @@ const ForgotPassword = () => {
           <input
             type="email"
             className='form-control'
-            placeholder="Enter your email"
             value={email}
+            readOnly
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>

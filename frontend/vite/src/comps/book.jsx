@@ -140,7 +140,7 @@ const Book = () => {
     <div className="outer-main-book">
       <Navbar />
       <div className="inner-main-book p-5">
-        <div className='mt-3 top-inyan px-3'>
+        <div className='mt-1 top-inyan px-3'>
           {!extParagraphsContentArr[currentParagraphIndex]?.data?.end && (
             <button onClick={hadleAddPara} className='btn add-para-btn text-white border bg-dark'>Add a new paragraph</button>
           )}
@@ -168,21 +168,23 @@ const Book = () => {
             <p className='content p-4'>{secondColumn}</p>
             <p className='page-number-2 px-4 py-2'>{pageNumber + 1}</p>
           </div>
+
+          <div className="characters-list p-2">
+            <div className='mainCharacters'>
+              {characters.map((character, index) => (
+                <div key={index} className='character mb-3' onClick={() => openCharacterLightbox(character)}>
+                  <div className="col-3">
+                    <img className="character-img" src={character.image} alt={character.characterName} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
         <br />
-        <div className="buttons d-flex justify-content-between px-3 mb-4">
+        <div className="buttons d-flex justify-content-between px-3 mb-5">
           <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
           <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
-        </div>
-
-        <div className='mainCharacters d-flex justify-content-between'>
-          {characters.map((character, index) => (
-            <div key={index} className='character' onClick={() => openCharacterLightbox(character)}>
-              <div className="col-3">
-                <img className="profile-img" src={character.image} alt={character.characterName} />
-              </div>
-            </div>
-          ))}
         </div>
 
         {selectedCharacter && (
@@ -192,7 +194,7 @@ const Book = () => {
 
         {profileData && (
           <div className="author-details">
-            <div className="top-details mb-5 row p-4 bg-dark">
+            <div className="top-details mt-5 mb-5 row p-4 bg-dark">
               <div className="profile-img-div col-3">
                 <img className="profile-img" src={profileData.profilePicture} alt="Profile" />
               </div>

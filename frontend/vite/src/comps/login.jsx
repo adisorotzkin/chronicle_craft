@@ -12,9 +12,9 @@ const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const {getStartedEmail} = useContext(AppContext);
+  const { getStartedEmail } = useContext(AppContext);
 
-  const handleLogin = async() => {
+  const handleLogin = async () => {
     try {
       const body = {
         email: emailRef.current.value,
@@ -26,24 +26,34 @@ const Login = () => {
       console.log(res.user);
       localStorage.setItem('uid', res.user._id);
       navigate('/home');
-    } 
+    }
     catch (error) {
       alert("Email or password are wrong. Please try again");
-      
+
       setShowLoading(false);
       setShowNext(true);
       console.error('Error logging in:', error);
     }
   }
 
-  const handleForgotPassword = async() => {
-    navigate('/forgotPassword');
+  const handleForgotPassword = async () => {
+    if (emailRef.current.value) {
+      navigate('/forgotPassword', { state: { email: emailRef.current.value } });
+    }
+    else{
+      alert("Please enter your email address");
+    }
   }
 
   const onSub = async () => {
     setShowNext(false);
     setShowLoading(true);
-    handleLogin();
+    try{
+      await handleLogin();
+    }
+    catch (error){
+      console.log("error", error);
+    }
   }
 
   return (
@@ -55,7 +65,7 @@ const Login = () => {
       <form className='form'>
         <div className="form-group">
           <label>Email *</label>
-          <input type="email" placeholder='Enter email' className='form-control' ref={emailRef} defaultValue={getStartedEmail ? getStartedEmail : null}/>
+          <input type="email" placeholder='Enter email' className='form-control' ref={emailRef} defaultValue={getStartedEmail ? getStartedEmail : null} />
         </div>
         <div className="form-group">
           <label>Password *</label>

@@ -13,7 +13,7 @@ const NewStory = () => {
   const genreRef = useRef(null);
   const navigate = useNavigate();
   const { postAuthenticatedData } = apiService();
-  const { imageUrl, setImageUrl, genresArray } = useContext(AppContext);
+  const { imageUrl, setImageUrl, genresArray, setSelectedBook } = useContext(AppContext);
   const [cloudImg, setCloudImg] = useState('');
 
   const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
@@ -28,6 +28,7 @@ const NewStory = () => {
       );
 
       console.log('Image uploaded successfully to Cloudinary:', response.data);
+      setImageUrl('/');
       // await Promise.all(response)
       return response.data.url;
     } catch (error) {
@@ -46,24 +47,24 @@ const NewStory = () => {
       return;
     }
 
-
-    console.log(imageUrl)
-
-    const urlImgFromCloud =await uploadImageToCloudinary(imageUrl, title)
-    setCloudImg(urlImgFromCloud);
+    if(imageUrl){
+      const urlImgFromCloud =await uploadImageToCloudinary(imageUrl, title)
+      setCloudImg(urlImgFromCloud);
+    }
 
     try {
       const response = await postAuthenticatedData('/stories', {
         title: title,
         description: description,
         genre: genre,
-        coverImg: urlImgFromCloud,
+        coverImg: imageUrl ? imageUrl : '/',
       }, localStorage.getItem('token'));
 
+      if(response){
         console.log("Story created successfully!" , response);
-        console.log(response);
+        setSelectedBook(response);
         navigate('/newParagraph', {state: {storyInfo: response }});
-    
+      }
     } catch (error) {
       console.error('Error creating story:', error);
       alert('An error occurred while creating the story. Please try again.');

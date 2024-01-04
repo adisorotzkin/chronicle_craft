@@ -16,7 +16,7 @@ exports.validParagraph = (_reqBody) => {
     let joiSchema = joi.object({
         storyId: joi.string(),
         name: joi.string(),
-        content: joi.string().min(2).max(2000).required(),
+        content: joi.string().min(2).max(3000).required(),
         end: joi.boolean()
     })
     return joiSchema.validate(_reqBody);
