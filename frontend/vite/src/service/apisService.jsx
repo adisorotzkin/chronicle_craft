@@ -95,12 +95,8 @@ export const apiService = () => {
 
     const updateData = async (url, params, body) => {
         try {
-            // console.log(`${baseUrl}${url}/${params}`);
-            // console.log(body);
 
             const res = await axios.put(`${baseUrl}${url}/${params}`, body);
-
-            // console.log(res);
 
             return res.data;
         } catch (err) {
