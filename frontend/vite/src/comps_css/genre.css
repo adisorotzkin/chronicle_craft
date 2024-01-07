@@ -4,6 +4,11 @@
     margin-top: 50px;
     margin-bottom: 30px;
 }
+.btn-flow{
+    height: 40px;
+    margin-top: 40px;
+    font-weight: 900;
+}
 .book-cover{
     cursor: pointer;
     width: 130px;
