@@ -6,7 +6,6 @@ import Genre from './genre'
 
 const Home = () => {
     const {genresArray} = useContext(AppContext);
-    
 
     return (
         <div className="outer-main-home">

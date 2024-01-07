@@ -55,7 +55,7 @@ router.get("/search", async (req, res) => {
 })
 //search a story follwing genre, presenting 6 results per page.
 router.get("/genre/:genre", async (req, res) => {
-  let perPage = req.query.perPage || 5;
+  let perPage = req.query.perPage || 6;
   let page = req.query.page || 1;
   
 
