@@ -18,12 +18,39 @@ const NewParagraph = () => {
   const { postAuthenticatedData, updateData, getData } = apiService();
   const { storyInfo } = location.state || {};
   const { imageUrl, setImageUrl } = useContext(AppContext);
-  const [cloudImg, setCloudImg] = useState('');
   const [addCharacter, setAddCharacter] = useState(false);
+
+  const uploadImageToCloudinary = async () => {
+    console.log("imageUrl: ", imageUrl);
+    console.log("characterameRef: ", characterNameRef.current.value);
+    try {
+      const formData = new FormData();
+      formData.append('file', imageUrl);
+      formData.append('upload_preset', 'cmezl4xo');
+      formData.append('public_id', characterNameRef.current.value);
+  
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+  
+      console.log('Image uploaded successfully to Cloudinary:', response.data);
+      return response.data.url;
+    } catch (error) {
+      console.error('Error uploading image to Cloudinary:', error);
+      throw error;
+    }
+  };
 
   const handleAdd = async () => {
     const name = nameRef.current.value;
     const content = contentRef.current.value;
+
     if (name.trim() === '') {
       alert('Please enter paragraph name.');
       return;
@@ -32,13 +59,6 @@ const NewParagraph = () => {
       alert('Please enter paragraph content.');
       return;
     }
-
-    console.log("storyInfo._id: ", storyInfo._id);
-
-    // if (addCharacter) {
-    //   const characterName = characterNameRef.current.value;
-    //   const characterDescription = characterDescriptionRef.current.value;
-    // }
 
     try {
       const response = await postAuthenticatedData('/paragraphs', {
@@ -49,50 +69,11 @@ const NewParagraph = () => {
       }, localStorage.getItem('token'));
 
       const storyInfo2 = await getData(`/stories/single/${storyInfo._id}`);
-      console.log('Data from API:', storyInfo2.data);
-
-      console.log(storyInfo2.data.paragraphsArr);
       const existingParagraphsArr = Array.isArray(storyInfo2.data.paragraphsArr) ? storyInfo2.data.paragraphsArr : [];
-
       const updatedParagraphsArr = [...existingParagraphsArr, response._id];
-
-      // const ctr = storyInfo.charactersCtr+1;
-
-      // const response2 = await updateData('/stories', storyInfo._id, {
-      //   charactersCtr: ctr 
-      // });
-
-      const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
-        try {
-          const formData = new FormData();
-          formData.append('file', generatedImg);
-          formData.append('upload_preset', 'cmezl4xo');
-          formData.append('public_id', bookCoverName);
-      
-          const response = await axios.post(
-            'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            }
-          );
-      
-          console.log('Image uploaded successfully to Cloudinary:', response.data);
-          return response.data.url;
-        } catch (error) {
-          console.error('Error uploading image to Cloudinary:', error);
-          throw error;
-        }
-      };
-      
-
-      alert('Paragraph added successfully!');
-
+  
       if (addCharacter) {
-        const urlImgFromCloud = await uploadImageToCloudinary(imageUrl, characterNameRef)
-        setCloudImg(urlImgFromCloud);
+        const urlImgFromCloud = await uploadImageToCloudinary();
 
         const response2 = await postAuthenticatedData('/characters', {
           storyId: storyInfo._id,
@@ -101,17 +82,16 @@ const NewParagraph = () => {
           image: urlImgFromCloud
         }, localStorage.getItem('token'));
 
-        console.log("character response: ", response2);
-
         alert('Character added successfully!');
+        setImageUrl("/");
         const response3 = await updateData('/stories/',storyInfo._id, {charactersCtr: storyInfo.charactersCtr+1})
-        console.log(response3);
       }
       navigate('/bookItem');
     } catch (error) {
       console.error('Error adding paragraph:', error);
       alert('An error occurred while adding the paragraph. Please try again.');
     }
+    alert('Paragraph added successfully!');
 
   };
 

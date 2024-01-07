@@ -36,6 +36,7 @@ const ImageGenerator = () => {
         let data = await resp.json();
         console.log(data);
         setImageUrl(data.data[0].url);
+        console.log("imageUrl from ai: ", imageUrl);
         setLoading(false); // Set loading to false after the API call is complete
     };
 
