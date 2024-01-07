@@ -49,8 +49,8 @@ const AddRating = () => {
                     <div className='pt-5 rate-div'>
                         <h2> Rate {profileData.username}:</h2>
                         <StarRating averageRating={rating} />
-                        {/* <label className='labaelRating'>Rating:</label>
-                        <input className='btn text-white border' type="number" id="rating" min="1" max="5" value={rating} onChange={handleRatingChange} /> */}
+                        <label className='labaelRating mb-2'>Rating:</label>
+                        <input className='btn text-white border mb-3' type="number" id="rating" min="1" max="5" value={rating} onChange={handleRatingChange} />
                         <button className='btn text-white border btnRatings' onClick={handleSubmit}>
                             Submit Rating
                         </button>
