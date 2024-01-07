@@ -104,12 +104,7 @@ const Navbar = () => {
             {/* User Actions */}
             <div className='exit-div'>
                 <Greeting />
-                <button className="btn btn-dark exit-btn" onClick={handleExit}>
-                    {/* <div className="icon-container">
-                        <img src="../images/signOut.png" alt="Exit Icon" />
-                    </div> */}
-                </button>
-                {/* <i class="bi bi-box-arrow-right text-danger"></i> */}
+                {/* <button className="btn btn-dark exit-btn border" onClick={handleExit}>Log Out</button> */}
             </div>
         </div>
     )

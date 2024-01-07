@@ -10,14 +10,9 @@ const Greeting = () => {
     const fetchData = async () => {
         try {
             if (uid && !apiRequestsCompleted) {
-                // Fetch reports
                 const userResponse = await getData(`/users/singleId/${uid}`);
-
-
                 setUserData(userResponse.data);
                 console.log(userResponse);
-
-                // Set apiRequestsCompleted to true
                 setApiRequestsCompleted(true);
             }
         } catch (error) {

@@ -40,14 +40,13 @@ const AddRating = () => {
 
     return (
         <div className='outer-main-rating'>
-            <div className="inner-main-rating">
-                <h1 className='title-rating'>Come vote and impact!</h1>
-                <div className="empty-area"></div>
+            <div className="inner-main-rating container bg-dark">
+                <h1 className='title-rating mb-5'>Vote and Impact!</h1>
                 <div className="profile-data">
                     <div className="profile-img-div-rating">
                         <img className="profile-img-rating" src={profileData.profilePicture} alt="Profile" />
                     </div>
-                    <div className='pt-5'>
+                    <div className='pt-5 rate-div'>
                         <h2> Rate {profileData.username}:</h2>
                         <StarRating averageRating={rating} />
                         {/* <label className='labaelRating'>Rating:</label>

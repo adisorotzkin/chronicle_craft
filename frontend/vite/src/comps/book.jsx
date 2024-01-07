@@ -148,7 +148,7 @@ const Book = () => {
       <div className="inner-main-book p-5">
         <div className='mt-1 top-inyan px-3'>
           {!extParagraphsContentArr[currentParagraphIndex]?.data?.end && (
-            <button onClick={hadleAddPara} className='btn add-para-btn text-white border bg-dark'>Add a new paragraph</button>
+            <button onClick={hadleAddPara} className='btn book-nav-btn add-para-btn border bg-dark'>Add a new paragraph</button>
           )}
           <div className="select-paragraph ">
             <select className="select-input bg-dark text-white ms-2 p-2" onChange={handleSelectChange}>
@@ -189,8 +189,8 @@ const Book = () => {
         </div>
         <br />
         <div className="buttons d-flex justify-content-between px-3 mb-5">
-          <button className='btn text-white border' onClick={handlePrevParagraph} disabled={pageNumber === 1}>Previous</button>
-          <button className='btn text-white border' onClick={handleNextParagraph} disabled={currentParagraphIndex === extParagraphsContentArr.length - 1}>Next</button>
+          <button className='btn border book-nav-btn bg-dark' onClick={handlePrevParagraph} disabled={pageNumber === 1}>Previous</button>
+          <button className='btn border book-nav-btn bg-dark' onClick={handleNextParagraph} disabled={currentParagraphIndex === extParagraphsContentArr.length - 1}>Next</button>
         </div>
 
         {selectedCharacter && (
@@ -204,7 +204,7 @@ const Book = () => {
               <div className="profile-img-div col-3">
                 <img className="profile-img" src={profileData.profilePicture} alt="Profile" />
               </div>
-              <div className="details-div col-6">
+              <div className="details-div col-7">
                 <p>
                   <strong>Author:</strong> {profileData.username}
                 </p>
@@ -215,9 +215,8 @@ const Book = () => {
                   <strong>Rating:</strong><StarRating averageRating={profileData.rating} />
                 </p>
               </div>
-              <div className='col-2'>
-                <br /><br /><br /><br /><br /><br />
-                <button className='btn text-white border' onClick={() => { navigate('/addRating', { state: { author: profileData } }) }}>Rate me now</button>
+              <div className='col-2 rate-me-btn'>
+                <button className='btn border book-nav-btn' onClick={() => { navigate('/addRating', { state: { author: profileData } }) }}>Rate me :)</button>
               </div>
             </div>
 
@@ -238,11 +237,11 @@ const Book = () => {
               ))}
 
               <form onSubmit={handleCommentSubmit}>
-                <button type="button" className='btn border text-white mb-4 mt-2' onClick={() => { setAddComment(!addComment) }}>Add a Comment</button>
+                <button type="button" className='btn border book-nav-btn bg-dark mb-4 mt-2' onClick={() => { setAddComment(!addComment) }}>Add a Comment</button>
                 {addComment && (
                   <div className="add-comment w-25 d-flex">
                     <input className="comment-input form-control me-2" ref={inputRef} type="text" id="comment" name="comment" />
-                    <button className='btn text-white border' type="submit">Submit</button>
+                    <button className='btn book-nav-btn border' type="submit">Submit</button>
                   </div>)}
               </form>
             </div>

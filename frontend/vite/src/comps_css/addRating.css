@@ -1,32 +1,25 @@
 .outer-main-rating {
-    color: #d6b64e;
     margin: 0;
     display: flex;
     justify-content: center;
     min-height: 100vh;
-    background-image: url('../images/5-star.gif');
+    background-image: url('../images/white-stars-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    padding: 150px;
 }
 
 .inner-main-rating{
-    padding: 100px;
+    padding: 75px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* color:#f9d96c; */
-}
-.empty-area{
-    height: 425px;
-}
-.profile-data{
-    display: flex;
-}
-
-.profile-img-div-rating {
-    margin-right: 30px;
+    border-radius: 50px;
+    color: white;
+    opacity: 0.9
+    /* color:#3ecca4; */
 }
 
 .profile-img-rating {
@@ -35,6 +28,13 @@
     height: 175px;
     object-fit: cover;
     object-position: center;
+}
+
+.rate-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* .content {

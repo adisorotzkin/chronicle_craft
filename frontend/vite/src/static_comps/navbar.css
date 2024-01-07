@@ -44,12 +44,6 @@
     /* font-family: 'Cuprum', sans-serif; */
 }
 
-.exit-btn{
-    border: white 2px solid;
-    margin-right: 0;
-    background-image: url('../images/signOut.png');
-
-}
 .exit-btn:hover
 {
     color: #3ecca4;
@@ -61,6 +55,4 @@
     width: 40px;
     border-radius: 50%;
     border:#12b69d solid 2px;
-
-
 }
