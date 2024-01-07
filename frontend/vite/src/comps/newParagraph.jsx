@@ -5,7 +5,7 @@ import ImageGenerator from './imageGenerator';
 import { AppContext } from '../context/context';
 import axios from 'axios';
 import Navbar from '../static_comps/navbar';
-import '../comps_css/newParagraph.css'
+import '../comps_css/newParagraph.css';
 
 const NewParagraph = () => {
   const contentRef = useRef(null);
@@ -21,14 +21,14 @@ const NewParagraph = () => {
   const [addCharacter, setAddCharacter] = useState(false);
 
   const uploadImageToCloudinary = async () => {
-    console.log("imageUrl: ", imageUrl);
-    console.log("characterameRef: ", characterNameRef.current.value);
+    console.log('imageUrl: ', imageUrl);
+    console.log('characterameRef: ', characterNameRef.current.value);
     try {
       const formData = new FormData();
       formData.append('file', imageUrl);
       formData.append('upload_preset', 'cmezl4xo');
       formData.append('public_id', characterNameRef.current.value);
-  
+
       const response = await axios.post(
         'https://api.cloudinary.com/v1_1/dfi59gi7h/image/upload',
         formData,
@@ -38,7 +38,7 @@ const NewParagraph = () => {
           },
         }
       );
-  
+
       console.log('Image uploaded successfully to Cloudinary:', response.data);
       return response.data.url;
     } catch (error) {
@@ -71,7 +71,7 @@ const NewParagraph = () => {
       const storyInfo2 = await getData(`/stories/single/${storyInfo._id}`);
       const existingParagraphsArr = Array.isArray(storyInfo2.data.paragraphsArr) ? storyInfo2.data.paragraphsArr : [];
       const updatedParagraphsArr = [...existingParagraphsArr, response._id];
-  
+
       if (addCharacter) {
         const urlImgFromCloud = await uploadImageToCloudinary();
 
@@ -83,22 +83,35 @@ const NewParagraph = () => {
         }, localStorage.getItem('token'));
 
         alert('Character added successfully!');
-        setImageUrl("/");
-        const response3 = await updateData('/stories/',storyInfo._id, {charactersCtr: storyInfo.charactersCtr+1})
+
+        // Update characters count and paragraphs array
+        const response3 = await updateData('/stories/', storyInfo._id, {
+          charactersCtr: storyInfo.charactersCtr + 1,
+          paragraphsArr: updatedParagraphsArr
+        });
       }
+
+      else {
+        const response3 = await updateData('/stories/', storyInfo._id, {
+          charactersCtr: storyInfo.charactersCtr,
+          paragraphsArr: updatedParagraphsArr
+        });
+        console.log(response3);
+
+      }
+
+
       navigate('/bookItem');
+      alert('Paragraph added successfully!');
     } catch (error) {
       console.error('Error adding paragraph:', error);
       alert('An error occurred while adding the paragraph. Please try again.');
     }
-    alert('Paragraph added successfully!');
-
   };
 
   const handleAddCharacter = () => {
     setAddCharacter(!addCharacter);
-  }
-
+  };
 
   return (
     <div className="outer-main-para">
@@ -147,6 +160,7 @@ const NewParagraph = () => {
 };
 
 export default NewParagraph;
+
 
 
 
