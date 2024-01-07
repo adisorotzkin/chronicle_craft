@@ -44,6 +44,11 @@
     /* font-family: 'Cuprum', sans-serif; */
 }
 
+.exit-btn{
+    border: white 2px solid;
+    margin-right: 0;
+    /* background-image: url('../images/signOut.png'); */
+}
 .exit-btn:hover
 {
     color: #3ecca4;
@@ -51,8 +56,8 @@
 }
 
 .profile-picture-greeting{
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     border-radius: 50%;
     border:#12b69d solid 2px;
 }
