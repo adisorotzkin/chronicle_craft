@@ -24,3 +24,9 @@
     display: flex;
     justify-content: flex-end;
 }
+.top-profile{
+    border-radius: 32px;
+}
+.btn-edit{
+    background-color: black;
+}

@@ -1,11 +1,11 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../static_comps/navbar'
 import '../comps_css/home.css'
 import { AppContext } from '../context/context'
 import Genre from './genre'
 
 const Home = () => {
-    const {genresArray} = useContext(AppContext);
+    const { genresArray } = useContext(AppContext);
 
     return (
         <div className="outer-main-home">

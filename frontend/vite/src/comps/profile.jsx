@@ -126,11 +126,11 @@ const Profile = () => {
       <div className="container inner-main-profile p-5">
         {userData ? (
           <div>
-            <div className="row mb-5">
+            <div className="row mb-5 bg-dark top-profile p-4">
               <div className="col-3 d-flex align-items-center">
                 <img src={userData.profilePicture} className="profile-img" alt="Profile" />
               </div>
-              <div className="col-8 p-3">
+              <div className="col-8">
                 <div className="username-rating d-flex">
                   <h2 className='me-4 d-flex align-items-center'>{userData.username}</h2>
                   {console.log('user data:', userData)}
@@ -141,7 +141,7 @@ const Profile = () => {
                 <p><strong>Active:</strong> {userData.active ? 'Yes' : 'No'}</p>
               </div>
               <div className="buttons col-1">
-                <button onClick={handleUpdateDetails} className="btn btn-dark me-3 mb-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete account"><i class="fa fa-list text-white" aria-hidden="true"></i></button>
+                <button onClick={handleUpdateDetails} className="btn btn-edit me-3 mb-2"><i class="fa fa-list text-white" aria-hidden="true"></i></button>
                 <button onClick={handleDeleteAccount} className="btn btn-danger"><i class="fa fa-trash text-white" aria-hidden="true"></i></button>
               </div>
             </div>
