@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import Navbar from '../static_comps/navbar'
 import '../comps_css/home.css'
 import { AppContext } from '../context/context'

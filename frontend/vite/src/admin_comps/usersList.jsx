@@ -85,12 +85,14 @@ const UsersList = () => {
                                             )}
                                             <div className="user-text-info">
 
-                                                <h3 className="user-name">User name: {item.username}</h3>
-                                                <h3 className="user-email">Email: {item.email}</h3>
-                                                <h4 className="date-of-birth">Date of birth: {new Date(item.dateOfBirth).toLocaleDateString()}</h4>
+                                                <p className="user-name"><strong>User name: </strong> {item.username}</p>
+                                                <p className="user-email"><strong>Email: </strong> {item.email}</p>
+                                                <p className="date-of-birth"><strong>Date of birth: </strong>{new Date(item.dateOfBirth).toLocaleDateString()}</p>
 
-                                                <h5 className="user-bio">bio: {item.bio}</h5>
-                                                <h5 className="user-role">role: {item.role}</h5>
+                                                <p className="user-bio"><strong>bio:  </strong>{item.bio}</p>
+                                                <p className="user-role"><strong>role: </strong> {item.role}</p>
+                                                <p className='text-white'><strong>Active: {item.active? "true": "false"} </strong></p>
+
                                             </div>
                                         </div>
                                         <div className='text-end'>

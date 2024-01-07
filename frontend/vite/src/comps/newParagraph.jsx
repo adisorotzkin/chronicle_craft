@@ -56,13 +56,11 @@ const NewParagraph = () => {
 
       const updatedParagraphsArr = [...existingParagraphsArr, response._id];
 
-      const response2 = await updateData('/stories', storyInfo._id, {
-        title: storyInfo.title,
-        description: storyInfo.description,
-        genre: storyInfo.genre,
-        coverImg: storyInfo.coverImg,
-        paragraphsArr: updatedParagraphsArr
-      });
+      // const ctr = storyInfo.charactersCtr+1;
+
+      // const response2 = await updateData('/stories', storyInfo._id, {
+      //   charactersCtr: ctr 
+      // });
 
       const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
         try {
@@ -106,7 +104,7 @@ const NewParagraph = () => {
         console.log("character response: ", response2);
 
         alert('Character added successfully!');
-        const response3 = await updateData('/stories/',storyInfo._id, {charctersCtr: storyInfo.charctersCtr+1})
+        const response3 = await updateData('/stories/',storyInfo._id, {charactersCtr: storyInfo.charactersCtr+1})
         console.log(response3);
       }
       navigate('/bookItem');

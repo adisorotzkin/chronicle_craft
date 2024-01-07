@@ -78,18 +78,13 @@ const Book = () => {
     setSelectedCharacter(null);
   };
 
-  const handleNextParagraph = () => {
-    setPageNumber(pageNumber + 2);
-    setCurrentParagraphIndex((prevIndex) => prevIndex + 1);
-    setShouldFetchData(true);
-  };
-
   const handleSelectChange = (event) => {
     const selectedIndex = event.target.value;
 
     if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < extParagraphsContentArr.length) {
       setCurrentParagraphIndex(parseInt(selectedIndex, 10));
       setShouldFetchData(true);
+      setPageNumber(selectedIndex * 2 + 1);
     }
   };
 
@@ -98,9 +93,19 @@ const Book = () => {
   };
 
   const handlePrevParagraph = () => {
-    setPageNumber(pageNumber - 2);
-    setCurrentParagraphIndex((prevIndex) => prevIndex - 1);
-    setShouldFetchData(true);
+    if (currentParagraphIndex > 0) {
+      setPageNumber(pageNumber - 2);
+      setCurrentParagraphIndex((prevIndex) => prevIndex - 1);
+      setShouldFetchData(true);
+    }
+  };
+
+  const handleNextParagraph = () => {
+    if (currentParagraphIndex < extParagraphsContentArr.length - 1) {
+      setPageNumber(pageNumber + 2);
+      setCurrentParagraphIndex((prevIndex) => prevIndex + 1);
+      setShouldFetchData(true);
+    }
   };
 
   const handleCommentSubmit = async (event) => {
@@ -184,8 +189,8 @@ const Book = () => {
         </div>
         <br />
         <div className="buttons d-flex justify-content-between px-3 mb-5">
-          <button className='btn text-white border' onClick={handlePrevParagraph}>Previous</button>
-          <button className='btn text-white border' onClick={handleNextParagraph}>Next</button>
+          <button className='btn text-white border' onClick={handlePrevParagraph} disabled={pageNumber === 1}>Previous</button>
+          <button className='btn text-white border' onClick={handleNextParagraph} disabled={currentParagraphIndex === extParagraphsContentArr.length - 1}>Next</button>
         </div>
 
         {selectedCharacter && (

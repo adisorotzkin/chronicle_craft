@@ -22,10 +22,18 @@ const Login = () => {
       }
       const res = await postData('/users/login', body);
       console.log(res);
-      localStorage.setItem('token', res.token);
-      console.log(res.user);
-      localStorage.setItem('uid', res.user._id);
-      navigate('/home');
+      if (!(res.user.active)) {
+        alert("user is not active");
+        navigate('/signup');
+      }
+      else {
+        localStorage.setItem('token', res.token);
+        console.log(res.user);
+        localStorage.setItem('uid', res.user._id);
+        navigate('/home');
+      }
+
+
     }
     catch (error) {
       alert("Email or password are wrong. Please try again");
@@ -40,7 +48,7 @@ const Login = () => {
     if (emailRef.current.value) {
       navigate('/forgotPassword', { state: { email: emailRef.current.value } });
     }
-    else{
+    else {
       alert("Please enter your email address");
     }
   }
@@ -48,10 +56,10 @@ const Login = () => {
   const onSub = async () => {
     setShowNext(false);
     setShowLoading(true);
-    try{
+    try {
       await handleLogin();
     }
-    catch (error){
+    catch (error) {
       console.log("error", error);
     }
   }
