@@ -27,7 +27,8 @@ exports.validStory = (_reqBody) => {
 
 exports.validEditStory = (_reqBody) => {
     let joiSchema = joi.object({
-        charactersCtr: joi.number().min(0).max(5)
+        charactersCtr: joi.number().min(0).max(5),
+        paragraphsArr: joi.array()
     })
     return joiSchema.validate(_reqBody);
 }

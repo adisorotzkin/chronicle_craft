@@ -68,10 +68,10 @@ const Navbar = () => {
                     <i className="text-white fa fa-home" aria-hidden="true"></i>
                     <Link to="/home" className='link'> Home</Link>
                 </div>
-                <div className="pt-4">
+                {/* <div className="pt-4">
                     <i className="text-white fa fa-compass" aria-hidden="true"></i>
                     <Link to="/explore" className='link'> Explore</Link>
-                </div>
+                </div> */}
                 <div className="pt-4">
                     <i className="text-white fa fa-search" aria-hidden="true"></i>
                     <Link to="/search" className='link'> Search</Link>
