@@ -15,7 +15,7 @@ const Navbar = () => {
 
         const fetchData = async () => {
             try {
-                const user = await getData(`/users/singleId/${uid}`);            // console.log('API Result:', result);
+                const user = await getData(`/users/singleId/${uid}`);            
                 console.assert(user);
                 if (user.data.role === 'admin') {
                     setAdmim(true);
@@ -56,7 +56,7 @@ const Navbar = () => {
         <div className='main-navbar fixed-left vh-100'>
             {/* Logo */}
             <div className="logo">
-                <img src='../images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate(<Welcome />) }} />
+                <img src='../images/logo.jpg' alt='logo' className="logo" onClick={() => { navigate('/home') }} />
             </div>
 
             {/* Navigation Links */}
