@@ -17,10 +17,8 @@ const Reports = () => {
     const fetchData = async () => {
         try {
             if (tokenId && !apiRequestsCompleted) {
-                // Fetch reports
                 const reportsResponse = await getAuthenticatedData('/reports', tokenId);
                 
-                // Create an array of promises for fetching additional data for each report
                 const additionalDataPromises = reportsResponse.map(async (item) => {
                     const paragraphNameResponse = await getParagraph(item.paragraphId);
                     console.log(paragraphNameResponse);
@@ -29,7 +27,6 @@ const Reports = () => {
                     
                     const book = await getData(`/stories/single/${paragraphNameResponse.storyId}`);
 
-                    // Update the item with additional data
                     item.paragraphName = paragraphNameResponse.name || "";
                     item.storyId = paragraphNameResponse.storyId || "";
                     item.reporterName = reporterNameResponse || "";
@@ -98,10 +95,10 @@ const Reports = () => {
                   <div>
                     {reports.map((item, index) => (
                       <div className='report-info' key={index}>
-                        <h3 className="report-content">Report content: {item.reportReason}</h3>
-                        <h3 className="reported-paragraph">Reported paragraph: {item.paragraphName}</h3>
-                        <h6 className="reporter-name">Reporter name: {item.reporterName}</h6>
-                        <h6 className="author-name">Author name: {item.authorName}</h6>
+                        <h4 className="report-content"><strong>Report content: </strong>{item.reportReason}</h4>
+                        <h5 className="reported-paragraph"><strong>Reported paragraph: </strong>{item.paragraphName}</h5>
+                        <p className="reporter-name"><strong>Reporter name: </strong>{item.reporterName}</p>
+                        <p className="author-name"><strong>Author name: </strong>{item.authorName}</p>
                         <button
                           onClick={() => {
                             setSelectedBook(item.book);
