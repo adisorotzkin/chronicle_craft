@@ -48,7 +48,6 @@
     border: white 2px solid;
     margin-right: 0;
     /* background-image: url('../images/signOut.png'); */
-
 }
 .exit-btn:hover
 {
@@ -61,6 +60,4 @@
     width: 45px;
     border-radius: 50%;
     border:#12b69d solid 2px;
-
-
 }

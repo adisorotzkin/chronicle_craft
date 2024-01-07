@@ -154,11 +154,29 @@
     justify-content: space-between;
 }
 
-.character-img{
+.character-img {
     margin-left: 20px;
     width: 75px;
     border-radius: 50%;
+    transition: transform 0.3s ease;
 }
-.character-img:hover{
+
+.character-img:hover {
     cursor: pointer;
+    text-decoration: underline;
+    transform: scale(1.2);
+}
+.book-nav-btn{
+    color: white;
+}
+.book-nav-btn:hover{
+    color: #3ecca4;
+    background-color: #3a3838;
+}
+.rate-me-btn{
+    padding: 16px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    color: white;
 }
