@@ -17,15 +17,14 @@ const Profile = () => {
   const [shouldFetchActivity, setShouldFetchActivity] = useState(true);
   const navigate = useNavigate();
   const { setSelectedBook, userData, setUserData } = useContext(AppContext);
-  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+  const [isEditFormVisible, setIsEditFormVisible] = useState({});
   const commentEditRef = useRef();
 
-  const handleEditButtonClick = () => {
-    setIsEditFormVisible(!isEditFormVisible);
-  };
-
-  const handleDeleteCommentClick = () => {
-
+  const handleEditButtonClick = (commentId) => {
+    setIsEditFormVisible(prevState => ({
+      ...prevState,
+      [commentId]: !prevState[commentId],
+    }));
   };
 
   const handleStoryClick = () => {
@@ -141,23 +140,24 @@ const Profile = () => {
                 <p><strong>Active:</strong> {userData.active ? 'Yes' : 'No'}</p>
               </div>
               <div className="buttons col-1">
-                <button onClick={handleUpdateDetails} className="btn btn-edit me-3 mb-2"><i class="fa fa-list text-white" aria-hidden="true"></i></button>
-                <button onClick={handleDeleteAccount} className="btn btn-danger"><i class="fa fa-trash text-white" aria-hidden="true"></i></button>
+                <button onClick={handleUpdateDetails} className="btn btn-edit me-3 mb-2"><i className="fa fa-list text-white" aria-hidden="true"></i></button>
+                <button onClick={handleDeleteAccount} className="btn btn-danger"><i className="fa fa-trash text-white" aria-hidden="true"></i></button>
               </div>
             </div>
 
-            <h1 className="mb-4">Activity</h1>
+            <h1 className="mb-4">My Activity:</h1>
             <div className="activity">
               <div className="mb-5 w-75">
                 <h3>Written Stories</h3>
                 <ul className="list-group">
                   {userActivity.stories.map((story) => (
-                    <li className="list-group-item row" key={story.id}>
-                      <div className="para-name col-4">
-                        {story.title}
+                    <li className="list-group-item row bg-dark" key={story.id}>
+                      <div className="para-name col-6 mt-2">
+                        <p className='h5'>{story.title}</p>
+                        <p className="text-white mt-2">Genre: {story.genre}</p>
                       </div>
-                      <div className='buttons-profile col-8'>
-                        <button onClick={handleStoryClick} className="btn">View</button>
+                      <div className='buttons-profile col-6'>
+                        <button onClick={handleStoryClick} className="btn text-white">View</button>
                       </div>
                     </li>
                   ))}
@@ -167,20 +167,20 @@ const Profile = () => {
                 <h3>Written Paragraphs</h3>
                 <ul className="list-group">
                   {userActivity.paragraphs.map((paragraph) => (
-                    <li className="list-group-item row" key={paragraph.id}>
+                    <li className="list-group-item row bg-dark" key={paragraph.id}>
                       <div className="para-name col-4">
-                        {paragraph.name}
+                        <p className='h5'>{paragraph.name}</p>
                       </div>
                       <div className="buttons-profile col-8">
                         {paragraph.end && (
                           <>
-                            <button onClick={() => { navigate('/editParagraph', { state: { paragraph: paragraph } }); }} className="btn border mx-2"> Edit</button>
-                            <button onClick={() => { navigate('/deletePeregraph', { state: { paragraph: paragraph } }) }} className="btn border ">Delete </button>
+                            <button onClick={() => { navigate('/editParagraph', { state: { paragraph: paragraph } }); }} className="btn mx-2"> Edit</button>
+                            <button onClick={() => { navigate('/deletePeregraph', { state: { paragraph: paragraph } }) }} className="btn">Delete </button>
                           </>
                         )}
                         {paragraph.end == false && (
-                          <div className="d-flex align-item-center ">
-                            <p className='text-black-50 me-4'>Unable to edit</p>
+                          <div className="me-3">
+                            <p className='text-danger mt-3'>Unable to edit</p>
                           </div>
                         )}
 
@@ -188,55 +188,70 @@ const Profile = () => {
                           const response = await getData(`/stories/single/${paragraph.storyId}`);
                           setSelectedBook(response.data);
                           navigate('/bookItem');
-                        }} className="btn border">View</button>
+                        }} className="btn text-white">View</button>
                       </div>
 
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
 
-            <div className="your-comments w-75">
-              <h3 className="mt-4">Your Comments</h3>
-              <ul className="list-group">
-                {userCommentsDetails.map((details, index) => (
-                  <li className="list-group-item" key={index}>
-                    <>
+
+              <div className="your-comments w-75">
+                <h3 className="mt-4">Your Comments</h3>
+                <ul className="list-group">
+                  {userCommentsDetails.map((details, index) => (
+                    <li className="list-group-item comments bg-dark" key={index}>
                       {details ? (
-                        <>
-                          <p className="h5">{details.content}</p>
-                          <p className="text-muted">Paragraph Name: {details.paragraphName}</p>
-                          {/* <p className="text-muted">Story Title: {details.storyTitle}</p> */}
-                          <button onClick={handleEditButtonClick} className="btn border mx-2"> Edit</button>
-                          {isEditFormVisible && (
-                            <div className="edit-form">
-                              <textarea ref={commentEditRef} defaultValue={details.content} />
-                              <button
-                                onClick={async () => {
-                                  const updatedContent = commentEditRef.current.value;
-                                  console.log('Comment ID:', details.commentId);
+                        <div className='outer-div-comment mt-2'>
+                          <div>
+                            <p className="h5">{details.content}</p>
+                            <p className="text-white">Paragraph Name: {details.paragraphName}</p>
+                            {/* <p className="text-muted">Story Title: {details.storyTitle}</p> */}
+                          </div>
 
-                                  const resComment = await updateAuthenticatedData('/comments', details.commentId, { content: updatedContent }, token);
-                                  console.log(resComment);
-                                  setIsEditFormVisible(!isEditFormVisible)
-                                  navigate('/commentEdited');
-                                }}
-                                className='btn border'> Save </button>
+                          <div className='d-flex'>
+                            <div className="buttons-profile">
+                              <button onClick={() => { handleEditButtonClick(details.commentId) }} className="btn mx-2 text-white"> Edit</button>
                             </div>
-                          )}
-                          <button onClick={() => {
-                            navigate('/deleteComment', { state: { commentId: details.commentId } });
-                          }} className="btn border mx-2">Delete</button>
-                        </>
+
+                            <div className="buttons-profile">
+                              <button onClick={() => {
+                                navigate('/deleteComment', { state: { commentId: details.commentId } });
+                              }} className="btn mx-2 text-white">Delete</button>
+                            </div>
+                          </div>
+                        </div>
 
                       ) : (
                         <p>Error fetching details for comment</p>
                       )}
-                    </>
-                  </li>
-                ))}
-              </ul>
+                      {isEditFormVisible[details.commentId] && (
+                        <div className="edit-form">
+                          <textarea ref={commentEditRef} defaultValue={details.content} className='w-75' />
+
+                          <button
+                            onClick={async () => {
+                              const updatedContent = commentEditRef.current.value;
+                              console.log('Comment ID:', details.commentId);
+
+                              const resComment = await updateAuthenticatedData('/comments', details.commentId, { content: updatedContent }, token);
+                              console.log(resComment);
+
+                              setIsEditFormVisible(prevState => ({
+                                ...prevState,
+                                [details.commentId]: false,
+                              }));
+
+                              navigate('/commentEdited');
+                            }}
+                            className='btn text-white'>Save</button>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         ) : (
