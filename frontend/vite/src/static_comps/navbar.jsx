@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css'
 import Welcome from '../comps/welcome'
 import { apiService } from '../service/apisService';
+import Greeting from '../comps/greeting';
+import Home from '../comps/home';
 
 
 const Navbar = () => {
@@ -60,6 +62,7 @@ const Navbar = () => {
             </div>
 
             {/* Navigation Links */}
+
             <nav className='nav d-flex flex-column'>
                 <div className="pt-4">
                     <i className="text-white fa fa-home" aria-hidden="true"></i>
@@ -99,8 +102,14 @@ const Navbar = () => {
             </nav>
 
             {/* User Actions */}
-            <div className="flex-end">
-                <button className="btn btn-dark exit" onClick={handleExit}>Exit</button>
+            <div className='exit-div'>
+                <Greeting />
+                <button className="btn btn-dark exit-btn" onClick={handleExit}>
+                    {/* <div className="icon-container">
+                        <img src="../images/signOut.png" alt="Exit Icon" />
+                    </div> */}
+                </button>
+                {/* <i class="bi bi-box-arrow-right text-danger"></i> */}
             </div>
         </div>
     )

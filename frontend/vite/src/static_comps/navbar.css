@@ -34,16 +34,33 @@
 {
     color: #3ecca4;
 }
-.exit{
+.exit-div{
     bottom: 0;
-    border: white 2px solid;
     position: absolute;
     margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     /* font-family: 'Cuprum', sans-serif; */
 }
-.exit:hover
+
+.exit-btn{
+    border: white 2px solid;
+    margin-right: 0;
+    background-image: url('../images/signOut.png');
+
+}
+.exit-btn:hover
 {
     color: #3ecca4;
     border-color: #3ecca4;
+}
+
+.profile-picture-greeting{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border:#12b69d solid 2px;
+
 
 }
