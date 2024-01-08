@@ -48,8 +48,8 @@ const Greeting = () => {
                     <img src={userData.profilePicture} className="profile-picture-greeting me-3" alt={`Profile ${userData.username}`} />
                 </div>
             )}
-            <div className="user-text-info text-white bold"><strong>
-                Good {checkTime()} <br/> {userData.username} :)</strong>
+            <div className="user-text-info text-white">
+                Good {checkTime()}, <br/> {userData.username} :)
             </div>
         </div>
     )

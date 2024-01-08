@@ -63,8 +63,8 @@
 }
 
 .paragraphs {
-    margin-top: 70px;
-    margin-bottom: 70px;
+    margin-top: 130px;
+    margin-bottom: 40px;
 }
 
 .author-details {
@@ -153,7 +153,7 @@
 .top-inyan {
     display: flex;
     justify-content: space-between;
-    height: 70px;
+    height: 45px;
 }
 
 .character-img {
@@ -188,12 +188,11 @@
 .listenOn{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 .text-to-speech-div{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
+    min-height: 80px;
 }

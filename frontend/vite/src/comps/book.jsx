@@ -49,6 +49,7 @@ const Book = () => {
             setSecondColumn(wordsArray.slice(WordsPerPage).join(' '));
           } else {
             setFirstColumn(wordsArray.join(' '));
+            setSecondColumn('');
           }
 
           const profile = await getData(`/users/singleId/${extParagraphsContentArr[currentParagraphIndex].data.author}`);
@@ -145,37 +146,22 @@ const Book = () => {
     setSelectedVoice(voice);
   };
 
-  const style = {
-    // play: {
-    //   button: {
-    //     width: '40px',
-    //     height: '40px',
-    //     cursor: 'pointer',
-    //     pointerEvents: 'none',
-    //     outline: 'none',
-    //     backgroundColor: 'yellow',
-    //     border: 'solid 1px rgba(255,255,255,1)',
-    //     borderRadius: 6
-    //   },
-    // }
-  }
-
   return (
     <div className="outer-main-book">
       <Navbar />
       <div className="inner-main-book p-5">
-        <div className="mt-1 top-inyan px-3">
+        <div className="top-inyan px-3">
           {!extParagraphsContentArr[currentParagraphIndex]?.data?.end && (
             <button onClick={handleAddPara} className="btn book-nav-btn add-para-btn border bg-dark">
               Add a new paragraph
             </button>
           )}
-          <div className="text-to-speech-div mb-1">
+          <div className="text-to-speech-div">
             <button
               className="text-to-speech-btn btn bg-dark text-white"
               onClick={() => setListen(!listen)}
             >
-              {listen ? 'Turn Off Speech' : 'Turn On Speech'}
+              {listen ? 'Close Audio' : 'Open Audio'}
             </button>
             <br />
             {listen &&
@@ -184,15 +170,17 @@ const Book = () => {
                   Selected Voice: {selectedVoice}
                 </span>
                 <div>
-                  <button className="btn bg-dark text-white" onClick={() => handleVoiceChange('Google UK English Female')}>Woman's Voice</button>
-                  <button className="btn bg-dark text-white" onClick={() => handleVoiceChange('Google US English Male')}>Man's Voice</button>
+                  <button className="btn bg-dark text-white me-2 mt-2 mb-2" onClick={() => handleVoiceChange('Google UK English Female')}>Woman</button>
+                  <button className="btn bg-dark text-white mt-2 mb-2" onClick={() => handleVoiceChange('Google US English Male')}>Man</button>
                 </div>
-                <Speech
-                  text={firstColumn}
-                  voice={selectedVoice}
-                  stop={true}
-                  pause={true}
-                  resume={true} >start</Speech>
+                <div className="d-flex justify-content-center">
+                  <Speech
+                    text={firstColumn}
+                    voice={selectedVoice}
+                    stop={true}
+                    pause={true}
+                    resume={true} >start</Speech>
+                </div>
               </div>}
           </div>
           <div className="select-paragraph">

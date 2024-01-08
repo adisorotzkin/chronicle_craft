@@ -99,8 +99,7 @@ const NewParagraph = () => {
         console.log(response3);
 
       }
-
-
+      setImageUrl('');
       navigate('/bookItem');
       alert('Paragraph added successfully!');
     } catch (error) {
