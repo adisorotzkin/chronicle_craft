@@ -40,6 +40,33 @@
 
 .btn-edit {
     background-color: black;
+    width: 40px;
+    height: 40px;
+}
+.exit-btn{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.exit-btn:hover{
+    background-color: #212529;
+    border: #212529;
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.btn-delete{
+    width: 40px;
+    height: 40px;
+}
+.btn-delete:hover{
+    background-color: #212529;
+    border: #212529;
 }
 .comments{
     display: flex;

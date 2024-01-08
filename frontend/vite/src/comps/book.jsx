@@ -26,11 +26,11 @@ const Book = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const WordsPerPage = 125;
 
 
   useEffect(() => {
     console.log('Fetching data...');
-    console.log("selected book: ", selectedBook);
 
     const fetchData = async () => {
       try {
@@ -43,21 +43,28 @@ const Book = () => {
         ) {
           const content = extParagraphsContentArr[currentParagraphIndex]?.data.content || '';
           const wordsArray = content.split(' ');
-          const midpointIndex = Math.ceil(wordsArray.length / 2);
-          setFirstColumn(wordsArray.slice(0, midpointIndex).join(' '));
-          setSecondColumn(wordsArray.slice(midpointIndex).join(' '));
+          // const midpointIndex = Math.ceil(wordsArray.length / 2);
 
-          console.log(`author: ${extParagraphsContentArr[currentParagraphIndex].data.author}`);
+          // setFirstColumn(wordsArray.slice(0, midpointIndex).join(' '));
+          // setSecondColumn(wordsArray.slice(midpointIndex).join(' '));
+
+          //GO OVER THIS!!!
+          if (wordsArray.length > WordsPerPage) {
+            setFirstColumn(wordsArray.slice(0, WordsPerPage).join(' '));
+            setSecondColumn(wordsArray.slice(WordsPerPage).join(' '));
+          }
+          else{
+            setFirstColumn(wordsArray.join(' '));
+          }
+
           const profile = await getData(`/users/singleId/${extParagraphsContentArr[currentParagraphIndex].data.author}`);
           const comments = await getData(`/comments/paragraphId/${extParagraphsContentArr[currentParagraphIndex].data._id}`);
-          console.log('comments:', comments);
-          console.log('Data from API:', profile?.data);
+
           setCommentData(comments?.data);
           setProfileData(profile?.data);
           setShouldFetchData(false);
 
           const mainCharacters = await getData(`/characters/storyId/${selectedBook._id}`);
-          console.log(mainCharacters);
           setCharacters(mainCharacters.data)
         } else {
           console.warn('Author information not available for the current paragraph.');
@@ -88,7 +95,7 @@ const Book = () => {
     }
   };
 
-  const hadleAddPara = () => {
+  const handleAddPara = () => {
     navigate('/newParagraph', { state: { storyInfo: selectedBook } });
   };
 
@@ -133,9 +140,7 @@ const Book = () => {
   const getProfileImg = async () => {
     let data = '';
     try {
-      console.log(commentUid);
       data = await getData(`/users/singleId/${commentUid}`);
-      console.log("profile pic: ", data.profilePicture);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -148,7 +153,7 @@ const Book = () => {
       <div className="inner-main-book p-5">
         <div className='mt-1 top-inyan px-3'>
           {!extParagraphsContentArr[currentParagraphIndex]?.data?.end && (
-            <button onClick={hadleAddPara} className='btn book-nav-btn add-para-btn border bg-dark'>Add a new paragraph</button>
+            <button onClick={handleAddPara} className='btn book-nav-btn add-para-btn border bg-dark'>Add a new paragraph</button>
           )}
           <div className="select-paragraph ">
             <select className="select-input bg-dark text-white ms-2 p-2" onChange={handleSelectChange}>
@@ -164,7 +169,6 @@ const Book = () => {
         <div className="paragraphs d-flex">
 
           <div className="paragraph-content container p-3 bg-dark">
-            {console.log('selected book: ', selectedBook)}
             <p className='title-p mb-3'>{selectedBook.title}</p>
             <p className='content p-4'>{firstColumn}</p>
             <p className='page-number-1 px-4 py-2'>{pageNumber}</p>
@@ -224,8 +228,7 @@ const Book = () => {
               <h2 className='mb-4'>Comments:</h2>
               {commentData && commentData.map((comment) => (
                 <div className="comment mb-4" key={comment._id}>
-                  {/* {setCommentUid(comment.userId)} */}
-                  <CommentProfileImage comment={comment}/>
+                  <CommentProfileImage comment={comment} />
                   <div className="comment-inner">
                     <div className="comment-inner-inner d-flex p-2 ">
                       <p className='comment-uid fw-bold me-2'>@{comment.userId}</p>

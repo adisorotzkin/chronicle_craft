@@ -8,17 +8,14 @@ const BookItem = () => {
   const { getData } = apiService();
   const { setextParagraphsContentArr,setparagraphsIdArr, selectedBook } = useContext(AppContext);
   useEffect(() => {
-    console.log("bookitem selectedbook: ", selectedBook);
     const fetchData = async () => {
       try {
         const story = await getData(`/stories/single/${selectedBook._id}`);
-        console.log('Data from API:', story?.data);
 
         let paragraphsIdArr = story?.data.paragraphsArr || [];
         let paragraphsContentArr = [];
         for (let i = 0; i < paragraphsIdArr.length; i++) {
           paragraphsContentArr[i] = await getData(`/paragraphs/single/${paragraphsIdArr[i]}`);
-          console.log(paragraphsContentArr[i]);
         }
         setextParagraphsContentArr(paragraphsContentArr);
         setparagraphsIdArr(paragraphsIdArr)

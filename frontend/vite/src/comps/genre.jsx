@@ -42,12 +42,9 @@ const Genre = (props) => {
             try {
                 const result = await getData(`/stories/genre/${props.genre}?page=${currentPage}`);
                 if (result.data && result.data.length != 0) {
-                    console.log(result.data);
                     setData(result.data);
                 } else {
-
                     setCurrentPage(1);
-
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -76,7 +73,6 @@ const Genre = (props) => {
                             </div>
                         ))}
                         <button className='btn btn-flow text-white' onClick={() => handlePageChange(1)}>&gt;</button>
-
                     </div>
                 </div>
             )}

@@ -12,7 +12,6 @@ const Greeting = () => {
             if (uid && !apiRequestsCompleted) {
                 const userResponse = await getData(`/users/singleId/${uid}`);
                 setUserData(userResponse.data);
-                console.log(userResponse);
                 setApiRequestsCompleted(true);
             }
         } catch (error) {
@@ -44,7 +43,6 @@ const Greeting = () => {
 
     return (
         <div className='d-flex me-5'>
-            {console.log(userData)}
             {userData.profilePicture && (
                 <div>
                     <img src={userData.profilePicture} className="profile-picture-greeting me-3" alt={`Profile ${userData.username}`} />
