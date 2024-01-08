@@ -14,7 +14,6 @@ const NewStory = () => {
   const navigate = useNavigate();
   const { postAuthenticatedData } = apiService();
   const { imageUrl, setImageUrl, genresArray, setSelectedBook } = useContext(AppContext);
-  const [cloudImg, setCloudImg] = useState('');
 
   const uploadImageToCloudinary = async (generatedImg, bookCoverName) => {
     try {
@@ -48,8 +47,7 @@ const NewStory = () => {
     }
 
     if(imageUrl){
-      const urlImgFromCloud =await uploadImageToCloudinary(imageUrl, title)
-      setCloudImg(urlImgFromCloud);
+      const urlImgFromCloud = await uploadImageToCloudinary(imageUrl, title);
     }
 
     try {
@@ -57,7 +55,7 @@ const NewStory = () => {
         title: title,
         description: description,
         genre: genre,
-        coverImg: imageUrl ? imageUrl : '/',
+        coverImg: urlImgFromCloud,
       }, localStorage.getItem('token'));
 
       if(response){
