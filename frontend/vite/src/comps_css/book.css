@@ -55,6 +55,7 @@
 
 .select-input {
     border-radius: 4px;
+    height: 45px;
 }
 
 .profile-img {
@@ -152,6 +153,7 @@
 .top-inyan {
     display: flex;
     justify-content: space-between;
+    height: 70px;
 }
 
 .character-img {
@@ -179,4 +181,19 @@
     align-items: end;
     justify-content: end;
     color: white;
+}
+.add-para-btn{
+    height: 45px;
+}
+.listenOn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.text-to-speech-div{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
 }

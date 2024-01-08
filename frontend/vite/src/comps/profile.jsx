@@ -144,7 +144,7 @@ const Profile = () => {
                 <p><strong>Bio:</strong> {userData.bio}</p>
                 <p><strong>Active:</strong> {userData.active ? 'Yes' : 'No'}</p>
               </div>
-              <div className="buttons col-1">
+              <div className="buttons-profile col-1">
                 <button onClick={handleUpdateDetails} className="btn btn-edit"><i className="fa fa-list text-white" aria-hidden="true"></i></button>
                 <button onClick={handleDeleteAccount} className="btn btn-danger btn-delete"><i className="fa fa-trash text-white" aria-hidden="true"></i></button>
                 <button className="btn btn-dark exit-btn" onClick={handleExit}>

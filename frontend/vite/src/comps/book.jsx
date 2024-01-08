@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import StarRating from './starRating';
 import CharacterLightbox from './CharacterLightbox';
 import CommentProfileImage from './commentProfileImage';
+import Speech from 'react-speech';
 
 const Book = () => {
-
   const { extParagraphsContentArr, paragraphsIdArr, setSelectedBook, selectedBook } = useContext(AppContext);
   const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
   const [profileData, setProfileData] = useState(null);
@@ -20,14 +20,14 @@ const Book = () => {
   const { getData, postAuthenticatedData } = apiService();
   const [addComment, setAddComment] = useState(false);
   const [profileImg, setProfileImg] = useState('');
-  const [commentUid, setCommentUid] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const WordsPerPage = 125;
-
+  const [listen, setListen] = useState(false);
+  const [selectedVoice, setSelectedVoice] = useState('US English Female'); // Default voice
 
   useEffect(() => {
     console.log('Fetching data...');
@@ -43,17 +43,11 @@ const Book = () => {
         ) {
           const content = extParagraphsContentArr[currentParagraphIndex]?.data.content || '';
           const wordsArray = content.split(' ');
-          // const midpointIndex = Math.ceil(wordsArray.length / 2);
 
-          // setFirstColumn(wordsArray.slice(0, midpointIndex).join(' '));
-          // setSecondColumn(wordsArray.slice(midpointIndex).join(' '));
-
-          //GO OVER THIS!!!
           if (wordsArray.length > WordsPerPage) {
             setFirstColumn(wordsArray.slice(0, WordsPerPage).join(' '));
             setSecondColumn(wordsArray.slice(WordsPerPage).join(' '));
-          }
-          else{
+          } else {
             setFirstColumn(wordsArray.join(' '));
           }
 
@@ -65,7 +59,7 @@ const Book = () => {
           setShouldFetchData(false);
 
           const mainCharacters = await getData(`/characters/storyId/${selectedBook._id}`);
-          setCharacters(mainCharacters.data)
+          setCharacters(mainCharacters.data);
         } else {
           console.warn('Author information not available for the current paragraph.');
         }
@@ -142,20 +136,66 @@ const Book = () => {
     try {
       data = await getData(`/users/singleId/${commentUid}`);
     } catch (error) {
-      console.log("Error: ", error);
+      console.log('Error: ', error);
     }
     setProfileImg(data.profilePicture);
+  };
+
+  const handleVoiceChange = (voice) => {
+    setSelectedVoice(voice);
+  };
+
+  const style = {
+    // play: {
+    //   button: {
+    //     width: '40px',
+    //     height: '40px',
+    //     cursor: 'pointer',
+    //     pointerEvents: 'none',
+    //     outline: 'none',
+    //     backgroundColor: 'yellow',
+    //     border: 'solid 1px rgba(255,255,255,1)',
+    //     borderRadius: 6
+    //   },
+    // }
   }
 
   return (
     <div className="outer-main-book">
       <Navbar />
       <div className="inner-main-book p-5">
-        <div className='mt-1 top-inyan px-3'>
+        <div className="mt-1 top-inyan px-3">
           {!extParagraphsContentArr[currentParagraphIndex]?.data?.end && (
-            <button onClick={handleAddPara} className='btn book-nav-btn add-para-btn border bg-dark'>Add a new paragraph</button>
+            <button onClick={handleAddPara} className="btn book-nav-btn add-para-btn border bg-dark">
+              Add a new paragraph
+            </button>
           )}
-          <div className="select-paragraph ">
+          <div className="text-to-speech-div mb-1">
+            <button
+              className="text-to-speech-btn btn bg-dark text-white"
+              onClick={() => setListen(!listen)}
+            >
+              {listen ? 'Turn Off Speech' : 'Turn On Speech'}
+            </button>
+            <br />
+            {listen &&
+              <div className="listenOn">
+                <span style={{ marginLeft: '10px' }}>
+                  Selected Voice: {selectedVoice}
+                </span>
+                <div>
+                  <button className="btn bg-dark text-white" onClick={() => handleVoiceChange('Google UK English Female')}>Woman's Voice</button>
+                  <button className="btn bg-dark text-white" onClick={() => handleVoiceChange('Google US English Male')}>Man's Voice</button>
+                </div>
+                <Speech
+                  text={firstColumn}
+                  voice={selectedVoice}
+                  stop={true}
+                  pause={true}
+                  resume={true} >start</Speech>
+              </div>}
+          </div>
+          <div className="select-paragraph">
             <select className="select-input bg-dark text-white ms-2 p-2" onChange={handleSelectChange}>
               {extParagraphsContentArr.map((paragraph, index) => (
                 <option key={index} value={index}>
@@ -167,22 +207,20 @@ const Book = () => {
         </div>
 
         <div className="paragraphs d-flex">
-
           <div className="paragraph-content container p-3 bg-dark">
-            <p className='title-p mb-3'>{selectedBook.title}</p>
-            <p className='content p-4'>{firstColumn}</p>
-            <p className='page-number-1 px-4 py-2'>{pageNumber}</p>
+            <p className="title-p mb-3">{selectedBook.title}</p>
+            <p className="content p-4">{firstColumn}</p>
+            <p className="page-number-1 px-4 py-2">{pageNumber}</p>
           </div>
           <div className="paragraph-content container p-3 bg-dark">
-            <p className='title-p mb-3'>{selectedBook.title}</p>
-            <p className='content p-4'>{secondColumn}</p>
-            <p className='page-number-2 px-4 py-2'>{pageNumber + 1}</p>
+            <p className="title-p mb-3">{selectedBook.title}</p>
+            <p className="content p-4">{secondColumn}</p>
+            <p className="page-number-2 px-4 py-2">{pageNumber + 1}</p>
           </div>
-
           <div className="characters-list p-2">
-            <div className='mainCharacters'>
+            <div className="mainCharacters">
               {characters.map((character, index) => (
-                <div key={index} className='character mb-3' onClick={() => openCharacterLightbox(character)}>
+                <div key={index} className="character mb-3" onClick={() => openCharacterLightbox(character)}>
                   <div className="col-3">
                     <img className="character-img" src={character.image} alt={character.characterName} />
                   </div>
@@ -193,14 +231,23 @@ const Book = () => {
         </div>
         <br />
         <div className="buttons d-flex justify-content-between px-3 mb-5">
-          <button className='btn border book-nav-btn bg-dark' onClick={handlePrevParagraph} disabled={pageNumber === 1}>Previous</button>
-          <button className='btn border book-nav-btn bg-dark' onClick={handleNextParagraph} disabled={currentParagraphIndex === extParagraphsContentArr.length - 1}>Next</button>
+          <button
+            className="btn border book-nav-btn bg-dark"
+            onClick={handlePrevParagraph}
+            disabled={pageNumber === 1}
+          >
+            Previous
+          </button>
+          <button
+            className="btn border book-nav-btn bg-dark"
+            onClick={handleNextParagraph}
+            disabled={currentParagraphIndex === extParagraphsContentArr.length - 1}
+          >
+            Next
+          </button>
         </div>
 
-        {selectedCharacter && (
-          <CharacterLightbox character={selectedCharacter} onClose={closeCharacterLightbox} />
-        )}
-
+        {selectedCharacter && <CharacterLightbox character={selectedCharacter} onClose={closeCharacterLightbox} />}
 
         {profileData && (
           <div className="author-details">
@@ -216,36 +263,56 @@ const Book = () => {
                   <strong>Bio:</strong> {profileData.bio}{' '}
                 </p>
                 <p>
-                  <strong>Rating:</strong><StarRating averageRating={profileData.rating} />
+                  <strong>Rating:</strong>
+                  <StarRating averageRating={profileData.rating} />
                 </p>
               </div>
-              <div className='col-2 rate-me-btn'>
-                <button className='btn border book-nav-btn' onClick={() => { navigate('/addRating', { state: { author: profileData } }) }}>Rate me :)</button>
+              <div className="col-2 rate-me-btn">
+                <button
+                  className="btn border book-nav-btn"
+                  onClick={() => {
+                    navigate('/addRating', { state: { author: profileData } });
+                  }}
+                >
+                  Rate me :)
+                </button>
               </div>
             </div>
 
             <div className="bottom-details mb-5">
-              <h2 className='mb-4'>Comments:</h2>
-              {commentData && commentData.map((comment) => (
-                <div className="comment mb-4" key={comment._id}>
-                  <CommentProfileImage comment={comment} />
-                  <div className="comment-inner">
-                    <div className="comment-inner-inner d-flex p-2 ">
-                      <p className='comment-uid fw-bold me-2'>@{comment.userId}</p>
-                      <p className='comment-date'>{comment.dateCreated && comment.dateCreated.substring(0, 10)}</p>
+              <h2 className="mb-4">Comments:</h2>
+              {commentData &&
+                commentData.map((comment) => (
+                  <div className="comment mb-4" key={comment._id}>
+                    <CommentProfileImage comment={comment} />
+                    <div className="comment-inner">
+                      <div className="comment-inner-inner d-flex p-2 ">
+                        <p className="comment-uid fw-bold me-2">@{comment.userId}</p>
+                        <p className="comment-date">{comment.dateCreated && comment.dateCreated.substring(0, 10)}</p>
+                      </div>
+                      <p className="">{comment.content}</p>
                     </div>
-                    <p className=''>{comment.content}</p>
                   </div>
-                </div>
-              ))}
+                ))}
 
               <form onSubmit={handleCommentSubmit}>
-                <button type="button" className='btn border book-nav-btn bg-dark mb-4 mt-2' onClick={() => { setAddComment(!addComment) }}>Add a Comment</button>
+                <button
+                  type="button"
+                  className="btn border book-nav-btn bg-dark mb-4 mt-2"
+                  onClick={() => {
+                    setAddComment(!addComment);
+                  }}
+                >
+                  Add a Comment
+                </button>
                 {addComment && (
                   <div className="add-comment w-25 d-flex">
                     <input className="comment-input form-control me-2" ref={inputRef} type="text" id="comment" name="comment" />
-                    <button className='btn book-nav-btn border' type="submit">Submit</button>
-                  </div>)}
+                    <button className="btn book-nav-btn border" type="submit">
+                      Submit
+                    </button>
+                  </div>
+                )}
               </form>
             </div>
           </div>
@@ -256,10 +323,3 @@ const Book = () => {
 };
 
 export default Book;
-
-
-
-
-
-
-
