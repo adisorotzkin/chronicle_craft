@@ -5,8 +5,7 @@ import '../comps_css/robbie.css'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 
-// const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-const API_KEY = "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";
+const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 console.log(API_KEY);
 
 

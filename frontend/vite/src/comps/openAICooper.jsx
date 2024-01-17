@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const API_KEY = "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"; // secure -> environment variable my mafteach!!
+const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
 function OpenAICooper() {
   const [tweet, setTweet] = useState("");

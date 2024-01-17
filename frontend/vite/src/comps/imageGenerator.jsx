@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from 'react'
 import { AppContext } from '../context/context';
 import '../comps_css/imageGenerator.css'
 
-const API_KEY = "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"; // secure -> environment variable my mafteach!!
+const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const default_image = ""
 
 const ImageGenerator = () => {

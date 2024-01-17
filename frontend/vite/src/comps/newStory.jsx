@@ -36,38 +36,73 @@ const NewStory = () => {
     }
   };
 
+  // const handleNext = async () => {
+  //   const title = titleRef.current.value;
+  //   const description = descriptionRef.current.value;
+  //   const genre = genreRef.current.value;
+
+  //   if (title.trim() === '' || description.trim() === '' || genre.trim() === '') {
+  //     alert('Please fill in all fields.');
+  //     return;
+  //   }
+
+  //   if(imageUrl){
+  //     const urlImgFromCloud = await uploadImageToCloudinary(imageUrl, title);
+  //   }
+
+  //   try {
+  //     const response = await postAuthenticatedData('/stories', {
+  //       title: title,
+  //       description: description,
+  //       genre: genre,
+  //       coverImg: urlImgFromCloud,
+  //     }, localStorage.getItem('token'));
+
+  //     if(response){
+  //       console.log("Story created successfully!" , response);
+  //       setSelectedBook(response);
+  //       navigate('/newParagraph', {state: {storyInfo: response }});
+  //     }
+  //   } catch (error) {
+  //     console.error('Error creating story:', error);
+  //     alert('An error occurred while creating the story. Please try again.');
+  //   }
+  // };
+
   const handleNext = async () => {
     const title = titleRef.current.value;
     const description = descriptionRef.current.value;
     const genre = genreRef.current.value;
-
+    let urlImgFromCloud; // Declare the variable here
+  
     if (title.trim() === '' || description.trim() === '' || genre.trim() === '') {
       alert('Please fill in all fields.');
       return;
     }
-
-    if(imageUrl){
-      const urlImgFromCloud = await uploadImageToCloudinary(imageUrl, title);
+  
+    if (imageUrl) {
+      urlImgFromCloud = await uploadImageToCloudinary(imageUrl, title);
     }
-
+  
     try {
       const response = await postAuthenticatedData('/stories', {
         title: title,
         description: description,
         genre: genre,
-        coverImg: urlImgFromCloud,
+        coverImg: urlImgFromCloud, // Use the variable here
       }, localStorage.getItem('token'));
-
-      if(response){
-        console.log("Story created successfully!" , response);
+  
+      if (response) {
+        console.log("Story created successfully!", response);
         setSelectedBook(response);
-        navigate('/newParagraph', {state: {storyInfo: response }});
+        navigate('/newParagraph', { state: { storyInfo: response } });
       }
     } catch (error) {
       console.error('Error creating story:', error);
       alert('An error occurred while creating the story. Please try again.');
     }
   };
+  
 
   return (
     <div className="outer-main-create">
